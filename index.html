@@ -1,1 +1,407 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis|Inconsolata|Audiowide|Roboto|Roboto+Condensed"><title>React App</title><script defer="defer" src="/static/js/main.574d189e.js"></script><link href="/static/css/main.da014c59.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Omor Faruk // Digital Security Architect</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&display=swap'); /* Code font */
+
+        :root {
+            --background-color: #050505; /* Near black */
+            --container-bg: rgba(15, 15, 15, 0.8); /* Slightly lighter dark grey, semi-transparent */
+            --text-color: #a0a0a0;     /* Medium grey */
+            --header-color: #d0d0d0;   /* Lighter grey */
+            --accent-color-1: #00e676; /* Bright, slightly muted green */
+            --accent-color-2: #4CAF50; /* Softer green */
+            --border-color: rgba(76, 175, 80, 0.2); /* Soft green transparent */
+            --shadow-color: rgba(0, 230, 118, 0.15); /* Brighter green glow */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+            /* Subtle animated gradient background */
+            background: linear-gradient(-45deg, #050505, #0a100a, #050505, #100a10);
+            background-size: 400% 400%;
+            animation: gradientBG 25s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 30px 40px;
+            background-color: var(--container-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 30px var(--shadow-color);
+            backdrop-filter: blur(5px); /* Glassmorphism effect if browser supports */
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-size: 2.8em;
+            color: var(--header-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .hero .tagline {
+            font-size: 1.4em;
+            color: var(--accent-color-1);
+            margin-bottom: 25px;
+            font-weight: 400;
+            min-height: 30px; /* Space for typing effect */
+        }
+         .tagline .cursor { /* Blinking cursor */
+             display: inline-block;
+             background-color: var(--accent-color-1);
+             width: 10px;
+             height: 1.4em;
+             animation: blink 1s step-end infinite;
+             vertical-align: bottom;
+         }
+         @keyframes blink {
+             from, to { background-color: transparent }
+             50% { background-color: var(--accent-color-1); }
+         }
+
+
+        .hero p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--header-color);
+        }
+
+        .cta-buttons a {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 10px 15px;
+            border: 1px solid var(--accent-color-2);
+            color: var(--accent-color-1);
+            background-color: transparent;
+            text-decoration: none;
+            font-weight: 400;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1.0em;
+        }
+
+        .cta-buttons a:hover {
+            background-color: var(--accent-color-2);
+            color: var(--background-color);
+            box-shadow: 0 0 15px var(--shadow-color);
+        }
+
+        /* --- Core Services Section --- */
+        .core-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .service-card {
+            background-color: rgba(10, 10, 10, 0.6);
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow-color);
+        }
+
+        .service-card h3 {
+            font-size: 1.5em;
+            color: var(--accent-color-1);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+         .service-card h3::before { /* Thematic icon/prefix */
+             content: ''; display: inline-block; width: 10px; height: 10px;
+             margin-right: 10px; vertical-align: middle;
+             border: 1px solid var(--accent-color-2);
+             opacity: 0.7;
+         }
+         #build h3::before { background-color: var(--accent-color-2); } /* Square for build */
+         #protect h3::before { border-radius: 50%; background-color: transparent; } /* Circle for protect */
+         #destroy h3::before { transform: rotate(45deg); background-color: transparent; } /* Diamond for destroy */
+
+
+        .service-card p {
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding-left: 5px;
+        }
+
+        .service-card li {
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            position: relative;
+            padding-left: 15px;
+        }
+        .service-card li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color-2);
+        }
+
+        /* --- Tools/Tech Section --- */
+        .toolbox {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px;
+             background-color: rgba(10, 10, 10, 0.6);
+             border: 1px solid var(--border-color);
+        }
+        .toolbox h3 {
+            font-size: 1.8em;
+            color: var(--header-color);
+            margin-bottom: 25px;
+        }
+        .toolbox .tools-list {
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: center;
+             gap: 15px;
+        }
+        .toolbox .tool-tag {
+             background-color: var(--border-color);
+             color: var(--text-color);
+             padding: 5px 12px;
+             border-radius: 3px;
+             font-size: 0.9em;
+             transition: background-color 0.3s, color 0.3s;
+        }
+         .toolbox .tool-tag:hover {
+             background-color: var(--accent-color-2);
+             color: var(--background-color);
+         }
+
+
+        /* --- Contact Section --- */
+        .contact-section {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-section h3 {
+            font-size: 1.8em;
+            color: var(--header-color);
+            margin-bottom: 15px;
+        }
+
+        .contact-section p {
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+
+        .contact-links a {
+             color: var(--text-color);
+             text-decoration: none;
+             margin: 0 15px;
+             font-size: 1.2em; /* Larger icons/links */
+             transition: color 0.3s ease;
+         }
+         .contact-links a:hover {
+             color: var(--accent-color-1);
+         }
+        /* Basic icons using text/symbols - replace with actual icons if preferred */
+         .contact-links .email::before { content: '📧 '; }
+         .contact-links .linkedin::before { content: '🔗 '; } /* Placeholder, better with real icon font */
+         .contact-links .github::before { content: ' G '; } /* Placeholder */
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            font-size: 0.9em;
+            color: var(--text-color);
+            opacity: 0.6;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 900px) {
+            .container { margin: 20px; padding: 20px 25px; }
+            .core-services { grid-template-columns: 1fr; } /* Stack cards on smaller screens */
+        }
+
+        @media (max-width: 600px) {
+            body { font-size: 15px; }
+            .hero h1 { font-size: 2.2em; }
+            .hero .tagline { font-size: 1.2em; min-height: 25px; }
+            .cta-buttons a { display: block; margin: 10px 0; } /* Stack buttons */
+            .toolbox .tool-tag { font-size: 0.85em; padding: 4px 10px; }
+             .contact-links a { font-size: 1.1em; margin: 0 10px;}
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <section class="hero">
+            <h1>Mohammad Omor Faruk</h1>
+            <div class="tagline"><span id="tagline-text"></span><span class="cursor"></span></div>
+            <p>Architecting secure digital ecosystems. Identifying vulnerabilities before they're exploited. Neutralizing threats with precision.</p>
+            <div class="cta-buttons">
+                <a href="#contact">Engage Services</a>
+                <a href="https://drive.google.com/file/d/178MxuU84RFB-O7-CcgrpeDE4KKzt1G9j/view?usp=drive_link" id="cv-download">Download Intel [CV]</a> </div>
+        </section>
+
+        <section class="core-services">
+            <div class="service-card" id="build">
+                <h3>We Build</h3>
+                <p>Developing robust, secure software and systems from the ground up, embedding security principles throughout the lifecycle.</p>
+                <ul>
+                    <li>Secure Software Development (Python, Java, JS, C++)</li>
+                    <li>Cloud Security Architecture (AWS, GCP)</li>
+                    <li>CI/CD Pipeline Security (Docker, Jenkins)</li>
+                    <li>Custom Security Tooling (e.g., VulnXposer Scanner)</li>
+                </ul>
+            </div>
+            <div class="service-card" id="protect">
+                <h3>We Protect</h3>
+                <p>Implementing comprehensive defense strategies, monitoring for threats, and responding decisively to incidents.</p>
+                <ul>
+                    <li>Vulnerability Assessment & Management</li>
+                    <li>Threat Hunting & Intelligence Analysis</li>
+                    <li>Network Security Monitoring (Wireshark)</li>
+                    <li>Digital Forensics & Incident Response (Volatility)</li>
+                    <li>Security Awareness Training Principles</li>
+                </ul>
+            </div>
+            <div class="service-card" id="destroy">
+                <h3>We Destroy (Threats)</h3>
+                <p>Simulating real-world attacks to uncover weaknesses and eliminate attack vectors before malicious actors can leverage them.</p>
+                <ul>
+                    <li>Penetration Testing (Web, Mobile, Network)</li>
+                    <li>Red Teaming & Adversary Simulation</li>
+                    <li>Exploit Development & Analysis</li>
+                    <li>Malware Analysis (Static/Dynamic)</li>
+                    <li>Bug Bounty Hunting (HackerOne, BugCrowd)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="toolbox">
+             <h3>Primary Arsenal</h3>
+             <div class="tools-list">
+                 <span class="tool-tag">Python</span>
+                 <span class="tool-tag">Bash</span>
+                 <span class="tool-tag">Burp Suite</span>
+                 <span class="tool-tag">Metasploit</span>
+                 <span class="tool-tag">Nmap</span>
+                 <span class="tool-tag">Wireshark</span>
+                 <span class="tool-tag">Ghidra</span>
+                 <span class="tool-tag">Volatility</span>
+                 <span class="tool-tag">Docker</span>
+                 <span class="tool-tag">AWS</span>
+                 <span class="tool-tag">Linux (Kali)</span>
+                 <span class="tool-tag">OWASP ZAP</span>
+                 <span class="tool-tag">Nuclei</span>
+                 <span class="tool-tag">SQLMap</span>
+                 </div>
+        </section>
+
+
+        <section class="contact-section" id="contact">
+            <h3>Establish Contact</h3>
+            <p>Discuss your security challenges or project requirements.</p>
+            <div class="contact-links">
+                <a href="mailto:mdomorffaruk@gmail.com" class="email" title="Email">mdomorffaruk@gmail.com</a>
+                 <span style="opacity: 0.5;"> | </span>
+                <a href="https://www.linkedin.com/in/mdomorffaruk" target="_blank" rel="noopener noreferrer" class="linkedin" title="LinkedIn">LinkedIn</a>
+                 <span style="opacity: 0.5;"> | </span>
+                <a href="https://github.com/mdomorffaruk" target="_blank" rel="noopener noreferrer" class="github" title="GitHub">GitHub</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; <span id="year"></span> Mohammad Omor Faruk. All Rights Reserved.</p>
+            <p>Location: Bangladesh // Status: Operational</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Typing effect for tagline
+        const taglineText = "We Build // We Protect // We Destroy";
+        const taglineElement = document.getElementById('tagline-text');
+        let charIndex = 0;
+
+        function typeTagline() {
+            if (charIndex < taglineText.length) {
+                taglineElement.textContent += taglineText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeTagline, 80); // Adjust typing speed (milliseconds)
+            } else {
+                 // Optional: Keep cursor blinking or remove it
+                 // document.querySelector('.tagline .cursor').style.display = 'none';
+            }
+        }
+        // Start typing after a short delay
+        setTimeout(typeTagline, 500);
+
+
+        // --- CV Download Link ---
+        // IMPORTANT: Replace '#' with the actual URL where you will host your PDF file.
+        const cvDownloadButton = document.getElementById('cv-download');
+        cvDownloadButton.addEventListener('click', (event) => {
+            // Check if the link is still the placeholder
+            if (cvDownloadButton.getAttribute('href') === '#') {
+                event.preventDefault(); // Prevent navigating to '#'
+                alert('CV Download link not configured yet. Please upload the CV and update the link in the HTML source.');
+                 console.warn('CV Download link requires configuration in HTML source (href="#").');
+            }
+            // If href is a valid URL, the click will proceed as normal.
+            // You might want to add tracking here if needed.
+             console.log('CV Download initiated (if link is configured).');
+        });
+
+        // Console log message
+         console.log(`%c[SYSTEM BOOT COMPLETE] Mohammad Omor Faruk Digital Security Interface - ACTIVE`, "color: #4CAF50; font-weight: bold;");
+         console.log(`%cListening on secure channel... Ready for engagement.`, "color: #a0a0a0;");
+
+    </script>
+
+</body>
+</html>
