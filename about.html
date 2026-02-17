@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Mohammad Omor Faruk</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        :root {
+            --accent: #10b981;
+            /* Dark Mode Defaults */
+            --bg-body: #0a0c10;
+            --bg-card: #11141b;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --nav-bg: rgba(10, 12, 16, 0.9);
+            --border-color: rgba(255,255,255,0.08);
+            --skill-bg: rgba(255,255,255,0.05);
+        }
+
+        [data-bs-theme="light"] {
+            --bg-body: #f9fafb;
+            --bg-card: #ffffff;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --nav-bg: rgba(249, 250, 251, 0.9);
+            --border-color: rgba(0,0,0,0.1);
+            --skill-bg: rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.7;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: var(--nav-bg) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .navbar-nav .nav-link.active {
+            color: var(--accent) !important;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .nav-link { color: var(--text-muted) !important; font-weight: 500; }
+        .nav-link.active { color: var(--accent) !important; }
+
+        /* Profile Header */
+        .profile-header {
+            padding: 100px 0 60px;
+            border-bottom: 1px solid var(--border-color);
+            background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.05), transparent 40%);
+        }
+
+        /* Skill Tags */
+        .skill-tag {
+            display: inline-block;
+            background: var(--accent-glow);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 8px;
+            margin: 0 6px 10px 0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--accent);
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 35px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            height: 100%;
+        }
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+        }
+        /* .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+        } */
+
+        
+        a { color: var(--accent); text-decoration: none; transition: 0.2s; }
+        a:hover { opacity: 0.8; }
+        /* CV Button Custom Styling */
+        .btn-cv {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            font-weight: 600;
+            transition: 0.3s;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+        }
+        .btn-cv:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+        /* Fix mobile nav styling */
+        .navbar-toggler:focus { box-shadow: none; }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: var(--bg-card);
+                margin-top: 15px;
+                padding: 20px;
+                border-radius: 15px;
+                border: 1px solid var(--border-color);
+            }
+            .nav-link {
+                padding: 10px 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .nav-link:last-child { border-bottom: none; }
+            .theme-toggle { width: fit-content; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html" style="color: var(--text-main);">
+            <i data-lucide="shield-check" class="me-2"></i>
+            Security Snapshot
+        </a>
+
+
+        <div class="d-flex align-items-center">
+            <div class="navbar-nav me-3">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active" href="about.html">About</a>
+            </div>
+            <div class="theme-toggle" id="themeSwitcher">
+                <i data-lucide="moon" id="themeIcon"></i>
+            </div>
+        </div>
+    </div>
+</nav> -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html" style="color: var(--text-main);">
+            <i data-lucide="shield-check" class="me-2"></i>
+            Security Snapshot
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i data-lucide="menu" style="color: var(--text-main);"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav ms-auto align-items-lg-center">
+                <a class="nav-link px-3" href="index.html">Home</a>
+                <a class="nav-link px-3" href="about.html">About</a>
+                <div class="theme-toggle ms-lg-3 mt-3 mt-lg-0" id="themeSwitcher">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<header class="profile-header text-center">
+    <div class="container">
+        <h1 class="fw-bold display-4 mb-3">Mohammad Omor Faruk</h1>
+        <p class="text-muted lead mb-4" style="color: var(--text-muted) !important;">Cybersecurity Specialist & Full-Stack Developer</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="https://github.com/mdomorffaruk" target="_blank" class="btn btn-sm btn-outline-secondary px-4">GitHub</a>
+            <a href="https://linkedin.com/in/mdomorffaruk" target="_blank"class="btn btn-sm btn-outline-secondary px-4">LinkedIn</a>
+        </div>
+    </div>
+</header>
+
+<main class="container py-5">
+    <div class="row g-5">
+        <div class="col-lg-4">
+            <h2 class="section-title">Technical Arsenal</h2>
+            <div class="mb-4">
+                <h6 class="fw-bold mb-3">Security & Auditing</h6>
+                <span class="skill-tag">Web & Android Pentesting</span>
+                <span class="skill-tag">OWASP Top 10</span>
+                <span class="skill-tag">Malware Analysis</span>
+                <span class="skill-tag">Smart Contract Auditing</span>
+            </div>
+            <div class="mb-4">
+                <h6 class="fw-bold mb-3">Core Development</h6>
+                <span class="skill-tag">Node.js</span> <span class="skill-tag">Go</span>
+                <span class="skill-tag">Solidity</span> <span class="skill-tag">Python</span>
+                <span class="skill-tag">Kotlin</span> <span class="skill-tag">React.js</span>
+            </div>
+            <div class="mb-4">
+                <h6 class="fw-bold mb-3">Infrastructure</h6>
+                <span class="skill-tag">Docker</span> <span class="skill-tag">Kubernetes</span>
+                <span class="skill-tag">AWS</span> <span class="skill-tag">Kali Linux</span>
+            </div>
+            <div class="mb-4">
+                <h6 class="fw-bold mb-3">Professional Certifications</h6>
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    <span class="badge border border-success text-success p-2">Blue Team Junior Analyst</span>
+                    <span class="badge border border-success text-success p-2">Google Cybersecurity Professional</span>
+                </div>
+
+                 <a href="https://drive.google.com/file/d/1BXD0ytdC7nm144w_enJ4dQ2vPhvBQ8oz/view?usp=sharing" target="_blank" class="btn btn-cv d-flex align-items-center justify-content-center gap-2">
+                    <i data-lucide="file-down" size="18"></i>
+                    Download Full CV
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <h2 class="section-title">Professional Summary</h2>
+            <p class="fs-5 mb-5" style="color: var(--text-main);">
+               
+                Adaptive Cybersecurity Specialist and Full-Stack Developer with 6+ years of experience. 
+                I have a proven track record of building mission-critical systems, including national award-winning IoT devices and production-grade banking security solutions. 
+                Currently specializing in Blockchain Security and Smart Contract auditing.
+                
+
+                
+            </p>
+
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="row g-4">
+                <div class="col-md-12">
+                    <div class="project-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold mb-0">South-East Bank Alarm System</h5>
+                            <i data-lucide="shield-alert" class="text-success"></i>
+                        </div>
+                        <p style="color: var(--text-muted);">
+                            
+                            Lead developer for a mission-critical 24/7 monitoring system that reduced manual workload by 70%. Built using Kotlin, PHP, and React.
+                            </p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="project-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold mb-0">Smart Helmet (AI-Powered IoT)</h5>
+                            <i data-lucide="award" class="text-success"></i>
+                        </div>
+                        <p style="color: var(--text-muted);">
+                        Developed software architecture for an AI-powered safety device recognized by the Government of Bangladesh with the <strong>Digital Bangladesh Award 2022</strong>.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="project-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold mb-0">VulnXposer (SaaS)</h5>
+                            <i data-lucide="globe" class="text-success"></i>
+                        </div>
+                        <p style="color: var(--text-muted);">
+                            Designed a web-based automated vulnerability analysis engine integrating OWASP ZAP and DNS analysis to generate comprehensive security audit reports.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contact" class="mt-5 p-4 rounded-4" style="background: var(--skill-bg); border: 1px solid var(--border-color);">
+                <h2 class="section-title mb-3">Get In Touch</h2>
+                <div class="d-flex flex-column gap-2">
+                    <span>Email: <a href="mailto:mdomorffaruk@gmail.com" target="_blank" >mdomorffaruk@gmail.com</a></span>
+                    <span>LinkedIn: <a href="https://linkedin.com/in/mdomorffaruk">linkedin.com/in/mdomorffaruk</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer class="py-5 text-center mt-5" style="border-top: 1px solid var(--border-color); color: var(--text-muted);">
+    <div class="container small">
+        &copy; 2026 Mohammad Omor Faruk | All rights reserved
+    </div>
+</footer>
+
+<script>
+    lucide.createIcons();
+
+    const themeSwitcher = document.getElementById('themeSwitcher');
+    const htmlElement = document.documentElement;
+    const themeIcon = document.getElementById('themeIcon');
+
+    // Load saved theme or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlElement.setAttribute('data-bs-theme', savedTheme);
+    updateIcon(savedTheme);
+
+    themeSwitcher.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-bs-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        htmlElement.setAttribute('data-bs-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateIcon(newTheme);
+    });
+
+    function updateIcon(theme) {
+        themeIcon.setAttribute('data-lucide', theme === 'dark' ? 'moon' : 'sun');
+        lucide.createIcons();
+    }
+</script>
+</body>
+</html>
