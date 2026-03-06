@@ -1,552 +1,717 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Exposure Snapshot | Mohammad Omor Faruk</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mohammad Omor Faruk | Security Exposure Snapshot</title>
+    <meta
+        name="description"
+        content="Security-focused engineer offering external security exposure reviews for websites and businesses."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <style>
         :root {
-            --accent: #10b981;
-            --accent-glow: rgba(16, 185, 129, 0.15);
-            /* Dynamic Variables */
-            --bg-body: #0a0c10;
-            --bg-card: #11141b;
-            --text-main: #ffffff;
+            --bg-body: #0b1220;
+            --bg-card: #111827;
+            --bg-soft: #0f172a;
+            --nav-bg: rgba(11, 18, 32, 0.86);
+            --text-main: #e5e7eb;
             --text-muted: #94a3b8;
-            --nav-bg: rgba(10, 12, 16, 0.8);
-            --border-color: rgba(255,255,255,0.05);
+            --border-color: rgba(148, 163, 184, 0.18);
+            --accent: #10b981;
+            --accent-2: #34d399;
+            --accent-glow: rgba(16, 185, 129, 0.14);
+            --hero-ring: rgba(52, 211, 153, 0.08);
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.25);
         }
 
-        [data-bs-theme="light"] {
-            --bg-body: #f9fafb;
+        html[data-theme="light"] {
+            --bg-body: #f8fafc;
             --bg-card: #ffffff;
-            --text-main: #111827;
-            --text-muted: #4b5563;
-            --nav-bg: rgba(249, 250, 251, 0.8);
-            --border-color: rgba(0,0,0,0.1);
+            --bg-soft: #f1f5f9;
+            --nav-bg: rgba(248, 250, 252, 0.92);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: rgba(15, 23, 42, 0.08);
+            --accent: #059669;
+            --accent-2: #10b981;
+            --accent-glow: rgba(5, 150, 105, 0.1);
+            --hero-ring: rgba(16, 185, 129, 0.08);
+            --shadow-soft: 0 10px 30px rgba(2, 6, 23, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-body);
+            font-family: "Plus Jakarta Sans", sans-serif;
+            background: radial-gradient(circle at top right, var(--hero-ring), transparent 28%),
+                        radial-gradient(circle at top left, var(--hero-ring), transparent 22%),
+                        var(--bg-body);
             color: var(--text-main);
-            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .navbar {
             background: var(--nav-bg) !important;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--border-color);
         }
-        .navbar-nav .nav-link.active {
+
+        .navbar-brand,
+        .nav-link {
+            color: var(--text-main) !important;
+        }
+
+        .nav-link {
+            opacity: 0.82;
+            font-weight: 500;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
             color: var(--accent) !important;
-            font-weight: 600;
-            text-decoration: underline;
-        }
-
-
-        /* .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(to right, var(--text-main), var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        } */
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--text-main);
-        }
-
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            border-radius: 20px;
-            color: var(--text-main);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        .feature-card h5 {
-            font-weight: 700;
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-        }
-        .feature-card p {
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        .feature-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 1;
         }
 
         .theme-toggle {
             cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            display: flex;
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
             border: 1px solid var(--border-color);
+            color: var(--text-main);
+            background: transparent;
+            transition: 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 0 6px var(--accent-glow);
+        }
+
+        .hero {
+            padding: 110px 0 70px;
+        }
+
+        .eyebrow-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(16, 185, 129, 0.28);
+            background: var(--accent-glow);
+            color: var(--accent-2);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-top: 22px;
+            margin-bottom: 18px;
             color: var(--text-main);
         }
 
-        .btn-cyber { background: var(--accent); color: #fff; font-weight: 700; border-radius: 12px; border: none; padding: 12px 30px; }
-        .text-muted-custom { color: var(--text-muted) !important; }
-        /* Fix mobile nav styling */
-        .navbar-toggler:focus { box-shadow: none; }
+        .hero p.lead-copy {
+            font-size: 1.08rem;
+            color: var(--text-muted);
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .hero-note {
+            color: var(--text-muted);
+            max-width: 760px;
+            margin: 18px auto 0;
+            font-size: 0.97rem;
+        }
+
+        .btn-cyber,
+        .btn-outline-cyber {
+            border-radius: 12px;
+            font-weight: 700;
+            padding: 14px 22px;
+            transition: 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-cyber {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #04130d;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-cyber:hover {
+            transform: translateY(-1px);
+            opacity: 0.96;
+            color: #04130d;
+        }
+
+        .btn-outline-cyber {
+            background: transparent;
+            border-color: var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-outline-cyber:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 0 6px var(--accent-glow);
+        }
+
+        .section {
+            padding: 42px 0;
+        }
+
+        .section-title {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 14px;
+        }
+
+        .section-heading {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .section-subtext {
+            color: var(--text-muted);
+            max-width: 760px;
+        }
+
+        .glass-card,
+        .service-card,
+        .project-card,
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .service-card,
+        .project-card {
+            padding: 28px;
+            height: 100%;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .service-card:hover,
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(16, 185, 129, 0.35);
+        }
+
+        .service-icon,
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            margin-bottom: 18px;
+        }
+
+        .service-card h3,
+        .project-card h3 {
+            font-size: 1.08rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .muted {
+            color: var(--text-muted);
+        }
+
+        .mini-list {
+            padding-left: 0;
+            list-style: none;
+            margin: 0;
+        }
+
+        .mini-list li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        .mini-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .snapshot-wrap {
+            padding: 32px;
+        }
+
+        .price-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.94rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: var(--accent-glow);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 10px 14px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+        }
+
+        .deliverable-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px 18px;
+            margin-top: 18px;
+        }
+
+        .deliverable-item {
+            background: var(--bg-soft);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            color: var(--text-muted);
+        }
+
+        .deliverable-item strong {
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .project-links a,
+        .footer-links a,
+        .inline-link {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .project-links a:hover,
+        .footer-links a:hover,
+        .inline-link:hover {
+            opacity: 0.85;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .contact-card {
+            padding: 32px;
+        }
+
+        .contact-list a {
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .contact-list a:hover {
+            color: var(--accent);
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            margin-top: 48px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
         @media (max-width: 991px) {
             .navbar-collapse {
                 background: var(--bg-card);
-                margin-top: 15px;
-                padding: 20px;
-                border-radius: 15px;
+                margin-top: 14px;
+                padding: 18px;
+                border-radius: 18px;
                 border: 1px solid var(--border-color);
             }
-            .nav-link {
-                padding: 10px 0;
-                border-bottom: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 767px) {
+            .hero {
+                padding: 90px 0 52px;
             }
-            .nav-link:last-child { border-bottom: none; }
-            .theme-toggle { width: fit-content; }
+
+            .deliverable-list {
+                grid-template-columns: 1fr;
+            }
+
+            .snapshot-wrap,
+            .contact-card {
+                padding: 22px;
+            }
         }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+                <i data-lucide="shield-check" class="me-2"></i>
+                Security Snapshot
+            </a>
 
-<!-- <nav class="navbar navbar-expand-lg sticky-top">
-    <div class="container">
-       
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html" style="color: var(--text-main);">
-            <i data-lucide="shield-check" class="me-2"></i>
-            Security Snapshot
-        </a>
-        <div class="d-flex align-items-center">
-            <div class="navbar-nav me-3 d-none d-lg-flex">
-                <a class="nav-link" href="index.html">Home</a>
-                <a class="nav-link" href="about.html">About</a>
-            </div>
-            <div class="theme-toggle" id="themeSwitcher">
-                <i data-lucide="moon" id="themeIcon"></i>
-            </div>
-        </div>
-    </div>
-</nav> -->
-<nav class="navbar navbar-expand-lg sticky-top">
-    <div class="container">
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html" style="color: var(--text-main);">
-            <i data-lucide="shield-check" class="me-2"></i>
-            Security Snapshot
-        </a>
+            <button
+                class="navbar-toggler border-0"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-label="Toggle navigation"
+            >
+                <i data-lucide="menu" style="color: var(--text-main);"></i>
+            </button>
 
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <i data-lucide="menu" style="color: var(--text-main);"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="navbar-nav ms-auto align-items-lg-center">
-                <a class="nav-link px-3" href="index.html">Home</a>
-                <a class="nav-link px-3" href="about.html">About</a>
-                <div class="theme-toggle ms-lg-3 mt-3 mt-lg-0" id="themeSwitcher">
-                    <i data-lucide="moon" id="themeIcon"></i>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto align-items-lg-center">
+                    <a class="nav-link active px-3" href="index.html">Home</a>
+                    <a class="nav-link px-3" href="about.html">About</a>
+                    <button class="theme-toggle ms-lg-3 mt-3 mt-lg-0" id="themeSwitcher" aria-label="Toggle theme">
+                        <i data-lucide="moon" id="themeIcon"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<section class="hero text-center py-5 mt-5">
-    <div class="container" data-aos="fade-up">
-        <div class="mb-4">
-        <span class="badge rounded-pill border border-success text-success p-2 px-3">
-            $75 • One-Time Professional Report
-        </span>
-        </div>
-        <h1>Security Exposure Snapshot</h1>
-        <p class="lead text-muted-custom mx-auto" style="max-width: 700px;">
-        What does an attacker see when they scan your business?
-        </p>
-        <p class="text-muted-custom mx-auto" style="max-width: 700px; margin-top:10px;">
-        Get a clear, actionable report that helps you secure critical assets and prevent breaches.
-        </p>
-        <a href="mailto:mdomorffaruk@gmail.com" target="_blank" class="btn btn-cyber btn-lg mt-4">Order Your Snapshot</a>
+    <section class="hero text-center">
+        <div class="container">
+            <div class="eyebrow-badge">
+                <i data-lucide="scan-search" size="16"></i>
+                $75 • External Security Exposure Review
+            </div>
 
-        <!-- <div class="mb-4">
-            <span class="badge rounded-pill border border-success text-success p-2 px-3">$75 • One-Time Professional Report</span>
-        </div>
-        <h1>Security Exposure Snapshot</h1>
-        <p class="lead text-muted-custom mx-auto" style="max-width: 700px;">What does an attacker see when they scan your business?</p>
-        <p class="text-muted-custom mx-auto" style="max-width: 700px; margin-top:10px;">
-            Get a clear, actionable report that helps you secure critical assets and prevent breaches.
-        </p>
-        <a href="mailto:mdomorffaruk@gmail.com" class="btn btn-cyber btn-lg mt-4">Order Your Snapshot</a> -->
-    </div>
-</section>
+            <h1>See what your business exposes to the internet before attackers do.</h1>
 
-<section class="container py-5">
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="feature-card">
-                <i data-lucide="scan" class="text-success mb-3"></i>
-                <h5>Attack Surface Mapping</h5>
-                <p class="text-muted-custom small mb-0">Subdomain discovery and mapping.</p>
+            <p class="lead-copy">
+                I provide a focused external security exposure review for websites and public-facing systems,
+                helping businesses identify visible risks, weak configurations, and unnecessary exposure.
+            </p>
+
+            <p class="hero-note">
+                This is a lightweight, non-destructive review designed for small businesses, personal brands,
+                and teams that want a clearer picture of their public attack surface.
+            </p>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-4">
+                <a href="mailto:mdomorffaruk@gmail.com?subject=Security%20Exposure%20Snapshot" class="btn btn-cyber btn-lg">
+                    Request Snapshot
+                </a>
+                <a href="#snapshot-details" class="btn btn-outline-cyber btn-lg">
+                    What's Included
+                </a>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="feature-card">
-                <i data-lucide="alert-triangle" class="text-success mb-3"></i>
-                <h5>OWASP Checks</h5>
-                <p class="text-muted-custom small mb-0">Identification of top vulnerabilities.</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="feature-card">
-                <i data-lucide="file-check" class="text-success mb-3"></i>
-                <h5>Actionable Report</h5>
-                <p class="text-muted-custom small mb-0">Prioritized remediation guidance.</p>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="container py-5 text-center">
-  <div class="row">
-    <div class="col-md-4 mb-3">
-      <h2 style="color: var(--accent); font-size:2rem;">6+</h2>
-      <p>Years of Experience</p>
-    </div>
-    <div class="col-md-4 mb-3">
-      <h2 style="color: var(--accent); font-size:2rem;">50+</h2>
-      <p>Vulnerabilities Detected</p>
-    </div>
-    <div class="col-md-4 mb-3">
-      <h2 style="color: var(--accent); font-size:2rem;">2</h2>
-      <p>Award-Winning Projects</p>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="container py-5">
-  <div class="text-center mb-5">
-    <h2 class="fw-bold">What You Get</h2>
-    <p class="text-muted-custom">A practical security exposure overview, not a generic scan dump.</p>
-  </div>
-
-  <div class="row g-4">
-    <div class="col-md-6">
-      <div class="feature-card">
-        <h5>External Asset Discovery</h5>
-        <p>Full enumeration of exposed subdomains, services, and public-facing infrastructure.</p>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="feature-card">
-        <h5>Vulnerability Overview</h5>
-        <p>Identification of high-impact issues aligned with OWASP Top 10 risks.</p>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="feature-card">
-        <h5>Risk Prioritization</h5>
-        <p>Clear severity classification so you know what to fix first.</p>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="feature-card">
-        <h5>Remediation Guidance</h5>
-        <p>Concrete recommendations your developer can implement immediately.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- <section class="container py-5">
-    <div class="text-center mb-5" data-aos="fade-up">
-        <h2 class="fw-bold">Validated by Industry Leaders</h2>
-        <p class="text-muted-custom">My work has been vetted and recognized by national institutions and financial giants.</p>
-    </div>
-    
-    <div class="row g-4 justify-content-center">
-        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
-            <div class="trust-card text-center">
-                <div class="trust-logo-wrapper">
-                    <img src="assets/BangladeshA2i_ICT_Devision.svg" alt="ICT & a2i" class="img-fluid">
+    <section class="section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i data-lucide="radar"></i>
+                        </div>
+                        <h3>Attack Surface Mapping</h3>
+                        <p class="muted mb-0">
+                            Identify public-facing assets, exposed services, subdomains, and infrastructure details
+                            that increase risk.
+                        </p>
+                    </div>
                 </div>
-                <h6 class="fw-bold mt-3 mb-2">ICT Division & a2i</h6>
-                <p class="small text-muted-custom">National Selection Board for Engineering Excellence</p>
-            </div>
-        </div>
 
-        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-            <div class="trust-card text-center">
-                <div class="trust-logo-wrapper">
-                    <img src="assets/SouthEastBankPLC.jpg" alt="South East Bank" class="img-fluid rounded">
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i data-lucide="shield-alert"></i>
+                        </div>
+                        <h3>Security Weakness Review</h3>
+                        <p class="muted mb-0">
+                            Review visible security issues such as weak headers, SSL/TLS concerns,
+                            exposed ports, and other misconfigurations.
+                        </p>
+                    </div>
                 </div>
-                <h6 class="fw-bold mt-3 mb-2">South-East Bank PLC</h6>
-                <p class="small text-muted-custom">Delivered Mission-Critical Banking Security Systems</p>
-            </div>
-        </div>
 
-        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
-            <div class="trust-card text-center">
-                <div class="trust-logo-wrapper">
-                    <img src="assets/robo-tech-olympiad.png" alt="Robo Tech Olympiad" class="img-fluid">
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i data-lucide="file-text"></i>
+                        </div>
+                        <h3>Simple Actionable Report</h3>
+                        <p class="muted mb-0">
+                            Receive a clear written summary with prioritized findings and practical remediation guidance.
+                        </p>
+                    </div>
                 </div>
-                <h6 class="fw-bold mt-3 mb-2">Robotech Olympiad</h6>
-                <p class="small text-muted-custom">National Winner 2023: Excellence in Embedded Systems</p>
             </div>
         </div>
+    </section>
 
-        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="400">
-            <div class="trust-card text-center">
-                <div class="trust-logo-wrapper">
-                    <img src="assets/Digital_Bangladesh_Logo.svg" alt="Digital Bangladesh" class="img-fluid">
+    <section id="snapshot-details" class="section">
+        <div class="container">
+            <div class="glass-card snapshot-wrap">
+                <div class="row g-4 align-items-start">
+                    <div class="col-lg-7">
+                        <div class="section-title">Security Exposure Snapshot</div>
+                        <h2 class="section-heading">What you get</h2>
+                        <p class="section-subtext mb-0">
+                            This service is designed as an external exposure review, not a full penetration test.
+                            It focuses on publicly visible issues and non-destructive assessment that can help you
+                            understand where your website or business may be unnecessarily exposed.
+                        </p>
+
+                        <div class="deliverable-list">
+                            <div class="deliverable-item">
+                                <strong>Public Asset Review</strong>
+                                Visible domains, subdomains, services, and externally reachable endpoints.
+                            </div>
+
+                            <div class="deliverable-item">
+                                <strong>Port & Service Exposure</strong>
+                                Open ports, service banners, and unnecessary public exposure.
+                            </div>
+
+                            <div class="deliverable-item">
+                                <strong>Header & TLS Review</strong>
+                                HTTP security headers and SSL/TLS configuration observations.
+                            </div>
+
+                            <div class="deliverable-item">
+                                <strong>High-Level Risk Summary</strong>
+                                Clear explanation of which findings matter most and why.
+                            </div>
+
+                            <div class="deliverable-item">
+                                <strong>Report Delivery</strong>
+                                One-time written report with straightforward remediation guidance.
+                            </div>
+
+                            <div class="deliverable-item">
+                                <strong>Small Business Friendly</strong>
+                                Built for teams who need clarity without a heavy consulting process.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="glass-card h-100 p-4">
+                            <div class="price-chip">
+                                <i data-lucide="badge-dollar-sign" size="16"></i>
+                                Fixed Price: $75
+                            </div>
+
+                            <h3 class="fw-bold mb-3">Best for</h3>
+                            <ul class="mini-list mb-4">
+                                <li>Small business websites</li>
+                                <li>Agency or portfolio sites</li>
+                                <li>Public-facing admin or app portals</li>
+                                <li>Teams needing a fast external review</li>
+                            </ul>
+
+                            <h3 class="fw-bold mb-3">Important note</h3>
+                            <p class="muted mb-4">
+                                This review is limited to non-destructive and authorized external checks.
+                                It does not include intrusive exploitation or a full internal penetration test.
+                            </p>
+
+                            <a
+                                href="mailto:mdomorffaruk@gmail.com?subject=Security%20Exposure%20Snapshot%20Request"
+                                class="btn btn-cyber w-100"
+                            >
+                                Request Your Review
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <h6 class="fw-bold mt-3 mb-2">Digital Bangladesh</h6>
-                <p class="small text-muted-custom">Recipient: Digital Bangladesh Award 2022</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<style>
-    /* Trust Card Styling */
-    .trust-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border-color);
-        padding: 25px;
-        border-radius: 20px;
-        height: 100%;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+    <section class="section">
+        <div class="container">
+            <div class="section-title">Selected Work</div>
+            <h2 class="section-heading">Projects that reflect how I work</h2>
+            <p class="section-subtext">
+                My background combines software engineering, practical security tooling, and attack-surface-focused work.
+            </p>
 
-    .trust-card:hover {
-        border-color: var(--accent);
-        transform: translateY(-10px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Logo Container to handle different aspect ratios */
-    .trust-logo-wrapper {
-        height: 60px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-
-    .trust-logo-wrapper img {
-        max-height: 100%;
-        max-width: 100%;
-        object-fit: contain;
-        /* Kept original colors for better impact */
-    }
-
-    /* Dark mode adjustments for logos if needed */
-    [data-bs-theme="dark"] .trust-logo-wrapper img {
-        filter: brightness(0.9) contrast(1.1);
-    }
-
-    /* Ensure mobile responsiveness */
-    @media (max-width: 768px) {
-        .trust-card {
-            padding: 20px;
-        }
-        .trust-logo-wrapper {
-            height: 50px;
-        }
-    }
-</style> -->
-<section class="container py-5">
-    <div class="text-center mb-5" data-aos="fade-up">
-        <h2 class="fw-bold">Validated by Industry Leaders</h2>
-        <p class="text-muted-custom">My work has been vetted and recognized by national institutions and financial giants.</p>
-    </div>
-    
-    <div class="row g-4 justify-content-center">
-        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
-            <div class="trust-card text-center">
-                <div class="trust-logo-wrapper">
-                    <img src="assets/BangladeshA2i_ICT_Devision.svg" alt="ICT & a2i" class="img-fluid">
+            <div class="row g-4 mt-1">
+                <div class="col-lg-4">
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i data-lucide="shield"></i>
+                        </div>
+                        <h3>VulnXposer</h3>
+                        <p class="muted mb-0">
+                            A web-based vulnerability scanning platform integrating reconnaissance modules,
+                            report generation, and OWASP ZAP-based scanning workflows.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/mdomorffaruk/vulnxposer-web-vulnerability-scanner" target="_blank">GitHub</a>
+                        </div>
+                    </div>
                 </div>
-                <h6 class="fw-bold mt-3 mb-2">ICT Division & a2i</h6>
-                <p class="small text-muted-custom">National Selection Board for Engineering Excellence</p>
-            </div>
-        </div>
 
-        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-            <div class="trust-card text-center">
-                <div class="trust-logo-wrapper">
-                    <img src="assets/SouthEastBankPLC.jpg" alt="South East Bank" class="img-fluid rounded">
+                <div class="col-lg-4">
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i data-lucide="search-code"></i>
+                        </div>
+                        <h3>Recon Automation</h3>
+                        <p class="muted mb-0">
+                            Reconnaissance automation pipelines for subdomain enumeration, host discovery,
+                            crawling, and initial triage during web security testing.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/mdomorffaruk/recon-automation" target="_blank">GitHub</a>
+                        </div>
+                    </div>
                 </div>
-                <h6 class="fw-bold mt-3 mb-2">South-East Bank PLC</h6>
-                <p class="small text-muted-custom">Delivered Mission-Critical Banking Security Systems</p>
-            </div>
-        </div>
 
-        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
-            <div class="trust-card text-center">
-                <div class="trust-logo-wrapper">
-                    <img src="assets/robo-tech-olympiad.png" alt="Robo Tech Olympiad" class="img-fluid">
+                <div class="col-lg-4">
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i data-lucide="server-cog"></i>
+                        </div>
+                        <h3>South-East Bank Alarm Management System</h3>
+                        <p class="muted mb-0">
+                            Production monitoring system built for a banking environment with secure backend APIs
+                            and automated alert workflows that reduced manual monitoring workload.
+                        </p>
+                        <div class="project-links">
+                            <a href="about.html" class="inline-link">Learn more</a>
+                        </div>
+                    </div>
                 </div>
-                <h6 class="fw-bold mt-3 mb-2">Robotech Olympiad</h6>
-                <p class="small text-muted-custom">National Winner 2023: Excellence in Embedded Systems</p>
             </div>
         </div>
+    </section>
 
-        <div class="col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="400">
-            <div class="trust-card text-center">
-                <div class="trust-logo-wrapper">
-                    <img src="assets/Digital_Bangladesh_Logo.svg" alt="Digital Bangladesh" class="img-fluid">
+    <section class="section">
+        <div class="container">
+            <div class="contact-card">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-8">
+                        <div class="section-title">About Me</div>
+                        <h2 class="section-heading mb-2">Mohammad Omor Faruk</h2>
+                        <p class="muted mb-0">
+                            I’m a security-focused engineer with a background in full-stack development and
+                            offensive-security-oriented research. My current focus is web application testing,
+                            reconnaissance automation, vulnerability assessment, and practical security tooling.
+                        </p>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="d-grid gap-3">
+                            <a href="about.html" class="btn btn-outline-cyber">View About Page</a>
+                            <a href="mailto:mdomorffaruk@gmail.com" class="btn btn-cyber">Contact Me</a>
+                        </div>
+                    </div>
                 </div>
-                <h6 class="fw-bold mt-3 mb-2">Digital Bangladesh</h6>
-                <p class="small text-muted-custom">Recipient: Digital Bangladesh Award 2022</p>
+
+                <div class="row g-3 mt-3 contact-list">
+                    <div class="col-md-4">
+                        <strong>Email</strong><br />
+                        <a href="mailto:mdomorffaruk@gmail.com">mdomorffaruk@gmail.com</a>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>LinkedIn</strong><br />
+                        <a href="https://linkedin.com/in/mdomorffaruk" target="_blank">linkedin.com/in/mdomorffaruk</a>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>GitHub</strong><br />
+                        <a href="https://github.com/mdomorffaruk" target="_blank">github.com/mdomorffaruk</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    <footer class="py-5 text-center">
+        <div class="container">
+            <div class="footer-links mb-3">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="https://github.com/mdomorffaruk" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/mdomorffaruk" target="_blank">LinkedIn</a>
+            </div>
+            <div class="small muted">
+                © 2026 Mohammad Omor Faruk
+            </div>
+        </div>
+    </footer>
 
-
-<style>
-    /* Trust Card Styling */
-    .trust-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border-color);
-        padding: 25px;
-        border-radius: 20px;
-        height: 100%;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .trust-card:hover {
-        border-color: var(--accent);
-        transform: translateY(-10px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    }
-
-    .trust-logo-wrapper {
-        height: 60px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-
-    /* Logo Visibility in Dark Mode */
-    .trust-logo-wrapper img {
-        max-height: 100%;
-        max-width: 100%;
-        object-fit: contain;
-        transition: filter 0.3s ease;
-    }
-
-    /* Target Dark Mode specifically for better logo visibility */
-    [data-bs-theme="dark"] .trust-logo-wrapper img {
-        filter: brightness(1.2) contrast(1.1) saturate(1.2);
-    }
-    
-    /* Specific adjustment for dark/black logos like SouthEastBank text if needed */
-    [data-bs-theme="dark"] .trust-card {
-        background: rgba(255, 255, 255, 0.03); /* Lighter "Glass" look in dark mode */
-    }
-
-    @media (max-width: 768px) {
-        .trust-card { padding: 20px; }
-        .trust-logo-wrapper { height: 50px; }
-    }
-</style>
-
-
-
-<section class="text-center py-5">
-  <div class="container">
-    <h2 class="fw-bold mb-3">Know What Attackers See - Before They Do</h2>
-    <p class="text-muted-custom mb-4">
-      One-time professional exposure snapshot for serious businesses.
-    </p>
-    <a href="mailto:mdomorffaruk@gmail.com" target="_blank" class="btn btn-cyber btn-lg">
-      Request Your Security Snapshot
-    </a>
-  </div>
-</section>
-
-
-
-<footer class="py-5 text-center mt-5" style="border-top: 1px solid var(--border-color); color: var(--text-muted);">
-    <div class="container small">
-        &copy; 2026 Mohammad Omor Faruk | All rights reserved
-    </div>
-</footer>
-
-
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<!-- <script>
-    AOS.init();
-    lucide.createIcons();
-
-    const themeSwitcher = document.getElementById('themeSwitcher');
-    const htmlElement = document.documentElement;
-    const themeIcon = document.getElementById('themeIcon');
-
-    themeSwitcher.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-bs-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        htmlElement.setAttribute('data-bs-theme', newTheme);
-        
-        // Update Icon
-        themeIcon.setAttribute('data-lucide', newTheme === 'dark' ? 'moon' : 'sun');
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
         lucide.createIcons();
-    });
-</script> -->
-<script>
-    AOS.init();
-    lucide.createIcons();
 
-    const themeSwitcher = document.getElementById('themeSwitcher');
-    const htmlElement = document.documentElement;
-    const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+        const themeSwitcher = document.getElementById("themeSwitcher");
+        const themeIcon = document.getElementById("themeIcon");
 
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    htmlElement.setAttribute('data-bs-theme', savedTheme);
-    updateIcon(savedTheme);
+        function setTheme(theme) {
+            html.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+            if (themeIcon) {
+                themeIcon.setAttribute("data-lucide", theme === "dark" ? "moon" : "sun");
+                lucide.createIcons();
+            }
+        }
 
-    themeSwitcher.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-bs-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        htmlElement.setAttribute('data-bs-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateIcon(newTheme);
-    });
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        setTheme(savedTheme);
 
-    function updateIcon(theme) {
-        themeIcon.setAttribute('data-lucide', theme === 'dark' ? 'moon' : 'sun');
-        lucide.createIcons();
-    }
-</script>
+        if (themeSwitcher) {
+            themeSwitcher.addEventListener("click", () => {
+                const currentTheme = html.getAttribute("data-theme");
+                setTheme(currentTheme === "dark" ? "light" : "dark");
+            });
+        }
+    </script>
 </body>
 </html>
