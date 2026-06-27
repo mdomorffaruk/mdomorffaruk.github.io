@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mohammad Omor Faruk - Full Portfolio</title>
+<meta name="description" content="Full portfolio of Mohammad Omor Faruk - Software Engineer, Security Researcher, Backend Developer." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #f5f5f5;
+  --card: #eeeeee;
+  --border: rgba(0,0,0,0.08);
+  --border-hover: rgba(0,0,0,0.18);
+  --accent: #6d28d9;
+  --accent-soft: rgba(109,40,217,0.08);
+  --text: #111111;
+  --text-muted: #555555;
+  --text-dim: #888888;
+  --logo-bg: #111111;
+  --logo-text: #ffffff;
+  --radius: 18px;
+  --radius-sm: 10px;
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --card: #1e1e1e;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --accent: #8b5cf6;
+  --accent-soft: rgba(139,92,246,0.12);
+  --text: #f0f0f0;
+  --text-muted: #a0a0a0;
+  --text-dim: #707070;
+  --logo-bg: #8b5cf6;
+  --logo-text: #0a0a0a;
+  color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Instrument Sans',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100vh;-webkit-font-smoothing:antialiased;
+  transition:background .2s,color .2s;
+}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
+
+nav{
+  position:sticky;top:0;z-index:100;
+  border-bottom:1px solid var(--border);
+  background:var(--bg);backdrop-filter:blur(24px);
+  transition:background .2s;
+}
+.nav-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.5rem;gap:1rem;
+}
+.nav-brand{display:flex;align-items:center;gap:.75rem}
+.nav-mark{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--logo-bg);color:var(--logo-text);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:.8rem;font-family:'IBM Plex Mono',monospace;
+  transition:background .2s,color .2s;
+}
+.nav-name{font-size:.85rem;font-weight:600;letter-spacing:-.01em}
+.nav-sub{font-size:.68rem;color:var(--text-dim);margin-top:1px;font-family:'IBM Plex Mono',monospace}
+.nav-links{display:flex;align-items:center;gap:.15rem}
+.nav-links a{
+  padding:.45rem .85rem;border-radius:8px;
+  font-size:.78rem;font-weight:500;color:var(--text-muted);
+  transition:all .15s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);background:var(--accent-soft)}
+.theme-toggle{
+  width:36px;height:36px;border-radius:8px;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-muted);font-size:1rem;flex-shrink:0;
+  transition:all .15s;
+}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+
+.container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.section{padding:4rem 0}
+
+.section-tag{
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem;
+}
+.section-h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;letter-spacing:-.03em}
+.section-p{font-size:.85rem;color:var(--text-muted);line-height:1.7;margin-top:.5rem;max-width:560px}
+
+.hero-short{padding:3rem 0 1.5rem;max-width:720px}
+.hero-short h1{font-size:clamp(2rem,4vw,2.8rem);font-weight:700;letter-spacing:-.035em;line-height:1.1}
+.hero-short h1 span{color:var(--accent)}
+.hero-short p{font-size:.92rem;color:var(--text-muted);line-height:1.7;margin-top:.75rem}
+.hero-links{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.hero-links a{
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+  border:1px solid var(--border);border-radius:100px;
+  padding:.3rem .8rem;color:var(--text-dim);transition:all .15s;
+}
+.hero-links a:hover{border-color:var(--accent);color:var(--accent)}
+
+.two-col{display:grid;grid-template-columns:1fr 1.3fr;gap:2rem}
+
+.card{
+  border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface);padding:1.75rem;transition:border-color .2s,background .2s;
+}
+.card h4{font-size:.95rem;font-weight:600;letter-spacing:-.01em;margin-bottom:.4rem}
+.card p,.card li{font-size:.8rem;color:var(--text-muted);line-height:1.7}
+.card ul{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+.card ul li{padding-left:1rem;position:relative}
+.card ul li::before{content:'-';position:absolute;left:0;color:var(--accent)}
+
+.timeline{display:flex;flex-direction:column;gap:1.5rem;margin-top:1rem}
+.tl-item{border-left:2px solid var(--border);padding-left:1.15rem;position:relative}
+.tl-item::before{
+  content:'';position:absolute;left:-4px;top:4px;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--accent);border:2px solid var(--bg);
+  transition:border-color .2s;
+}
+.tl-period{font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:500;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.tl-role{font-size:.95rem;font-weight:600;margin-top:.15rem;letter-spacing:-.01em}
+.tl-org{font-size:.75rem;color:var(--text-dim);margin-top:2px}
+.tl-bullets{margin-top:.5rem;display:flex;flex-direction:column;gap:.3rem}
+.tl-bullets li{font-size:.78rem;color:var(--text-muted);line-height:1.5;list-style:none;padding-left:1rem;position:relative}
+.tl-bullets li::before{content:'-';position:absolute;left:0;color:var(--accent)}
+
+.skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-top:1rem}
+.skill-cat{border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card);padding:1rem;transition:background .2s}
+.skill-cat h5{font-size:.78rem;font-weight:600;color:var(--accent);margin-bottom:.35rem}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.25rem}
+.skill-tags span{
+  font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:500;
+  border:1px solid var(--border);border-radius:100px;
+  padding:.12rem .55rem;color:var(--text-dim);
+}
+
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:1.5rem}
+.proj-card{
+  border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface);padding:1.5rem;transition:border-color .2s,background .2s;
+}
+.proj-card:hover{border-color:var(--border-hover)}
+.proj-cat{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.35rem}
+.proj-card h4{font-size:.95rem;font-weight:600;letter-spacing:-.01em}
+.proj-card p{font-size:.75rem;color:var(--text-muted);line-height:1.6;margin-top:.3rem}
+.proj-links{display:flex;gap:.5rem;margin-top:.6rem}
+.proj-links a{font-size:.7rem;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:.25rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.6rem}
+.proj-tags span{
+  font-family:'IBM Plex Mono',monospace;font-size:.58rem;font-weight:500;
+  border:1px solid var(--border);border-radius:100px;
+  padding:.1rem .5rem;color:var(--text-dim);
+}
+.app-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-top:1.5rem;
+}
+.app-card{
+  border:1px solid var(--border);border-radius:var(--radius-sm);
+  background:var(--surface);padding:.85rem 1rem;
+  display:flex;align-items:center;gap:.75rem;
+  transition:border-color .2s,background .2s;
+}
+.app-card:hover{border-color:var(--border-hover)}
+.app-icon{
+  width:38px;height:38px;border-radius:10px;
+  background:var(--accent-soft);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:.9rem;
+  font-family:'IBM Plex Mono',monospace;flex-shrink:0;
+}
+.app-info{flex:1;min-width:0}
+.app-name{font-size:.82rem;font-weight:600;letter-spacing:-.01em}
+.app-pkg{
+  font-family:'IBM Plex Mono',monospace;font-size:.58rem;
+  color:var(--text-dim);margin-top:1px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.app-badge{
+  font-family:'IBM Plex Mono',monospace;font-size:.55rem;font-weight:500;
+  padding:.15rem .5rem;border-radius:100px;white-space:nowrap;flex-shrink:0;
+  background:var(--accent-soft);color:var(--accent);border:1px solid var(--border);
+}
+.app-badge.dev{
+  background:rgba(0,0,0,0.03);color:var(--text-dim);
+}
+[data-theme="dark"] .app-badge.dev{
+  background:rgba(255,255,255,0.03);color:var(--text-dim);
+}
+
+.writeup-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.5rem}
+.writeup-card{
+  border:1px solid var(--border);border-radius:var(--radius-sm);
+  background:var(--card);padding:1.25rem;transition:border-color .2s,background .2s;
+}
+.writeup-card:hover{border-color:var(--border-hover)}
+.writeup-card h4{font-size:.88rem;font-weight:600;letter-spacing:-.01em}
+.writeup-card p{font-size:.74rem;color:var(--text-muted);margin-top:.25rem;line-height:1.5}
+.writeup-card a{font-size:.7rem;color:var(--accent);font-weight:600;display:inline-flex;align-items:center;gap:.25rem;margin-top:.5rem}
+
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}
+.contact-item{
+  border:1px solid var(--border);border-radius:var(--radius-sm);
+  background:var(--card);padding:1.25rem;text-align:center;transition:border-color .2s,background .2s;
+}
+.contact-item:hover{border-color:var(--border-hover)}
+.contact-item .label{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim)}
+.contact-item .val{font-size:.82rem;font-weight:600;margin-top:.3rem;color:var(--accent)}
+.contact-item .sub{font-size:.65rem;color:var(--text-dim);margin-top:.15rem}
+
+footer{
+  border-top:1px solid var(--border);background:var(--surface);padding:2rem 0;margin-top:2rem;transition:background .2s;
+}
+.footer-inner{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.footer-name{font-size:.82rem;font-weight:600}
+.footer-sub{font-size:.7rem;color:var(--text-dim);margin-top:2px}
+
+@media(max-width:900px){
+  .two-col{grid-template-columns:1fr}
+  .proj-grid,.writeup-grid,.app-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .section{padding:2.5rem 0}
+  .skill-grid,.contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="nav-mark">MF</div>
+      <div>
+        <div class="nav-name">Mohammad Omor Faruk</div>
+        <div class="nav-sub">mdomorffaruk</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:.25rem">
+      <div class="nav-links">
+        <a href="index.html">Agency</a>
+        <a href="about.html" class="active">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">&#9680;</button>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+  <section class="hero-short">
+    <h1>Mohammad <span>Omor Faruk</span></h1>
+    <p>Software engineer with 6+ years in backend systems and 3+ years in cybersecurity research. I build production infrastructure and find what breaks. Based in Bogura, Bangladesh.</p>
+    <div class="hero-links">
+      <a href="mailto:mdomorffaruk@gmail.com">mdomorffaruk@gmail.com</a>
+      <a href="tel:+880175014994">+880175014994</a>
+      <a href="https://github.com/mdomorffaruk" target="_blank">github/mdomorffaruk</a>
+      <a href="https://linkedin.com/in/mdomorffaruk" target="_blank">linkedin/in/mdomorffaruk</a>
+      <a href="https://fiverr.com/mdofrbn7" target="_blank">fiverr/mdofrbn7</a>
+      <a href="https://medium.com/@mdomorffaruk" target="_blank">medium/@mdomorffaruk</a>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:1rem">
+    <div class="two-col">
+      <div>
+        <div class="section-tag">About</div>
+        <div class="card">
+          <h4>Delivery + Security Depth</h4>
+          <p style="font-size:.88rem;line-height:1.75">I started as a full-stack developer building production banking systems. Over time I moved deeper into cybersecurity - recon automation, vulnerability research, and application security. That mix means I understand both how software is built and how it breaks.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.25rem">
+            <div>
+              <div style="font-size:.7rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Education</div>
+              <ul>
+                <li>B.Sc. CSE, University of Rajshahi (2018-2022)</li>
+                <li>OSCP Coursework (PWK 3.2)</li>
+                <li>Blue Team Junior Analyst (BJT)</li>
+                <li>Google Foundations of Cybersecurity</li>
+                <li>PortSwigger & TryHackMe labs</li>
+              </ul>
+            </div>
+            <div>
+              <div style="font-size:.7rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Awards</div>
+              <ul>
+                <li>Digital Bangladesh Award 2022 (Prime Minister's Office)</li>
+                <li>Robotech Olympiad 2023 - Embedded Systems</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-tag">Timeline</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-period">2023 - Present</div>
+            <div class="tl-role">Cybersecurity Researcher</div>
+            <div class="tl-org">ByteTech, Bangladesh</div>
+            <ul class="tl-bullets">
+              <li>Web app recon, attack-surface mapping, manual testing</li>
+              <li>Automation pipelines for asset discovery and vuln triage</li>
+              <li>Malware analysis and reverse engineering</li>
+              <li>30+ bug bounty reports across H1, Bugcrowd, Intigriti</li>
+            </ul>
+          </div>
+          <div class="tl-item">
+            <div class="tl-period">2020 - 2023</div>
+            <div class="tl-role">Full-Stack Developer</div>
+            <div class="tl-org">ByteTech, Bangladesh</div>
+            <ul class="tl-bullets">
+              <li>Production web apps (React, Node.js, PHP, REST APIs)</li>
+              <li>Southeast Bank Alarm Management System - end to end</li>
+              <li>ElectronJS desktop tooling, monitoring dashboards</li>
+            </ul>
+          </div>
+          <div class="tl-item">
+            <div class="tl-period">2019 - 2020</div>
+            <div class="tl-role">Freelance Developer</div>
+            <div class="tl-org">Fiverr / Upwork</div>
+            <ul class="tl-bullets">
+              <li>Java 2D games and web projects for international clients</li>
+              <li>$700+ earned across platforms</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:1rem">
+    <div class="section-tag">Skills</div>
+    <h2 class="section-h2">Stack &amp; tooling</h2>
+    <div class="skill-grid">
+      <div class="skill-cat"><h5>Languages</h5><div class="skill-tags"><span>JavaScript</span><span>PHP</span><span>Python</span><span>Kotlin</span><span>C/C++</span><span>Bash</span><span>Java</span></div></div>
+      <div class="skill-cat"><h5>Backend</h5><div class="skill-tags"><span>Node.js</span><span>Express</span><span>Laravel</span><span>Django</span><span>REST APIs</span></div></div>
+      <div class="skill-cat"><h5>Frontend</h5><div class="skill-tags"><span>React</span><span>TypeScript</span><span>HTML/CSS</span><span>ElectronJS</span></div></div>
+      <div class="skill-cat"><h5>Databases</h5><div class="skill-tags"><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>SQLite</span></div></div>
+      <div class="skill-cat"><h5>Web Security</h5><div class="skill-tags"><span>OWASP Top 10</span><span>XSS</span><span>SQLi</span><span>SSRF</span><span>IDOR</span><span>RCE</span><span>SSTI</span><span>XXE</span><span>CSRF</span><span>Race Conditions</span><span>Business Logic</span><span>Prototype Pollution</span></div></div>
+      <div class="skill-cat"><h5>API &amp; Auth</h5><div class="skill-tags"><span>REST API Testing</span><span>GraphQL</span><span>JWT Attacks</span><span>OAuth/OIDC</span><span>MFA Bypass</span><span>Auth Bypass</span><span>Mass Assignment</span><span>CORS Misconfig</span></div></div>
+      <div class="skill-cat"><h5>Advanced Attacks</h5><div class="skill-tags"><span>HTTP Request Smuggling</span><span>Host Header Injection</span><span>Cache Poisoning</span><span>WebSocket Hijack</span><span>Subdomain Takeover</span><span>Cloud Metadata SSRF</span><span>File Upload Bypass</span><span>Open Redirect</span></div></div>
+      <div class="skill-cat"><h5>Infra &amp; Cloud</h5><div class="skill-tags"><span>AWS Pentest</span><span>S3 Misconfig</span><span>Cloud Recon</span><span>WAF Bypass</span><span>DNS Enum</span><span>Port Scanning</span><span>Container Security</span><span>Linux Priv Esc</span></div></div>
+      <div class="skill-cat"><h5>Recon &amp; Automation</h5><div class="skill-tags"><span>Subfinder</span><span>Amass</span><span>Chaos API</span><span>Httpx</span><span>Katana</span><span>Gau</span><span>Wayback</span><span>Feroxbuster</span><span>Nuclei</span><span>FFuF</span><span>Grep</span><span>Custom Pipelines</span></div></div>
+      <div class="skill-cat"><h5>Tools</h5><div class="skill-tags"><span>Burp Suite Pro</span><span>Nmap</span><span>Metasploit</span><span>Ghidra</span><span>Wireshark</span><span>Python Scripting</span><span>Bash</span><span>Docker</span><span>Playwright</span><span>Git</span></div></div>
+      <div class="skill-cat"><h5>Reverse &amp; Malware</h5><div class="skill-tags"><span>Malware Analysis</span><span>Reverse Engineering</span><span>Buffer Overflow</span><span>Exploit Dev</span><span>Kernel Exploit</span><span>PatchGuard</span><span>DLL Injection</span></div></div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:1rem">
+    <div class="section-tag">Android</div>
+    <h2 class="section-h2">Play Store apps</h2>
+    <p class="section-p">Kotlin apps built from scratch. Some published, more in development.</p>
+    <div class="app-grid">
+      <div class="app-card">
+        <div class="app-icon">H</div>
+        <div class="app-info">
+          <div class="app-name">Hifz Tracker</div>
+          <div class="app-pkg">com.mdomorffaruk.hifztracker</div>
+        </div>
+        <div class="app-badge">Published</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">Z</div>
+        <div class="app-info">
+          <div class="app-name">Zakat Calculator</div>
+          <div class="app-pkg">com.mdomorffaruk.zakatcalculator</div>
+        </div>
+        <div class="app-badge">Published</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">T</div>
+        <div class="app-info">
+          <div class="app-name">Simple To-Do</div>
+          <div class="app-pkg">com.mdomorffaruk.todoapp</div>
+        </div>
+        <div class="app-badge">Published</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">M</div>
+        <div class="app-info">
+          <div class="app-name">Mosque Toolkit</div>
+          <div class="app-pkg">com.mdomorffaruk.mosquetoolkit</div>
+        </div>
+        <div class="app-badge dev">In Dev</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">B</div>
+        <div class="app-info">
+          <div class="app-name">Budget Tracker</div>
+          <div class="app-pkg">com.mdomorffaruk.budgettracker</div>
+        </div>
+        <div class="app-badge dev">In Dev</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">H</div>
+        <div class="app-info">
+          <div class="app-name">Habit Tracker</div>
+          <div class="app-pkg">com.mdomorffaruk.habittracker</div>
+        </div>
+        <div class="app-badge dev">In Dev</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">L</div>
+        <div class="app-info">
+          <div class="app-name">Ledger Book</div>
+          <div class="app-pkg">com.mdomorffaruk.ledgerbook</div>
+        </div>
+        <div class="app-badge dev">In Dev</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">F</div>
+        <div class="app-info">
+          <div class="app-name">Freelancer CRM</div>
+          <div class="app-pkg">com.mdomorffaruk.freelancercrm</div>
+        </div>
+        <div class="app-badge dev">In Dev</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">R</div>
+        <div class="app-info">
+          <div class="app-name">Renewal Tracker</div>
+          <div class="app-pkg">com.mdomorffaruk.renewaltracker</div>
+        </div>
+        <div class="app-badge dev">In Dev</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">S</div>
+        <div class="app-info">
+          <div class="app-name">Study Planner</div>
+          <div class="app-pkg">com.mdomorffaruk.studyplanner</div>
+        </div>
+        <div class="app-badge dev">In Dev</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:1rem">
+    <div class="section-tag">Projects</div>
+    <h2 class="section-h2">Full project list</h2>
+    <p class="section-p">Production systems, security tools, and award-winning engineering.</p>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-cat">Banking Platform</div>
+        <h4>Southeast Bank Alarm Management</h4>
+        <p>24/7 real-time monitoring for banking security infrastructure. Kotlin Android client + PHP REST API backend. Reduced manual monitoring workload by 70%.</p>
+        <div class="proj-tags"><span>PHP</span><span>Kotlin</span><span>MySQL</span><span>Banking</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-cat">Security Scanner</div>
+        <h4>VulnXposer</h4>
+        <p>Web-based vulnerability assessment platform integrating OWASP ZAP, DNS analysis, port scanning, and structured HTML/PDF reporting.</p>
+        <div class="proj-links"><a href="https://github.com/mdomorffaruk/vulnxposer-web-vulnerability-scanner" target="_blank">GitHub &rarr;</a></div>
+        <div class="proj-tags"><span>React</span><span>Node.js</span><span>OWASP ZAP</span><span>Nmap</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-cat">Award-Winning IoT</div>
+        <h4>Smart Helmet</h4>
+        <p>AI-powered accident alert and rider safety system with GPS/GSM and OpenCV vehicle recognition. Digital Bangladesh Award 2022 by the Prime Minister.</p>
+        <div class="proj-tags"><span>Python</span><span>OpenCV</span><span>IoT</span><span>GPS/GSM</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-cat">Recon Pipeline</div>
+        <h4>Recon Automation Toolkit</h4>
+        <p>Bash/Python automation for subdomain enumeration, archive URL collection, HTTP probing, and Nuclei-based vulnerability triage.</p>
+        <div class="proj-links"><a href="https://github.com/mdomorffaruk/recon-automation" target="_blank">GitHub &rarr;</a></div>
+        <div class="proj-tags"><span>Bash</span><span>Python</span><span>Subfinder</span><span>Nuclei</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-cat">Bug Bounty Methodology</div>
+        <h4>Research Notes &amp; Workflows</h4>
+        <p>Curated methodology for recon, API testing, and structured testing strategy for bug bounty hunting.</p>
+        <div class="proj-links"><a href="https://github.com/mdomorffaruk/bug-bounty-methodology" target="_blank">GitHub &rarr;</a></div>
+        <div class="proj-tags"><span>Methodology</span><span>API Testing</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-cat">Automation</div>
+        <h4>HackerOne Workflow Scripts</h4>
+        <p>Python automation for HackerOne bug bounty workflows, target scope management, and reporting.</p>
+        <div class="proj-links"><a href="https://github.com/mdomorffaruk/hackerone-automation" target="_blank">GitHub &rarr;</a></div>
+        <div class="proj-tags"><span>Python</span><span>Automation</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:1rem">
+    <div class="section-tag">Writeups</div>
+    <h2 class="section-h2">Research &amp; articles</h2>
+    <p class="section-p">Published on Medium. Malware analysis, kernel internals, web security, and red team methodology.</p>
+    <div class="writeup-grid">
+      <div class="writeup-card">
+        <h4>Exploring Vulnerabilities in Modern Web Applications</h4>
+        <p>Overview of common web weaknesses and practical security considerations.</p>
+        <a href="https://medium.com/@mdomorffaruk/exploring-vulnerabilities-in-modern-web-applications-758ad6a4e7cd" target="_blank">Read &rarr;</a>
+      </div>
+      <div class="writeup-card">
+        <h4>Kernel Mode DLL Injection Techniques</h4>
+        <p>Low-level injection concepts, OS internals, and kernel-space execution.</p>
+        <a href="https://medium.com/@mdomorffaruk/kernel-mode-dll-injection-techniques-6d92d7419863" target="_blank">Read &rarr;</a>
+      </div>
+      <div class="writeup-card">
+        <h4>Advanced Persistent Threats and Kernel-Level Exploits</h4>
+        <p>Attacker tradecraft, APT methodology, and kernel exploitation techniques.</p>
+        <a href="https://medium.com/@mdomorffaruk/advanced-persistent-threats-apts-and-kernel-level-exploits-d71cfac7a1b3" target="_blank">Read &rarr;</a>
+      </div>
+      <div class="writeup-card">
+        <h4>Bypassing Windows Kernel PatchGuard</h4>
+        <p>Deep dive into PatchGuard bypass for exploit development workflows.</p>
+        <a href="https://medium.com/@mdomorffaruk/bypassing-windows-kernel-patchguard-for-exploit-development-c7472b7af10c" target="_blank">Read &rarr;</a>
+      </div>
+      <div class="writeup-card">
+        <h4>Red Team Strategies and Methodologies</h4>
+        <p>Offensive security approaches covering planning, execution, and reporting.</p>
+        <a href="https://medium.com/@mdomorffaruk/red-team-strategies-and-methodologies-outlined-effective-approaches-in-offensive-security-72166b456375" target="_blank">Read &rarr;</a>
+      </div>
+      <div class="writeup-card">
+        <h4>Advanced Malware Injection Techniques</h4>
+        <p>Analysis of sophisticated injection patterns and defensive countermeasures.</p>
+        <a href="https://medium.com/@mdomorffaruk/advanced-malware-injection-techniques-and-countermeasures-f22bf95585f2" target="_blank">Read &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="section-tag">Contact</div>
+    <h2 class="section-h2">Open to work</h2>
+    <p class="section-p">Freelance engineering, security consulting, and remote collaboration. Bangladesh-based, global hours.</p>
+    <div class="contact-grid">
+      <a href="mailto:mdomorffaruk@gmail.com" class="contact-item">
+        <div class="label">Email</div>
+        <div class="val">mdomorffaruk@gmail.com</div>
+        <div class="sub">Reply within hours</div>
+      </a>
+      <a href="https://fiverr.com/mdofrbn7" target="_blank" class="contact-item">
+        <div class="label">Fiverr</div>
+        <div class="val">mdofrbn7</div>
+        <div class="sub">Send an order</div>
+      </a>
+      <a href="https://linkedin.com/in/mdomorffaruk" target="_blank" class="contact-item">
+        <div class="label">LinkedIn</div>
+        <div class="val">in/mdomorffaruk</div>
+        <div class="sub">Connect</div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-name">Mohammad Omor Faruk</div>
+      <div class="footer-sub">mdomorffaruk@gmail.com &middot; +880175014994</div>
+    </div>
+    <div>
+      <a href="index.html" style="font-size:.75rem;color:var(--text-muted);border:1px solid var(--border);border-radius:100px;padding:.35rem .85rem;transition:all .15s">&larr; Agency home</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const toggle = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  if (toggle) {
+    toggle.addEventListener('click', function(){
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (isDark) { html.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
+      else { html.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
+    });
+  }
+})();
+</script>
+</body>
+</html>
