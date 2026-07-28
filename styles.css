@@ -957,21 +957,28 @@ h1 em::after {
 .testimonial-role { font-size: 0.68rem; color: var(--text-dim); margin-top: 1px; }
 
 /* ============================================================
-   TESTIMONIALS — HORIZONTAL AUTO-SCROLL CAROUSEL
+   TESTIMONIALS — MARQUEE (like certs)
    ============================================================ */
 .testimonials-scroll {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding: 0.25rem 0 1rem;
+  position: relative;
   margin-top: 1.5rem;
+  overflow: hidden;
   mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
 }
-.testimonials-scroll::-webkit-scrollbar { display: none; }
+.testimonials-scroll-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: ts-marquee 40s linear infinite;
+}
+.testimonials-scroll:hover .testimonials-scroll-track {
+  animation-play-state: paused;
+}
+@keyframes ts-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 .testimonial-scroll-card {
   flex-shrink: 0;
   width: 320px;
@@ -1058,6 +1065,19 @@ h1 em::after {
   font-size: 0.6rem;
   color: var(--text-dim);
   margin-top: 0.5rem;
+}
+@media (max-width: 640px) {
+  .testimonials-scroll { mask-image: none; -webkit-mask-image: none; }
+  .testimonials-scroll-track {
+    animation: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+  }
+  .testimonials-scroll-track::-webkit-scrollbar { display: none; }
+  .testimonial-scroll-card { scroll-snap-align: start; }
 }
 
 /* ============================================================
@@ -1436,18 +1456,38 @@ h1 em::after {
    ANDROID APPS — SCROLL CAROUSEL
    ============================================================ */
 .app-scroll {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding: 0.25rem 0 1rem;
+  position: relative;
   margin-top: 1rem;
+  overflow: hidden;
   mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
 }
-.app-scroll::-webkit-scrollbar { display: none; }
+.app-scroll-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: app-marquee 50s linear infinite;
+}
+.app-scroll:hover .app-scroll-track {
+  animation-play-state: paused;
+}
+@keyframes app-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@media (max-width: 640px) {
+  .app-scroll { mask-image: none; -webkit-mask-image: none; }
+  .app-scroll-track {
+    animation: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+  }
+  .app-scroll-track::-webkit-scrollbar { display: none; }
+  .app-scroll-card { scroll-snap-align: start; }
+}
 .app-scroll-card {
   flex-shrink: 0;
   width: 260px;
@@ -1458,6 +1498,7 @@ h1 em::after {
   overflow: hidden;
   text-decoration: none;
   color: inherit;
+  position: relative;
   transition: all var(--duration-md) var(--ease);
 }
 .app-scroll-card:hover {
@@ -1503,22 +1544,28 @@ h1 em::after {
 .app-badge {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.55rem;
-  font-weight: 500;
-  padding: 0.15rem 0.5rem;
-  border-radius: var(--radius-full);
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
   white-space: nowrap;
   flex-shrink: 0;
-  margin-left: auto;
-  background: var(--accent-soft);
-  color: var(--accent);
-  border: 1px solid var(--border);
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  backdrop-filter: blur(4px);
 }
 .app-badge.dev {
-  background: rgba(0,0,0,0.03);
-  color: var(--text-dim);
+  background: rgba(0,0,0,0.55);
+  color: #fff;
 }
 [data-theme="dark"] .app-badge.dev {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.15);
+  color: #fff;
 }
 
 /* ============================================================
