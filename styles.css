@@ -957,6 +957,110 @@ h1 em::after {
 .testimonial-role { font-size: 0.68rem; color: var(--text-dim); margin-top: 1px; }
 
 /* ============================================================
+   TESTIMONIALS — HORIZONTAL AUTO-SCROLL CAROUSEL
+   ============================================================ */
+.testimonials-scroll {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0.25rem 0 1rem;
+  margin-top: 1.5rem;
+  mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+}
+.testimonials-scroll::-webkit-scrollbar { display: none; }
+.testimonial-scroll-card {
+  flex-shrink: 0;
+  width: 320px;
+  max-width: 85vw;
+  scroll-snap-align: start;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--duration-md) var(--ease);
+}
+.testimonial-scroll-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow);
+}
+.testimonial-scroll-card .testimonial-stars {
+  margin-bottom: 0.6rem;
+}
+.testimonial-scroll-card .testimonial-text {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  flex: 1;
+  font-style: italic;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.testimonial-scroll-author {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+.testimonial-scroll-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+.testimonial-scroll-info {
+  flex: 1;
+  min-width: 0;
+}
+.testimonial-scroll-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.testimonial-scroll-meta {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  margin-top: 1px;
+}
+.testimonial-scroll-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.5rem;
+  font-weight: 500;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  margin-left: auto;
+}
+.testimonial-scroll-time {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  margin-top: 0.5rem;
+}
+
+/* ============================================================
    FAQ / ACCORDION
    ============================================================ */
 .faq-list {

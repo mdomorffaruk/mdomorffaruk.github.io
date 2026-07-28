@@ -556,7 +556,55 @@
   };
 
   /* ----------------------------------------------------------
-     16. HERO PARALLAX (subtle)
+     16. AUTO SCROLL CAROUSEL
+     Auto-scroll for testimonials & apps. Pauses on hover.
+     ---------------------------------------------------------- */
+  const AutoScroll = {
+    init() {
+      const containers = document.querySelectorAll('.auto-scroll');
+      if (!containers.length) return;
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      containers.forEach(container => {
+        const speed = parseFloat(container.getAttribute('data-speed')) || 0.8;
+        let isPaused = false;
+        let rafId = null;
+
+        const scroll = () => {
+          if (!isPaused && !prefersReduced) {
+            container.scrollLeft += speed;
+            if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+              container.scrollLeft = 0;
+            }
+          }
+          rafId = requestAnimationFrame(scroll);
+        };
+
+        container.addEventListener('mouseenter', () => { isPaused = true; });
+        container.addEventListener('mouseleave', () => { isPaused = false; });
+
+        // Pause while user is dragging/scrolls manually
+        let isManual = false;
+        container.addEventListener('mousedown', () => { isManual = true; isPaused = true; });
+        container.addEventListener('mouseup', () => { isManual = false; isPaused = false; });
+        container.addEventListener('scroll', () => {
+          if (isManual) return;
+          // User scrolled manually — pause briefly
+          isPaused = true;
+          clearTimeout(container._scrollPause);
+          container._scrollPause = setTimeout(() => {
+            isPaused = false;
+          }, 3000);
+        });
+
+        rafId = requestAnimationFrame(scroll);
+      });
+    }
+  };
+
+  /* ----------------------------------------------------------
+     17. HERO PARALLAX (subtle)
      ---------------------------------------------------------- */
   const HeroParallax = {
     init() {
@@ -592,6 +640,7 @@
     MagneticButtons.init();
     SmoothScroll.init();
     TimelineToggle.init();
+    AutoScroll.init();
     HeroParallax.init();
   });
 
