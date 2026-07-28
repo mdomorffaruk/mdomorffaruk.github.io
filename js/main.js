@@ -25,7 +25,7 @@
         const html = document.documentElement;
         const isDark = html.getAttribute('data-theme') === 'dark';
         if (isDark) {
-          html.removeAttribute('data-theme');
+          html.setAttribute('data-theme', 'light');
           localStorage.setItem('theme', 'light');
         } else {
           html.setAttribute('data-theme', 'dark');
@@ -36,8 +36,7 @@
       // Listen for OS changes
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
         if (!localStorage.getItem('theme')) {
-          if (e.matches) document.documentElement.setAttribute('data-theme', 'dark');
-          else document.documentElement.removeAttribute('data-theme');
+          document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
         }
       });
     }
@@ -322,18 +321,35 @@
 
         if (!valid) return;
 
-        // Simulate send
-        const submitBtn = form.querySelector('.btn-submit');
-        submitBtn.classList.add('loading');
-        submitBtn.disabled = true;
+        // Gather form data
+        const name = form.querySelector('[name="name"]').value.trim();
+        const email = form.querySelector('[name="email"]').value.trim();
+        const type = form.querySelector('[name="type"]').value;
+        const budget = form.querySelector('[name="budget"]').value;
+        const message = form.querySelector('[name="message"]').value.trim();
 
-        setTimeout(() => {
-          submitBtn.classList.remove('loading');
-          submitBtn.disabled = false;
-          form.style.display = 'none';
-          const success = form.parentElement.querySelector('.form-success');
-          if (success) success.classList.add('show');
-        }, 1500);
+        // Build mailto link
+        const typeLabels = {
+          backend: 'Backend Development',
+          security: 'Security Assessment',
+          automation: 'Automation & Tooling',
+          website: 'Website Recovery',
+          android: 'Android Development',
+          consulting: 'Technical Consulting',
+          other: 'Other'
+        };
+        const subject = encodeURIComponent('Project Inquiry — ' + (typeLabels[type] || 'General'));
+        const body = encodeURIComponent(
+          'Hi Mohammad,\n\n' +
+          'Name: ' + name + '\n' +
+          'Email: ' + email + '\n' +
+          'Project Type: ' + (typeLabels[type] || 'Not specified') + '\n' +
+          'Budget Range: ' + (budget || 'Not specified') + '\n\n' +
+          'Project Details:\n' + message + '\n\n' +
+          'Looking forward to hearing from you.'
+        );
+
+        window.location.href = 'mailto:mdomorffaruk@gmail.com?subject=' + subject + '&body=' + body;
       });
 
       // Clear error on input
