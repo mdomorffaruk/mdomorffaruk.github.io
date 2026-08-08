@@ -13,22 +13,34 @@
   <meta property="og:title" content="Mohammad Omor Faruk — Full Portfolio" />
   <meta property="og:description" content="Backend Engineer, Security Researcher, Android Developer. 6+ years building production systems and finding vulnerabilities." />
   <meta property="og:url" content="https://mdomorffaruk.github.io/about.html" />
-  <meta property="og:image" content="https://avatars.githubusercontent.com/u/63899148?v=4" />
+  <meta property="og:image" content="https://mdomorffaruk.github.io/profile.gif" />
   <meta property="og:locale" content="en_US" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Mohammad Omor Faruk — Full Portfolio" />
   <meta name="twitter:description" content="Backend Engineer, Security Researcher, Android Developer. 6+ years building production systems and finding vulnerabilities." />
-  <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/63899148?v=4" />
+  <meta name="twitter:image" content="https://mdomorffaruk.github.io/profile.gif" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/gif" href="profile.gif" />
 
+  <!-- Theme boot: prevent flash of wrong theme (tri-state: light / dark / system) -->
+  <script>
+    (function () {
+      try {
+        var mode = localStorage.getItem('theme');
+        if (mode === 'light' || mode === 'dark') {
+          document.documentElement.setAttribute('data-theme', mode);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
@@ -40,7 +52,7 @@
     "@type": "Person",
     "name": "Mohammad Omor Faruk",
     "url": "https://mdomorffaruk.github.io/about.html",
-    "image": "https://avatars.githubusercontent.com/u/63899148?v=4",
+    "image": "https://mdomorffaruk.github.io/profile.gif",
     "jobTitle": "Backend Engineer & Security Researcher",
     "description": "Full portfolio of Mohammad Omor Faruk — Backend Engineer, Security Researcher, Android Developer.",
     "address": { "@type": "PostalAddress", "addressLocality": "Bogura", "addressCountry": "BD" },
@@ -73,7 +85,7 @@
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-brand" aria-label="Mohammad Omor Faruk — Home">
-        <div class="nav-mark" aria-hidden="true"><img src="profile.gif" alt="" width="36" height="36" style="border-radius:10px;object-fit:cover" /></div>
+        <div class="nav-mark" aria-hidden="true">OF</div>
         <div>
           <div class="nav-name">Mohammad Omor Faruk</div>
           <div class="nav-sub">mdomorffaruk</div>
@@ -81,15 +93,16 @@
       </a>
       <div class="nav-right">
         <div class="nav-links">
-          <a href="index.html">Home</a>
-          <a href="about.html" class="active">Portfolio</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
+          <a href="index.html">Work</a>
+          <a href="index.html#services">Services</a>
+          <a href="security/">Security</a>
+          <a href="about.html" class="active">About</a>
           <a href="#contact">Contact</a>
         </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <button class="theme-toggle" id="themeToggle" aria-label="Cycle color theme">
           <span class="icon-sun" aria-hidden="true">&#9788;</span>
           <span class="icon-moon" aria-hidden="true">&#9790;</span>
+          <span class="icon-system" aria-hidden="true">&#9681;</span>
         </button>
         <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -99,10 +112,10 @@
   </nav>
 
   <div class="mobile-nav" role="navigation" aria-label="Mobile navigation">
-    <a href="index.html">Home</a>
-    <a href="about.html">Portfolio</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
+    <a href="index.html">Work</a>
+    <a href="index.html#services">Services</a>
+    <a href="security/">Security</a>
+    <a href="about.html" class="active">About</a>
     <a href="#contact">Contact</a>
     <div class="mobile-cta">
       <a href="#contact" class="btn btn-primary">Hire Me</a>
@@ -160,7 +173,7 @@
       <div class="two-col">
         <!-- About -->
         <div>
-          <div class="section-tag reveal">About</div>
+          <div class="section-tag reveal">01 / About</div>
           <div class="card reveal">
             <h4>Delivery + Security Depth</h4>
             <p style="font-size:0.88rem;line-height:1.75;margin-top:0.25rem">I started as a full-stack developer building production banking systems. Over time I moved deeper into cybersecurity — recon automation, vulnerability research, and application security. That mix means I understand both how software is built and how it breaks.</p>
@@ -188,7 +201,7 @@
         </div>
         <!-- Timeline -->
         <div>
-          <div class="section-tag reveal">Timeline</div>
+          <div class="section-tag reveal">02 / Timeline</div>
           <div class="timeline">
             <div class="tl-item reveal" style="--i:0">
               <div class="tl-period">2023 — Present</div>
@@ -227,7 +240,7 @@
 
     <!-- ====== SKILLS ====== -->
     <section class="section" id="skills" style="padding-top:1rem" aria-labelledby="skills-heading">
-      <div class="section-tag reveal">Skills</div>
+      <div class="section-tag reveal">03 / Skills</div>
       <h2 class="section-h2 reveal" id="skills-heading">Stack &amp; tooling</h2>
       <p class="section-sub reveal">Technologies I use daily, organized by category.</p>
       <div class="skill-grid stagger">
@@ -247,7 +260,7 @@
 
     <!-- ====== CERTIFICATIONS — MARQUEE ====== -->
     <section class="section" style="padding-top:1rem" aria-labelledby="certs-heading">
-      <div class="section-tag reveal">Certifications</div>
+      <div class="section-tag reveal">04 / Certifications</div>
       <h2 class="section-h2 reveal" id="certs-heading">Credentials &amp; training</h2>
       <p class="section-sub reveal">Verified certifications and continuous learning. Hover to pause.</p>
 
@@ -291,7 +304,7 @@
 
     <!-- ====== ANDROID APPS ====== -->
     <section class="section" style="padding-top:1rem" aria-labelledby="apps-heading">
-      <div class="section-tag reveal">Android</div>
+      <div class="section-tag reveal">05 / Android</div>
       <h2 class="section-h2 reveal" id="apps-heading">Play Store apps</h2>
       <p class="section-sub reveal">Kotlin apps built from scratch. Scroll to explore &rarr;</p>
 
@@ -463,7 +476,7 @@
 
     <!-- ====== PROJECTS ====== -->
     <section class="section" style="padding-top:1rem" id="projects" aria-labelledby="projects-heading">
-      <div class="section-tag reveal">Projects</div>
+      <div class="section-tag reveal">06 / Projects</div>
       <h2 class="section-h2 reveal" id="projects-heading">Full project list</h2>
       <p class="section-sub reveal">Production systems, security tools, and award-winning engineering.</p>
 
@@ -523,7 +536,7 @@
 
     <!-- ====== WRITEUPS ====== -->
     <section class="section" style="padding-top:1rem" aria-labelledby="writeups-heading">
-      <div class="section-tag reveal">Writeups</div>
+      <div class="section-tag reveal">07 / Writeups</div>
       <h2 class="section-h2 reveal" id="writeups-heading">Research &amp; articles</h2>
       <p class="section-sub reveal">Published on Medium. Malware analysis, kernel internals, web security, and red team methodology.</p>
       <div class="writeup-grid stagger">
@@ -586,7 +599,7 @@
 
     <!-- ====== TESTIMONIALS ====== -->
     <section class="section" style="padding-top:1rem" aria-labelledby="testimonials-heading">
-      <div class="section-tag reveal">Testimonials</div>
+      <div class="section-tag reveal">08 / Testimonials</div>
       <h2 class="section-h2 reveal" id="testimonials-heading">What clients say</h2>
       <p class="section-sub reveal">&#9733;&#9733;&#9733;&#9733;&#9733; 12 reviews on Fiverr. Scroll to explore &rarr;</p>
 
@@ -639,7 +652,7 @@
             <div class="testimonial-scroll-avatar">G</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">graphicbang</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">4 years ago</div>
@@ -704,7 +717,7 @@
             <div class="testimonial-scroll-avatar">S</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">sorryttv</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -730,7 +743,7 @@
             <div class="testimonial-scroll-avatar">D</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">daclover</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -743,7 +756,7 @@
             <div class="testimonial-scroll-avatar">B</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">barakambarawa</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -797,7 +810,7 @@
             <div class="testimonial-scroll-avatar">G</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">graphicbang</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">4 years ago</div>
@@ -862,7 +875,7 @@
             <div class="testimonial-scroll-avatar">S</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">sorryttv</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -888,7 +901,7 @@
             <div class="testimonial-scroll-avatar">D</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">daclover</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -901,7 +914,7 @@
             <div class="testimonial-scroll-avatar">B</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">barakambarawa</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -912,7 +925,7 @@
 
     <!-- ====== CONTACT ====== -->
     <section class="section" id="contact" aria-labelledby="contact-heading">
-      <div class="section-tag reveal">Contact</div>
+      <div class="section-tag reveal">09 / Contact</div>
       <h2 class="section-h2 reveal" id="contact-heading">Open to work</h2>
       <p class="section-sub reveal">Freelance engineering, security consulting, and remote collaboration. Bangladesh-based, global hours.</p>
 
@@ -1042,10 +1055,10 @@
         <div>
           <div class="footer-heading">Navigation</div>
           <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">Portfolio</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
+            <a href="index.html">Work</a>
+            <a href="index.html#services">Services</a>
+            <a href="security/">Security</a>
+            <a href="about.html">About</a>
             <a href="#contact">Contact</a>
           </div>
         </div>
@@ -1084,11 +1097,11 @@
       <div class="cmd-results">
         <div class="cmd-item active" data-href="index.html">
           <div class="cmd-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
-          <span class="cmd-item-text">Home</span>
+          <span class="cmd-item-text">Work</span>
         </div>
         <div class="cmd-item" data-href="about.html">
           <div class="cmd-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-          <span class="cmd-item-text">Portfolio</span>
+          <span class="cmd-item-text">About</span>
         </div>
         <div class="cmd-item" data-href="#skills">
           <div class="cmd-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>

@@ -7,37 +7,33 @@
 
   /* ----------------------------------------------------------
      1. THEME MANAGER
-     Auto-detect system preference. Manual toggle overrides.
+     Tri-state: light → dark → system. Auto-detects OS when "system".
      ---------------------------------------------------------- */
   const ThemeManager = {
+    storageKey: 'theme',
+    cycle: ['light', 'dark', 'system'],
+    apply(mode) {
+      const html = document.documentElement;
+      const toggle = document.getElementById('themeToggle');
+      if (mode === 'system') {
+        html.removeAttribute('data-theme');
+      } else {
+        html.setAttribute('data-theme', mode);
+      }
+      if (toggle) toggle.dataset.theme = mode;
+    },
     init() {
       const toggle = document.getElementById('themeToggle');
       if (!toggle) return;
 
-      const saved = localStorage.getItem('theme');
-      if (saved) {
-        document.documentElement.setAttribute('data-theme', saved);
-      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
+      const saved = localStorage.getItem(this.storageKey);
+      this.apply(this.cycle.includes(saved) ? saved : 'system');
 
       toggle.addEventListener('click', () => {
-        const html = document.documentElement;
-        const isDark = html.getAttribute('data-theme') === 'dark';
-        if (isDark) {
-          html.setAttribute('data-theme', 'light');
-          localStorage.setItem('theme', 'light');
-        } else {
-          html.setAttribute('data-theme', 'dark');
-          localStorage.setItem('theme', 'dark');
-        }
-      });
-
-      // Listen for OS changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-          document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-        }
+        const current = toggle.dataset.theme || 'system';
+        const next = this.cycle[(this.cycle.indexOf(current) + 1) % this.cycle.length];
+        this.apply(next);
+        localStorage.setItem(this.storageKey, next);
       });
     }
   };

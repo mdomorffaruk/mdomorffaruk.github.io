@@ -5,10 +5,22 @@
     <link rel="icon" type="image/svg+xml" href="/security/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
-    <meta name="theme-color" content="#020617" />
+    <meta name="theme-color" content="#171816" />
     <meta name="description" content="Independent security reviews for New Zealand law firms. Protect confidential client information, find vulnerabilities before attackers do, and get clear, risk-rated reports. Free consultation." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://mdomorffaruk.github.io/security/" />
+
+    <!-- Theme boot: prevent flash of wrong theme (tri-state: light / dark / system) -->
+    <script>
+      (function () {
+        try {
+          var mode = localStorage.getItem('theme-security');
+          var dark = mode === 'dark' ? true : mode === 'light' ? false : !window.matchMedia('(prefers-color-scheme: light)').matches;
+          if (!dark) document.documentElement.classList.add('light');
+          document.documentElement.setAttribute('data-theme', mode || 'system');
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- OpenGraph -->
     <meta property="og:type" content="website" />
@@ -31,7 +43,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
     <!-- Structured data -->
     <script type="application/ld+json">
@@ -73,11 +85,11 @@
       }
     }
     </script>
-    <script type="module" crossorigin src="/security/assets/index-DmvFRCmu.js"></script>
+    <script type="module" crossorigin src="/security/assets/index-DkPLTm05.js"></script>
     <link rel="modulepreload" crossorigin href="/security/assets/rolldown-runtime-W-g5d7YK.js">
     <link rel="modulepreload" crossorigin href="/security/assets/motion-WgouodJs.js">
     <link rel="modulepreload" crossorigin href="/security/assets/vendor-DM73RFdl.js">
-    <link rel="stylesheet" crossorigin href="/security/assets/index-BGwfkPqh.css">
+    <link rel="stylesheet" crossorigin href="/security/assets/index-BW4mpOzA.css">
   </head>
   <body>
     <div id="root"></div>

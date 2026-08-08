@@ -13,22 +13,34 @@
   <meta property="og:title" content="Mohammad Omor Faruk — Backend Engineer & Security Researcher" />
   <meta property="og:description" content="Full-stack security engineer specializing in backend systems, application security, and automation. Banking infrastructure, vulnerability research, and production delivery since 2020." />
   <meta property="og:url" content="https://mdomorffaruk.github.io/" />
-  <meta property="og:image" content="https://avatars.githubusercontent.com/u/63899148?v=4" />
+  <meta property="og:image" content="https://mdomorffaruk.github.io/profile.gif" />
   <meta property="og:locale" content="en_US" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Mohammad Omor Faruk — Backend Engineer & Security Researcher" />
   <meta name="twitter:description" content="Full-stack security engineer specializing in backend systems, application security, and automation." />
-  <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/63899148?v=4" />
+  <meta name="twitter:image" content="https://mdomorffaruk.github.io/profile.gif" />
 
   <!-- Favicons -->
   <link rel="icon" type="image/gif" href="profile.gif" />
 
+  <!-- Theme boot: prevent flash of wrong theme (tri-state: light / dark / system) -->
+  <script>
+    (function () {
+      try {
+        var mode = localStorage.getItem('theme');
+        if (mode === 'light' || mode === 'dark') {
+          document.documentElement.setAttribute('data-theme', mode);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
@@ -40,7 +52,7 @@
     "@type": "Person",
     "name": "Mohammad Omor Faruk",
     "url": "https://mdomorffaruk.github.io/",
-    "image": "https://avatars.githubusercontent.com/u/63899148?v=4",
+    "image": "https://mdomorffaruk.github.io/profile.gif",
     "jobTitle": "Backend Engineer & Security Researcher",
     "description": "Full-stack security engineer specializing in backend systems, application security, and automation.",
     "address": {
@@ -82,7 +94,7 @@
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-brand" aria-label="Mohammad Omor Faruk — Home">
-        <div class="nav-mark" aria-hidden="true"><img src="profile.gif" alt="" width="36" height="36" style="border-radius:10px;object-fit:cover" /></div>
+        <div class="nav-mark" aria-hidden="true">OF</div>
         <div>
           <div class="nav-name">Mohammad Omor Faruk</div>
           <div class="nav-sub">mdomorffaruk</div>
@@ -90,17 +102,17 @@
       </a>
       <div class="nav-right">
         <div class="nav-links">
-          <a href="index.html" class="active">Home</a>
-          <a href="about.html">Portfolio</a>
+          <a href="index.html" class="active">Work</a>
           <a href="#services">Services</a>
-          <a href="#projects">Projects</a>
-          <a href="security/">Security Services</a>
+          <a href="security/">Security</a>
+          <a href="about.html">About</a>
           <a href="#contact">Contact</a>
         </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-          <span class="icon-sun" aria-hidden="true">&#9788;</span>
-          <span class="icon-moon" aria-hidden="true">&#9790;</span>
-        </button>
+<button class="theme-toggle" id="themeToggle" aria-label="Cycle color theme">
+  <span class="icon-sun" aria-hidden="true">&#9788;</span>
+  <span class="icon-moon" aria-hidden="true">&#9790;</span>
+  <span class="icon-system" aria-hidden="true">&#9681;</span>
+</button>
         <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -110,11 +122,10 @@
 
   <!-- Mobile nav -->
   <div class="mobile-nav" role="navigation" aria-label="Mobile navigation">
-    <a href="index.html">Home</a>
-    <a href="about.html">Portfolio</a>
+    <a href="index.html" class="active">Work</a>
     <a href="#services">Services</a>
-    <a href="#projects">Projects</a>
-    <a href="security/">Security Services</a>
+    <a href="security/">Security</a>
+    <a href="about.html">About</a>
     <a href="#contact">Contact</a>
     <div class="mobile-cta">
       <a href="#contact" class="btn btn-primary">Hire Me</a>
@@ -144,39 +155,19 @@
         </div>
       </div>
 
-      <!-- Profile + Trust Badges -->
-      <div class="hero-profile">
-        <div class="hero-photo-frame">
-          <div class="hero-photo">
-            <img src="profile.gif" alt="Mohammad Omor Faruk — Backend Engineer and Security Researcher" width="240" height="240" loading="eager" />
-          </div>
+      <!-- Technical index panel -->
+      <div class="hero-index">
+        <div class="hero-index-head">
+          <span class="hero-index-dot" aria-hidden="true"></span>
+          <span class="hero-index-title">~/index</span>
         </div>
-
-        <!-- Floating trust badges -->
-        <div class="floating-badge" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          6+ Years
-        </div>
-        <div class="floating-badge" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          Award Winner
-        </div>
-        <div class="floating-badge" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Cybersecurity
-        </div>
-        <div class="floating-badge" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          Backend Engineer
-        </div>
-        <div class="floating-badge" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Open Source
-        </div>
-        <div class="floating-badge" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-          Google Play Dev
-        </div>
+        <dl class="hero-index-list">
+          <div><dt>role</dt><dd>Backend Engineer &amp; Security Researcher</dd></div>
+          <div><dt>since</dt><dd>2020</dd></div>
+          <div><dt>focus</dt><dd>Backend / AppSec / Automation</dd></div>
+          <div><dt>status</dt><dd class="ok">available</dd></div>
+          <div><dt>location</dt><dd>Bogura, Bangladesh (UTC+6)</dd></div>
+        </dl>
       </div>
     </section>
 
@@ -212,7 +203,7 @@
 
     <!-- ====== SERVICES ====== -->
     <section class="section" id="services" aria-labelledby="services-heading">
-      <div class="section-tag reveal">Services</div>
+      <div class="section-tag reveal">01 / Services</div>
       <h2 class="section-h2 reveal" id="services-heading">What I can do for you</h2>
       <p class="section-sub reveal">Development, security, and advisory. For startups, agencies, and product teams who can't afford downtime.</p>
       <div class="grid-3 mt-4 stagger" style="--i:0">
@@ -329,7 +320,7 @@
 
     <!-- ====== PROJECTS ====== -->
     <section class="section" id="projects" aria-labelledby="projects-heading">
-      <div class="section-tag reveal">Selected work</div>
+      <div class="section-tag reveal">02 / Selected work</div>
       <h2 class="section-h2 reveal" id="projects-heading">Projects that delivered results</h2>
       <p class="section-sub reveal">Production systems, security tools, and award-winning engineering. Filter by category.</p>
 
@@ -345,7 +336,7 @@
         <button class="filter-pill" data-filter="banking">Banking</button>
       </div>
 
-      <div class="grid-2 stagger" style="--i:0">
+      <div class="work-list stagger" style="--i:0">
         <!-- Southeast Bank -->
         <div class="work-card reveal" data-category="backend banking" style="--i:0">
           <div class="work-cat">Banking &middot; Lead Developer</div>
@@ -441,7 +432,7 @@
 
     <!-- ====== PROCESS ====== -->
     <section class="section" aria-labelledby="process-heading">
-      <div class="section-tag reveal">Process</div>
+      <div class="section-tag reveal">03 / Process</div>
       <h2 class="section-h2 reveal" id="process-heading">How I work</h2>
       <p class="section-sub reveal">No fluff. Clear scope, fixed price, delivery on time.</p>
       <div class="process-grid stagger">
@@ -470,7 +461,7 @@
 
     <!-- ====== TESTIMONIALS ====== -->
     <section class="section" aria-labelledby="testimonials-heading">
-      <div class="section-tag reveal">Testimonials</div>
+      <div class="section-tag reveal">04 / Testimonials</div>
       <h2 class="section-h2 reveal" id="testimonials-heading">What clients say</h2>
       <p class="section-sub reveal">&#9733;&#9733;&#9733;&#9733;&#9733; 12 reviews on Fiverr. Scroll to explore &rarr;</p>
 
@@ -523,7 +514,7 @@
             <div class="testimonial-scroll-avatar">G</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">graphicbang</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">4 years ago</div>
@@ -588,7 +579,7 @@
             <div class="testimonial-scroll-avatar">S</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">sorryttv</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -614,7 +605,7 @@
             <div class="testimonial-scroll-avatar">D</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">daclover</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -627,7 +618,7 @@
             <div class="testimonial-scroll-avatar">B</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">barakambarawa</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -678,7 +669,7 @@
             <div class="testimonial-scroll-avatar">G</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">graphicbang</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">4 years ago</div>
@@ -738,7 +729,7 @@
             <div class="testimonial-scroll-avatar">S</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">sorryttv</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -762,7 +753,7 @@
             <div class="testimonial-scroll-avatar">D</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">daclover</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -774,7 +765,7 @@
             <div class="testimonial-scroll-avatar">B</div>
             <div class="testimonial-scroll-info">
               <div class="testimonial-scroll-name">barakambarawa</div>
-              <div class="testimonial-scroll-meta">&#127468;&#127463; United Kingdom</div>
+              <div class="testimonial-scroll-meta">LOC / United Kingdom</div>
             </div>
           </div>
           <div class="testimonial-scroll-time">5 years ago</div>
@@ -785,7 +776,7 @@
 
     <!-- ====== FAQ ====== -->
     <section class="section" aria-labelledby="faq-heading">
-      <div class="section-tag reveal">FAQ</div>
+      <div class="section-tag reveal">05 / FAQ</div>
       <h2 class="section-h2 reveal" id="faq-heading">Common questions</h2>
       <p class="section-sub reveal">Everything you need to know before hiring me.</p>
       <div class="faq-list">
@@ -860,7 +851,7 @@
 
     <!-- ====== CONTACT ====== -->
     <section class="section" id="contact" aria-labelledby="contact-heading">
-      <div class="section-tag reveal">Contact</div>
+      <div class="section-tag reveal">06 / Contact</div>
       <h2 class="section-h2 reveal" id="contact-heading">Let's build something</h2>
       <p class="section-sub reveal">Available for freelance, contract, and remote collaboration. Bangladesh-based, global hours.</p>
 
@@ -994,10 +985,10 @@
         <div>
           <div class="footer-heading">Navigation</div>
           <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">Portfolio</a>
+            <a href="index.html">Work</a>
             <a href="#services">Services</a>
-            <a href="#projects">Projects</a>
+            <a href="security/">Security</a>
+            <a href="about.html">About</a>
             <a href="#contact">Contact</a>
           </div>
         </div>
@@ -1037,17 +1028,21 @@
       <div class="cmd-results">
         <div class="cmd-item active" data-href="index.html">
           <div class="cmd-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
-          <span class="cmd-item-text">Home</span>
+          <span class="cmd-item-text">Work</span>
           <span class="cmd-item-shortcut"><kbd>G</kbd><kbd>H</kbd></span>
         </div>
         <div class="cmd-item" data-href="about.html">
           <div class="cmd-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-          <span class="cmd-item-text">Portfolio</span>
+          <span class="cmd-item-text">About</span>
           <span class="cmd-item-shortcut"><kbd>G</kbd><kbd>P</kbd></span>
         </div>
         <div class="cmd-item" data-href="#services">
           <div class="cmd-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
           <span class="cmd-item-text">Services</span>
+        </div>
+        <div class="cmd-item" data-href="security/">
+          <div class="cmd-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <span class="cmd-item-text">Security</span>
         </div>
         <div class="cmd-item" data-href="#projects">
           <div class="cmd-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
