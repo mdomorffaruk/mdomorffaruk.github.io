@@ -84,9 +84,6 @@ export default function Footer() {
           <Typography color="text.secondary" variant="body2">
             &copy; {new Date().getFullYear()} {footer.brand.name}. {footer.copyrightSuffix}
           </Typography>
-          <Typography color="text.secondary" variant="body2">
-            {footer.techCredit}
-          </Typography>
         </Box>
       </Container>
     </Box>

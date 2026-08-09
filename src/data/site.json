@@ -1,13 +1,13 @@
 {
   "pageTitles": {
-    "/": "Md Omar Faruk - Backend Engineer & Security Researcher",
-    "/portfolio": "Portfolio - Md Omar Faruk"
+    "/": "Mohammad Omor Faruk - Backend Engineer & Security Researcher",
+    "/portfolio": "Portfolio - Mohammad Omor Faruk"
   },
-  "defaultPageTitle": "Md Omar Faruk",
+  "defaultPageTitle": "Mohammad Omor Faruk",
 
   "nav": {
     "brand": {
-      "name": "Md Omar Faruk",
+      "name": "Mohammad Omor Faruk",
       "logo": "/profile.gif"
     },
     "mainLinks": [
@@ -23,7 +23,7 @@
 
   "footer": {
     "brand": {
-      "name": "Md Omar Faruk",
+      "name": "Mohammad Omor Faruk",
       "logo": "/profile.gif"
     },
     "tagline": "Backend engineer & security researcher. I build production systems, find what breaks, and automate the rest.",
@@ -38,8 +38,7 @@
     "contact": {
       "heading": "Get in touch"
     },
-    "copyrightSuffix": "All rights reserved.",
-    "techCredit": "Built with React & MUI"
+    "copyrightSuffix": "All rights reserved."
   },
 
   "form": {

@@ -101,7 +101,7 @@ export default function Portfolio() {
             <Grid size={{ xs: 12, md: 4 }} sx={{ textAlign: 'center' }}>
               <Avatar
                 src="/profile.gif"
-                alt="Md Omar Faruk"
+                alt="Mohammad Omor Faruk"
                 sx={{ width: 200, height: 200, mx: 'auto', border: '4px solid', borderColor: 'divider', boxShadow: 'var(--shadow-md)' }}
               />
             </Grid>
