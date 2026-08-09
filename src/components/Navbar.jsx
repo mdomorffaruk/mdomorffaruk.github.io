@@ -4,33 +4,24 @@ import {
   AppBar,
   Toolbar,
   Button,
-  Menu,
-  MenuItem,
   IconButton,
   Drawer,
   List,
   ListItemButton,
   ListItemText,
-  Divider,
   Box,
   Avatar,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import ExpandMore from '@mui/icons-material/ExpandMore'
 import Close from '@mui/icons-material/Close'
 import RocketLaunch from '@mui/icons-material/RocketLaunch'
 import ThemeToggle from './ThemeToggle'
 import { nav } from '../data/site.json'
 
-const { brand, mainLinks, securityLinks, hireMe } = nav
+const { brand, mainLinks, hireMe } = nav
 
 export default function Navbar() {
-  const [anchorEl, setAnchorEl] = useState(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const open = Boolean(anchorEl)
-
-  const handleMenuOpen = (e) => setAnchorEl(e.currentTarget)
-  const handleMenuClose = () => setAnchorEl(null)
 
   const linkSx = ({ isActive }) => ({
     color: 'inherit',
@@ -68,42 +59,11 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
-          {mainLinks.map((link) =>
-            link.dropdown ? (
-              <Button
-                key="security-services"
-                color="inherit"
-                endIcon={<ExpandMore />}
-                onClick={handleMenuOpen}
-                sx={{ fontWeight: 600, textTransform: 'none', px: 1.5, mx: 0.5 }}
-              >
-                {link.label}
-              </Button>
-            ) : (
-              <NavLink key={link.to} to={link.to} end={link.end} style={linkSx}>
-                {link.label}
-              </NavLink>
-            )
-          )}
-          <Menu
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleMenuClose}
-            MenuListProps={{ sx: { minWidth: 220 } }}
-          >
-            {securityLinks.map((l) => (
-              <MenuItem
-                key={l.to}
-                component={NavLink}
-                to={l.to}
-                end={l.end}
-                onClick={handleMenuClose}
-                sx={{ fontWeight: 600 }}
-              >
-                {l.label}
-              </MenuItem>
-            ))}
-          </Menu>
+          {mainLinks.map((link) => (
+            <NavLink key={link.to} to={link.to} end={link.end} style={linkSx}>
+              {link.label}
+            </NavLink>
+          ))}
           <ThemeToggle />
           <Button
             variant="contained"
@@ -139,28 +99,13 @@ export default function Navbar() {
               </IconButton>
             </Box>
             <List disablePadding>
-              {mainLinks.map((link) =>
-                link.dropdown ? (
-                  <Box key="security-services">
-                    <ListItemText primary={link.label} sx={{ px: 1.5, pt: 1.5, fontWeight: 700, color: 'text.secondary', fontSize: '0.8rem' }} />
-                    <Divider sx={{ my: 1 }} />
-                    {securityLinks.map((l) => (
-                      <NavLink key={l.to} to={l.to} end={l.end} style={drawerLink}>
-                        <ListItemButton onClick={() => setDrawerOpen(false)}>
-                          <ListItemText primary={l.label} />
-                        </ListItemButton>
-                      </NavLink>
-                    ))}
-                    <Divider sx={{ my: 1 }} />
-                  </Box>
-                ) : (
-                  <NavLink key={link.to} to={link.to} end={link.end} style={drawerLink}>
-                    <ListItemButton onClick={() => setDrawerOpen(false)}>
-                      <ListItemText primary={link.label} />
-                    </ListItemButton>
-                  </NavLink>
-                )
-              )}
+              {mainLinks.map((link) => (
+                <NavLink key={link.to} to={link.to} end={link.end} style={drawerLink}>
+                  <ListItemButton onClick={() => setDrawerOpen(false)}>
+                    <ListItemText primary={link.label} />
+                  </ListItemButton>
+                </NavLink>
+              ))}
             </List>
             <Box sx={{ px: 1, pt: 1.5 }}>
               <ThemeToggle />

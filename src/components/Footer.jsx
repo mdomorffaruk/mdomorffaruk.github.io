@@ -46,7 +46,7 @@ export default function Footer() {
               ))}
             </Box>
           </Grid>
-          <Grid size={{ xs: 6, md: 2 }}>
+          <Grid size={{ xs: 6, md: 4 }}>
             <Typography sx={{ fontWeight: 700, fontSize: '0.9rem', mb: 2 }}>
               {footer.explore.heading}
             </Typography>
@@ -58,19 +58,7 @@ export default function Footer() {
               </Link>
             ))}
           </Grid>
-          <Grid size={{ xs: 6, md: 3 }}>
-            <Typography sx={{ fontWeight: 700, fontSize: '0.9rem', mb: 2 }}>
-              {footer.security.heading}
-            </Typography>
-            {footer.security.links.map((link) => (
-              <Link key={link.to} to={link.to} style={{ textDecoration: 'none' }}>
-                <Typography color="text.secondary" sx={{ fontSize: '0.9rem', mb: 1.25, '&:hover': { color: 'primary.main' } }}>
-                  {link.label}
-                </Typography>
-              </Link>
-            ))}
-          </Grid>
-          <Grid size={{ xs: 12, md: 3 }}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Typography sx={{ fontWeight: 700, fontSize: '0.9rem', mb: 2 }}>
               {footer.contact.heading}
             </Typography>

@@ -4,13 +4,11 @@ import { Box, Container, Grid, Typography, Button, Paper, Chip, Stack, Accordion
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import Star from '@mui/icons-material/Star'
 import CheckCircle from '@mui/icons-material/CheckCircle'
-import ArrowForward from '@mui/icons-material/ArrowForward'
 import Email from '@mui/icons-material/Email'
 import LinkedIn from '@mui/icons-material/LinkedIn'
 import GitHub from '@mui/icons-material/GitHub'
 import Work from '@mui/icons-material/Work'
 import WhatsApp from '@mui/icons-material/WhatsApp'
-import GppGood from '@mui/icons-material/GppGood'
 import { hero, stats, services, projectCategories, projects, processSteps, testimonials, faqs, contact, marqueeItems } from '../data/home.json'
 import Counter from '../components/Counter'
 import SectionHeading from '../components/SectionHeading'
@@ -213,7 +211,7 @@ export default function Home() {
       <Box component="section" id="projects" className="bg-surface-2 border-y" sx={{ py: { xs: 6, md: 8 } }}>
         <Container maxWidth="lg">
           <Box sx={{ mb: 4 }}>
-            <SectionHeading tag="Projects" title="Selected work" subtitle="Production systems, security tooling, and automation — built and shipped." />
+            <SectionHeading tag="Projects" title="Selected work" subtitle="Production systems, security tooling, and automation - built and shipped." />
           </Box>
           <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: 'wrap', mb: 4 }}>
             {projectCategories.map((c) => (
@@ -338,7 +336,7 @@ export default function Home() {
               <SectionHeading
                 tag="Contact"
                 title="Let's build something"
-                subtitle="Tell me about your project and I'll get back to you within 24 hours. Prefer security consulting? Check the dedicated security section."
+                subtitle="Tell me about your project and I'll get back to you within 24 hours."
               />
               <Stack spacing={0.5} sx={{ mt: 3.5 }}>
                 {contactRows.map(({ label, value, href, Icon: C }) => (
@@ -358,26 +356,11 @@ export default function Home() {
                     </Paper>
                   </Link>
                 ))}
-                <Link to="/security/contact" style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <Paper className="card-hover" sx={{ p: 1.75, display: 'flex', alignItems: 'center', gap: 2, boxShadow: 'none', borderColor: 'transparent' }}>
-                    <Box sx={{ width: 44, height: 44, borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'primary.main', color: '#fff' }}>
-                      <GppGood fontSize="small" />
-                    </Box>
-                    <Box>
-                      <Typography variant="caption" color="text.secondary" display="block">
-                        Security consulting
-                      </Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                        Schedule a free consultation
-                      </Typography>
-                    </Box>
-                  </Paper>
-                </Link>
               </Stack>
             </Grid>
             <Grid size={{ xs: 12, lg: 7 }}>
               <Paper sx={{ p: { xs: 3, md: 5 } }}>
-                <ContactForm variant="general" subject="Project Inquiry" />
+                <ContactForm subject="Project Inquiry" />
               </Paper>
             </Grid>
           </Grid>

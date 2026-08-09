@@ -1,14 +1,7 @@
 {
   "pageTitles": {
     "/": "Md Omar Faruk - Backend Engineer & Security Researcher",
-    "/portfolio": "Portfolio - Md Omar Faruk",
-    "/security": "Security Consulting - Md Omar Faruk",
-    "/security/services": "Services - Security Consulting",
-    "/security/methodology": "Methodology - Security Consulting",
-    "/security/sample-report": "Sample Report - Security Consulting",
-    "/security/why-choose-me": "Why Choose Me - Security Consulting",
-    "/security/faq": "FAQ - Security Consulting",
-    "/security/contact": "Contact - Security Consulting"
+    "/portfolio": "Portfolio - Md Omar Faruk"
   },
   "defaultPageTitle": "Md Omar Faruk",
 
@@ -20,17 +13,7 @@
     "mainLinks": [
       { "label": "Home", "to": "/", "end": true },
       { "label": "Portfolio", "to": "/portfolio", "end": false },
-      { "label": "Security Services", "to": null, "dropdown": true, "end": false },
-      { "label": "Contact", "to": "/security/contact", "end": false }
-    ],
-    "securityLinks": [
-      { "to": "/security", "label": "Overview", "end": true },
-      { "to": "/security/services", "label": "Services", "end": false },
-      { "to": "/security/methodology", "label": "Methodology", "end": false },
-      { "to": "/security/sample-report", "label": "Sample Report", "end": false },
-      { "to": "/security/why-choose-me", "label": "Why Choose Me", "end": false },
-      { "to": "/security/faq", "label": "FAQ", "end": false },
-      { "to": "/security/contact", "label": "Contact", "end": false }
+      { "label": "Contact", "to": "/#contact", "end": false }
     ],
     "hireMe": {
       "label": "Hire Me",
@@ -49,17 +32,7 @@
       "links": [
         { "label": "Home", "to": "/" },
         { "label": "Portfolio", "to": "/portfolio" },
-        { "label": "Security Services", "to": "/security" },
-        { "label": "Contact", "to": "/security/contact" }
-      ]
-    },
-    "security": {
-      "heading": "Security Services",
-      "links": [
-        { "label": "Services", "to": "/security/services" },
-        { "label": "Methodology", "to": "/security/methodology" },
-        { "label": "Sample Report", "to": "/security/sample-report" },
-        { "label": "FAQ", "to": "/security/faq" }
+        { "label": "Contact", "to": "/#contact" }
       ]
     },
     "contact": {
@@ -86,15 +59,6 @@
       { "value": "$1,500 - $5,000", "label": "$1,500 - $5,000" },
       { "value": "$5,000+", "label": "$5,000+" },
       { "value": "Not sure yet", "label": "Not sure yet" }
-    ],
-    "securityServiceOptions": [
-      { "value": "web-app", "label": "Web Application Security Review" },
-      { "value": "portal", "label": "Client Portal Assessment" },
-      { "value": "api", "label": "API Security Assessment" },
-      { "value": "attack-surface", "label": "External Attack Surface Review" },
-      { "value": "retest", "label": "Security Retesting" },
-      { "value": "snapshot", "label": "Security Snapshot" },
-      { "value": "other", "label": "Not sure - let's discuss" }
     ]
   }
 }
