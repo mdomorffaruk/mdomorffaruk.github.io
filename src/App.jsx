@@ -215,8 +215,12 @@ function Header({ active, menuOpen, setMenuOpen }) {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a href="#top" className="font-serif text-lg font-semibold tracking-tight">
-          Omor<span className="text-accent">.</span>
+        <a href="#top" className="flex items-center" aria-label="Mohammad Omor Faruk">
+          <img
+            src="/profile.gif"
+            alt=""
+            className="h-8 w-8 rounded-full border border-line object-cover"
+          />
         </a>
         <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
           {sections.map((s) => (
