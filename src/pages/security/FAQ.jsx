@@ -1,14 +1,19 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { securityFaqs } from '../../data/security'
+import { Box, Container, Grid, Typography, Accordion, AccordionSummary, AccordionDetails, Stack, Button } from '@mui/material'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+import { securityFaqs } from '../../data/security.json'
 import SecurityNav from '../../components/SecurityNav'
 import SectionHeading from '../../components/SectionHeading'
 
 export default function FAQ() {
+  const [expanded, setExpanded] = useState('sfq-0')
+
   return (
     <>
       <SecurityNav />
-      <section className="py-5 bg-body-tertiary border-bottom">
-        <div className="container">
+      <Box component="section" className="bg-surface-2 border-y" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
           <SectionHeading
             as="h1"
             id="faq-heading"
@@ -16,43 +21,45 @@ export default function FAQ() {
             title="Frequently asked questions"
             subtitle="Everything you might want to know before booking a review."
           />
-        </div>
-      </section>
-      <section className="py-5">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-9">
-              <div className="accordion" id="securityFaqAccordion">
+        </Container>
+      </Box>
+
+      <Box component="section" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Grid container sx={{ justifyContent: 'center' }}>
+            <Grid size={{ xs: 12, lg: 9 }}>
+              <Stack spacing={1.5}>
                 {securityFaqs.map((f, i) => (
-                  <div className="accordion-item" key={f.question}>
-                    <h2 className="accordion-header">
-                      <button
-                        className={`accordion-button ${i > 0 ? 'collapsed' : ''}`}
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target={`#sfq-${i}`}
-                        aria-expanded={i === 0}
-                        aria-controls={`sfq-${i}`}
-                      >
+                  <Accordion
+                    key={f.question}
+                    expanded={expanded === `sfq-${i}`}
+                    onChange={() => setExpanded(expanded === `sfq-${i}` ? '' : `sfq-${i}`)}
+                  >
+                    <AccordionSummary expandIcon={<ExpandMore />} sx={{ '& .MuiAccordionSummary-content': { fontWeight: 600 } }}>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
                         {f.question}
-                      </button>
-                    </h2>
-                    <div id={`sfq-${i}`} className={`accordion-collapse collapse ${i === 0 ? 'show' : ''}`} data-bs-parent="#securityFaqAccordion">
-                      <div className="accordion-body text-secondary">{f.answer}</div>
-                    </div>
-                  </div>
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography variant="body2" color="text.secondary">
+                        {f.answer}
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
                 ))}
-              </div>
-              <div className="text-center mt-5">
-                <p className="text-secondary mb-3">Still have a question?</p>
-                <Link className="btn btn-primary" to="/security/contact">
+              </Stack>
+              <Box sx={{ textAlign: 'center', mt: 5 }}>
+                <Typography color="text.secondary" sx={{ mb: 2 }}>
+                  Still have a question?
+                </Typography>
+                <Button component={Link} to="/security/contact" variant="contained">
                   Ask Me Directly
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
     </>
   )
 }

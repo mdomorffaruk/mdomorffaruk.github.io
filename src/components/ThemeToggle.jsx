@@ -1,37 +1,49 @@
+import { useState } from 'react'
+import { IconButton, Menu, MenuItem, Tooltip } from '@mui/material'
+import LightMode from '@mui/icons-material/LightMode'
+import DarkMode from '@mui/icons-material/DarkMode'
+import SettingsBrightness from '@mui/icons-material/SettingsBrightness'
 import { useTheme } from './ThemeProvider'
 
 const modes = [
-  { value: 'light', label: 'Light', icon: 'bi-sun' },
-  { value: 'dark', label: 'Dark', icon: 'bi-moon-stars' },
-  { value: 'system', label: 'System', icon: 'bi-circle-half' },
+  { value: 'light', label: 'Light', Icon: LightMode },
+  { value: 'dark', label: 'Dark', Icon: DarkMode },
+  { value: 'system', label: 'System', Icon: SettingsBrightness },
 ]
 
 export default function ThemeToggle() {
   const { mode, setTheme } = useTheme()
-  const current = modes.find((m) => m.value === mode)
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
+  const current = modes.find((m) => m.value === mode) || modes[2]
 
   return (
-    <li className="nav-item dropdown">
-      <button
-        className="btn btn-sm btn-outline-primary d-flex align-items-center gap-2 ms-2"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        aria-label="Theme"
-      >
-        <i className={`bi ${current ? current.icon : 'bi-circle-half'}`} aria-hidden="true" />
-        <span className="d-none d-lg-inline">{current ? current.label : 'Theme'}</span>
-      </button>
-      <ul className="dropdown-menu dropdown-menu-end">
+    <>
+      <Tooltip title={`Theme: ${current.label}`}>
+        <IconButton
+          aria-label="Change theme"
+          onClick={(e) => setAnchorEl(e.currentTarget)}
+          sx={{ ml: 0.5, color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+        >
+          <current.Icon fontSize="small" />
+        </IconButton>
+      </Tooltip>
+      <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
         {modes.map((m) => (
-          <li key={m.value}>
-            <button className={`dropdown-item d-flex align-items-center gap-2 ${mode === m.value ? 'active' : ''}`} type="button" onClick={() => setTheme(m.value)}>
-              <i className={`bi ${m.icon}`} aria-hidden="true" />
-              {m.label}
-            </button>
-          </li>
+          <MenuItem
+            key={m.value}
+            onClick={() => {
+              setTheme(m.value)
+              setAnchorEl(null)
+            }}
+            selected={mode === m.value}
+            sx={{ fontWeight: mode === m.value ? 700 : 500, gap: 1.5 }}
+          >
+            <m.Icon fontSize="small" />
+            {m.label}
+          </MenuItem>
         ))}
-      </ul>
-    </li>
+      </Menu>
+    </>
   )
 }

@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
-import { whyChooseMe, securityCapabilities, securityCredentialGroups, securityConsultant } from '../../data/security'
+import { Box, Container, Grid, Typography, Paper, Chip, Stack, Button } from '@mui/material'
+import CheckCircleOutlined from '@mui/icons-material/CheckCircleOutlined'
+import FiberManualRecord from '@mui/icons-material/FiberManualRecord'
+import { whyChooseMe, securityCapabilities, securityCredentialGroups, securityConsultant } from '../../data/security.json'
 import SecurityNav from '../../components/SecurityNav'
 import SectionHeading from '../../components/SectionHeading'
 
@@ -7,8 +10,8 @@ export default function WhyChooseMe() {
   return (
     <>
       <SecurityNav />
-      <section className="py-5 bg-body-tertiary border-bottom">
-        <div className="container">
+      <Box component="section" className="bg-surface-2 border-y" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
           <SectionHeading
             as="h1"
             id="why-heading"
@@ -16,93 +19,95 @@ export default function WhyChooseMe() {
             title="Independent testing from an engineer who builds"
             subtitle="Most security testers only know how to break things. I spent 6+ years building production systems first — which is why I find the weaknesses others miss."
           />
-        </div>
-      </section>
+        </Container>
+      </Box>
 
-      <section className="py-5">
-        <div className="container">
-          <div className="row g-4">
+      <Box component="section" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={3}>
             {whyChooseMe.map((w) => (
-              <div className="col-md-6" key={w.title}>
-                <div className="card h-100 border-0 shadow-sm hover-lift">
-                  <div className="card-body p-4">
-                    <i className="bi bi-check2-circle text-primary fs-4 mb-2 d-inline-block" aria-hidden="true"></i>
-                    <h3 className="h5 fw-bold mb-2">{w.title}</h3>
-                    <p className="text-secondary small mb-0">{w.description}</p>
-                  </div>
-                </div>
-              </div>
+              <Grid key={w.title} size={{ xs: 12, md: 6 }}>
+                <Paper className="card-hover" sx={{ p: 3.5, height: '100%' }}>
+                  <CheckCircleOutlined sx={{ fontSize: 30, color: 'primary.main', mb: 1.5 }} />
+                  <Typography variant="h6" sx={{ mb: 1 }}>
+                    {w.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {w.description}
+                  </Typography>
+                </Paper>
+              </Grid>
             ))}
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Box>
 
-      <section className="py-5 bg-body-tertiary">
-        <div className="container">
-          <div className="section-header mb-5">
+      <Box component="section" className="bg-surface-2 border-y" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Box sx={{ mb: 4 }}>
             <SectionHeading tag="Coverage" title="What I test" />
-          </div>
-          <div className="row justify-content-center">
-            <div className="col-lg-10">
-              <div className="d-flex flex-wrap gap-2">
-                {securityCapabilities.map((c) => (
-                  <span key={c} className="badge text-bg-light border px-3 py-2 text-body">
-                    {c}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-5">
-        <div className="container">
-          <div className="section-header mb-5">
-            <SectionHeading tag="Background" title="Education, awards & experience" />
-          </div>
-          <div className="row g-4">
-            {securityCredentialGroups.map((g) => (
-              <div className="col-md-6 col-lg-3" key={g.title}>
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body p-4">
-                    <h3 className="h6 fw-bold text-primary mb-3">{g.title}</h3>
-                    <ul className="list-unstyled d-flex flex-column gap-2 mb-0">
-                      {g.items.map((item) => (
-                        <li key={item} className="small text-secondary">
-                          <i className="bi bi-dot text-primary" aria-hidden="true"></i>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
+          </Box>
+          <Stack direction="row" spacing={1.5} useFlexGap sx={{ flexWrap: 'wrap' }}>
+            {securityCapabilities.map((c) => (
+              <Chip key={c} label={c} variant="outlined" />
             ))}
-          </div>
-        </div>
-      </section>
+          </Stack>
+        </Container>
+      </Box>
 
-      <section className="py-5 bg-body-tertiary border-top">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-8 text-center">
-              <h2 className="h3 fw-bold mb-2">About {securityConsultant.name}</h2>
-              <p className="text-secondary mb-4">{securityConsultant.bio}</p>
-              <div className="d-flex flex-wrap justify-content-center gap-2 mb-4">
+      <Box component="section" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Box sx={{ mb: 4 }}>
+            <SectionHeading tag="Background" title="Education, awards & experience" />
+          </Box>
+          <Grid container spacing={3}>
+            {securityCredentialGroups.map((g) => (
+              <Grid key={g.title} size={{ xs: 12, md: 6, lg: 3 }}>
+                <Paper className="card-hover" sx={{ p: 3, height: '100%' }}>
+                  <Typography variant="subtitle1" sx={{ color: 'primary.main', mb: 2 }}>
+                    {g.title}
+                  </Typography>
+                  <Stack spacing={1}>
+                    {g.items.map((item) => (
+                      <Stack key={item} direction="row" spacing={0.5} sx={{ alignItems: 'flex-start' }}>
+                        <FiberManualRecord sx={{ fontSize: 10, color: 'primary.main', mt: 0.75 }} />
+                        <Typography variant="body2" color="text.secondary">
+                          {item}
+                        </Typography>
+                      </Stack>
+                    ))}
+                  </Stack>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
+      <Box component="section" className="bg-surface-2 border-y" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Grid container sx={{ justifyContent: 'center' }}>
+            <Grid size={{ xs: 12, lg: 8 }} sx={{ textAlign: 'center' }}>
+              <Typography variant="h3" sx={{ mb: 2 }}>
+                About {securityConsultant.name}
+              </Typography>
+              <Typography color="text.secondary" sx={{ mb: 3 }}>
+                {securityConsultant.bio}
+              </Typography>
+              <Stack direction="row" spacing={1.5} useFlexGap sx={{ flexWrap: 'wrap', justifyContent: 'center', mb: 3 }}>
                 {securityConsultant.links.map((l) => (
-                  <a key={l.label} className="btn btn-sm btn-outline-secondary" href={l.url} target="_blank" rel="noopener noreferrer">
+                  <Button key={l.label} variant="outlined" size="small" href={l.url} target="_blank" rel="noopener noreferrer">
                     {l.label}
-                  </a>
+                  </Button>
                 ))}
-              </div>
-              <Link className="btn btn-primary btn-lg" to="/security/contact">
+              </Stack>
+              <Button component={Link} to="/security/contact" variant="contained" size="large">
                 Work With Me
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+              </Button>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
     </>
   )
 }

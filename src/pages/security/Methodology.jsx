@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
-import { securityProcess } from '../../data/security'
+import { Box, Container, Grid, Typography, Paper, Stack, Button } from '@mui/material'
+import CalendarMonth from '@mui/icons-material/CalendarMonth'
+import CheckCircleOutlined from '@mui/icons-material/CheckCircleOutlined'
+import { securityProcess } from '../../data/security.json'
 import SecurityNav from '../../components/SecurityNav'
 import SectionHeading from '../../components/SectionHeading'
 
@@ -7,8 +10,8 @@ export default function Methodology() {
   return (
     <>
       <SecurityNav />
-      <section className="py-5 bg-body-tertiary border-bottom">
-        <div className="container">
+      <Box component="section" className="bg-surface-2 border-y" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
           <SectionHeading
             as="h1"
             id="methodology-heading"
@@ -16,58 +19,81 @@ export default function Methodology() {
             title="How a review runs"
             subtitle="A transparent, six-phase process. You know exactly what happens at every step — and nothing starts until you're comfortable."
           />
-        </div>
-      </section>
-      <section className="py-5">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-10">
-              <div className="d-flex flex-column gap-4">
+        </Container>
+      </Box>
+
+      <Box component="section" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Grid container sx={{ justifyContent: 'center' }}>
+            <Grid size={{ xs: 12, lg: 10 }}>
+              <Stack spacing={3}>
                 {securityProcess.map((p) => (
-                  <div className="card border-0 shadow-sm" key={p.number}>
-                    <div className="card-body p-4">
-                      <div className="row g-3">
-                        <div className="col-md-3">
-                          <span className="display-5 fw-bold text-primary-subtle">{p.number}</span>
-                          <h3 className="h5 fw-bold mt-1 mb-1">{p.title}</h3>
-                          <div className="text-secondary small">
-                            <i className="bi bi-calendar3 me-1" aria-hidden="true"></i>
-                            {p.time}
-                          </div>
-                        </div>
-                        <div className="col-md-9">
-                          <p className="text-secondary small">{p.description}</p>
-                          <ul className="list-unstyled d-flex flex-column gap-2 mb-0">
-                            {p.activities.map((a) => (
-                              <li key={a} className="small">
-                                <i className="bi bi-check2-circle text-primary me-2" aria-hidden="true"></i>
-                                {a}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <Paper key={p.number} className="card-hover" sx={{ p: 3.5 }}>
+                    <Grid container spacing={3}>
+                      <Grid size={{ xs: 12, md: 3 }}>
+                        <Typography variant="h3" sx={{ color: 'primary.main', fontWeight: 800 }}>
+                          {p.number}
+                        </Typography>
+                        <Typography variant="h6" sx={{ mt: 0.5, mb: 0.5 }}>
+                          {p.title}
+                        </Typography>
+                        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center', color: 'text.secondary' }}>
+                          <CalendarMonth sx={{ fontSize: 16 }} />
+                          <Typography variant="caption">{p.time}</Typography>
+                        </Stack>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 9 }}>
+                        <Typography variant="body2" color="text.secondary">
+                          {p.description}
+                        </Typography>
+                        <Stack spacing={1} sx={{ mt: 1.5 }}>
+                          {p.activities.map((a) => (
+                            <Stack key={a} direction="row" spacing={1} sx={{ alignItems: 'flex-start' }}>
+                              <CheckCircleOutlined sx={{ fontSize: 18, color: 'primary.main', mt: 0.25 }} />
+                              <Typography variant="body2">{a}</Typography>
+                            </Stack>
+                          ))}
+                        </Stack>
+                      </Grid>
+                    </Grid>
+                  </Paper>
                 ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="py-5 bg-body-tertiary border-top">
-        <div className="container">
-          <div className="card border-0 text-bg-primary">
-            <div className="card-body p-5 text-center">
-              <h2 className="h3 fw-bold mb-2">Ready to see the process in action?</h2>
-              <p className="mb-4 opacity-75">Every engagement follows this structure — tailored to your scope.</p>
-              <Link className="btn btn-light btn-lg" to="/security/contact">
-                Start a Review
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+              </Stack>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      <Box component="section" className="bg-surface-2 border-y" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Paper
+            sx={{
+              p: { xs: 4, md: 6 },
+              textAlign: 'center',
+              backgroundImage: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 55%, #db2777 100%)',
+              color: '#fff',
+            }}
+          >
+            <Typography variant="h3" sx={{ mb: 1, color: '#fff' }}>
+              Ready to see the process in action?
+            </Typography>
+            <Typography sx={{ mb: 3, opacity: 0.9 }}>Every engagement follows this structure — tailored to your scope.</Typography>
+            <Button
+              component={Link}
+              to="/security/contact"
+              variant="contained"
+              size="large"
+              sx={{
+                backgroundColor: '#fff',
+                color: '#4338ca',
+                '&:hover': { backgroundColor: '#eef0fb', color: '#4338ca' },
+              }}
+            >
+              Start a Review
+            </Button>
+          </Paper>
+        </Container>
+      </Box>
     </>
   )
 }

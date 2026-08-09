@@ -1,4 +1,6 @@
-import { NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Box, Tabs, Tab } from '@mui/material'
 
 const links = [
   { to: '/security', label: 'Overview', end: true },
@@ -11,23 +13,34 @@ const links = [
 ]
 
 export default function SecurityNav() {
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   return (
-    <nav className="navbar navbar-expand bg-body-secondary border-bottom" aria-label="Security sections">
-      <div className="container">
-        <ul className="navbar-nav flex-row flex-wrap gap-1 mx-auto">
+    <Box
+      component="nav"
+      aria-label="Security sections"
+      className="bg-surface-2 border-y"
+      sx={{ borderTop: 'none' }}
+    >
+      <Box sx={{ px: { xs: 1, md: 2 }, maxWidth: 960, mx: 'auto' }}>
+        <Tabs
+          value={pathname}
+          onChange={(_e, value) => navigate(value)}
+          variant="scrollable"
+          scrollButtons={false}
+          allowScrollButtonsMobile
+          sx={{ py: 1 }}
+        >
           {links.map((link) => (
-            <li key={link.to} className="nav-item">
-              <NavLink
-                to={link.to}
-                end={link.end}
-                className={({ isActive }) => `nav-link rounded px-3 py-1 ${isActive ? 'active bg-primary text-white' : ''}`}
-              >
-                {link.label}
-              </NavLink>
-            </li>
+            <Tab key={link.to} value={link.to} label={link.label} />
           ))}
-        </ul>
-      </div>
-    </nav>
+        </Tabs>
+      </Box>
+    </Box>
   )
 }

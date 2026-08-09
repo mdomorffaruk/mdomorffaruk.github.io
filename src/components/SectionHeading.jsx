@@ -1,15 +1,30 @@
+import { Box, Typography } from '@mui/material'
+
 export default function SectionHeading({ tag, title, subtitle, center, id, as: Heading = 'h2' }) {
   return (
-    <div className={center ? 'text-center mx-auto' : ''}>
+    <Box sx={{ maxWidth: '42rem', textAlign: center ? 'center' : 'left', mx: center ? 'auto' : 0 }}>
       {tag && (
-        <p className={`text-uppercase text-primary fw-semibold mb-2 ${center ? '' : ''}`} style={{ fontSize: '0.75rem', letterSpacing: '0.12em' }}>
+        <Typography
+          component="p"
+          className="eyebrow"
+          sx={{ mb: 1 }}
+        >
           {tag}
-        </p>
+        </Typography>
       )}
-      <Heading id={id} className={`fw-bold mb-0 ${center ? '' : ''}`} style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
+      <Typography
+        component={Heading}
+        id={id}
+        variant="h2"
+        sx={{ fontSize: 'clamp(1.6rem, 3.2vw, 2.2rem)', mb: 0, lineHeight: 1.15 }}
+      >
         {title}
-      </Heading>
-      {subtitle && <p className={`text-secondary mt-2 mb-0 ${center ? 'mx-auto' : ''}`} style={{ maxWidth: '40rem' }}>{subtitle}</p>}
-    </div>
+      </Typography>
+      {subtitle && (
+        <Typography color="text.secondary" sx={{ mt: 1.5, mb: 0, maxWidth: '40rem', mx: center ? 'auto' : 0 }}>
+          {subtitle}
+        </Typography>
+      )}
+    </Box>
   )
 }

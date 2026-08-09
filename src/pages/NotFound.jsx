@@ -1,17 +1,24 @@
 import { Link } from 'react-router-dom'
+import { Box, Button, Container, Typography } from '@mui/material'
+import Home from '@mui/icons-material/Home'
 
 export default function NotFound() {
   return (
-    <section className="py-5 bg-body-tertiary border-bottom min-vh-100 d-flex align-items-center">
-      <div className="container text-center py-5">
-        <div className="display-1 fw-bold text-primary mb-3">404</div>
-        <h1 className="fw-bold mb-3">Page not found</h1>
-        <p className="text-secondary mb-4">The page you're looking for doesn't exist or has moved.</p>
-        <Link className="btn btn-primary" to="/">
-          <i className="bi bi-house me-1" aria-hidden="true"></i>
+    <Box component="section" className="hero-mesh" sx={{ minHeight: '70vh', display: 'flex', alignItems: 'center' }}>
+      <Container maxWidth="md" sx={{ textAlign: 'center', py: 8 }}>
+        <Typography variant="h1" sx={{ fontSize: 'clamp(4rem, 12vw, 7rem)', color: 'primary.main', mb: 1 }}>
+          404
+        </Typography>
+        <Typography variant="h4" sx={{ fontWeight: 700, mb: 1.5 }}>
+          Page not found
+        </Typography>
+        <Typography color="text.secondary" sx={{ mb: 4 }}>
+          The page you&apos;re looking for doesn&apos;t exist or has moved.
+        </Typography>
+        <Button component={Link} to="/" variant="contained" size="large" startIcon={<Home />}>
           Back to Home
-        </Link>
-      </div>
-    </section>
+        </Button>
+      </Container>
+    </Box>
   )
 }

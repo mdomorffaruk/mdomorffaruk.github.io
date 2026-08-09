@@ -20,7 +20,7 @@ function readStored() {
 
 function applyTheme(mode) {
   const dark = mode === 'dark' || (mode === 'system' && systemPrefersDark())
-  document.documentElement.setAttribute('data-bs-theme', dark ? 'dark' : 'light')
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
 }
 
 export function useTheme() {

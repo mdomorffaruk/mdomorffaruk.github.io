@@ -1,82 +1,183 @@
+import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Menu,
+  MenuItem,
+  IconButton,
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
+  Divider,
+  Box,
+  Avatar,
+} from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+import Close from '@mui/icons-material/Close'
+import RocketLaunch from '@mui/icons-material/RocketLaunch'
 import ThemeToggle from './ThemeToggle'
+import { nav } from '../data/site.json'
 
-const securityLinks = [
-  { to: '/security', label: 'Overview' },
-  { to: '/security/services', label: 'Services' },
-  { to: '/security/methodology', label: 'Methodology' },
-  { to: '/security/sample-report', label: 'Sample Report' },
-  { to: '/security/why-choose-me', label: 'Why Choose Me' },
-  { to: '/security/faq', label: 'FAQ' },
-  { to: '/security/contact', label: 'Contact' },
-]
+const { brand, mainLinks, securityLinks, hireMe } = nav
 
 export default function Navbar() {
-  const linkClass = ({ isActive }) => `nav-link ${isActive ? 'active' : ''}`
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const open = Boolean(anchorEl)
+
+  const handleMenuOpen = (e) => setAnchorEl(e.currentTarget)
+  const handleMenuClose = () => setAnchorEl(null)
+
+  const linkSx = ({ isActive }) => ({
+    color: 'inherit',
+    fontWeight: 600,
+    fontSize: '0.95rem',
+    mx: 0.5,
+    px: 1.5,
+    py: 0.75,
+    borderRadius: 6,
+    textDecoration: 'none',
+    '&:hover': { color: 'primary.main', backgroundColor: 'action.hover' },
+    ...(isActive ? { color: 'primary.main', backgroundColor: 'action.hover' } : {}),
+  })
+
+  const drawerLink = ({ isActive }) => ({
+    textDecoration: 'none',
+    color: isActive ? 'primary.main' : 'text.primary',
+    fontWeight: 600,
+    py: 1.25,
+  })
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body sticky-top border-bottom shadow-sm">
-      <div className="container">
-        <Link className="navbar-brand d-flex align-items-center gap-2 fw-semibold" to="/">
-          <img src="/profile.gif" alt="Md Omar Faruk" width="32" height="32" className="rounded-circle" />
-          <span>Md Omar Faruk</span>
+    <AppBar position="sticky" color="inherit">
+      <Toolbar sx={{ gap: 1 }}>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25, mr: 1 }}>
+            <Avatar src={brand.logo} alt={brand.name} sx={{ width: 34, height: 34 }} />
+            <Box sx={{ fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+              {brand.name}
+            </Box>
+          </Box>
         </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mainNavbar"
-          aria-controls="mainNavbar"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="mainNavbar">
-          <ul className="navbar-nav ms-auto align-items-lg-center">
-            <li className="nav-item">
-              <NavLink className={linkClass} to="/" end>
-                Home
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className={linkClass} to="/portfolio">
-                Portfolio
-              </NavLink>
-            </li>
-            <li className="nav-item dropdown">
-              <button
-                className="nav-link dropdown-toggle d-flex align-items-center"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+
+        <Box sx={{ flexGrow: 1 }} />
+
+        {/* Desktop nav */}
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
+          {mainLinks.map((link) =>
+            link.dropdown ? (
+              <Button
+                key="security-services"
+                color="inherit"
+                endIcon={<ExpandMore />}
+                onClick={handleMenuOpen}
+                sx={{ fontWeight: 600, textTransform: 'none', px: 1.5, mx: 0.5 }}
               >
-                Security
-              </button>
-              <ul className="dropdown-menu dropdown-menu-end">
-                {securityLinks.map((link) => (
-                  <li key={link.to}>
-                    <NavLink className={({ isActive }) => `dropdown-item ${isActive ? 'active' : ''}`} to={link.to} end={link.to === '/security'}>
-                      {link.label}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </li>
-            <li className="nav-item">
-              <NavLink className={linkClass} to="/security/contact">
-                Contact
+                {link.label}
+              </Button>
+            ) : (
+              <NavLink key={link.to} to={link.to} end={link.end} style={linkSx}>
+                {link.label}
               </NavLink>
-            </li>
-            <ThemeToggle />
-            <li className="nav-item ms-lg-2">
-              <a className="btn btn-primary btn-sm" href="mailto:mdomorffaruk@gmail.com">
-                Hire Me
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+            )
+          )}
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleMenuClose}
+            MenuListProps={{ sx: { minWidth: 220 } }}
+          >
+            {securityLinks.map((l) => (
+              <MenuItem
+                key={l.to}
+                component={NavLink}
+                to={l.to}
+                end={l.end}
+                onClick={handleMenuClose}
+                sx={{ fontWeight: 600 }}
+              >
+                {l.label}
+              </MenuItem>
+            ))}
+          </Menu>
+          <ThemeToggle />
+          <Button
+            variant="contained"
+            size="small"
+            href={hireMe.href}
+            sx={{ ml: 1 }}
+          >
+            <RocketLaunch sx={{ mr: 0.75, fontSize: 18 }} />
+            {hireMe.label}
+          </Button>
+        </Box>
+
+        {/* Mobile menu button */}
+        <IconButton
+          edge="end"
+          aria-label="Open menu"
+          onClick={() => setDrawerOpen(true)}
+          sx={{ display: { md: 'none' } }}
+        >
+          <MenuIcon />
+        </IconButton>
+
+        {/* Mobile drawer */}
+        <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+          <Box sx={{ width: 300, p: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25 }}>
+                <Avatar src={brand.logo} alt={brand.name} sx={{ width: 34, height: 34 }} />
+                <Box sx={{ fontWeight: 800 }}>{brand.name}</Box>
+              </Box>
+              <IconButton aria-label="Close menu" onClick={() => setDrawerOpen(false)}>
+                <Close />
+              </IconButton>
+            </Box>
+            <List disablePadding>
+              {mainLinks.map((link) =>
+                link.dropdown ? (
+                  <Box key="security-services">
+                    <ListItemText primary={link.label} sx={{ px: 1.5, pt: 1.5, fontWeight: 700, color: 'text.secondary', fontSize: '0.8rem' }} />
+                    <Divider sx={{ my: 1 }} />
+                    {securityLinks.map((l) => (
+                      <NavLink key={l.to} to={l.to} end={l.end} style={drawerLink}>
+                        <ListItemButton onClick={() => setDrawerOpen(false)}>
+                          <ListItemText primary={l.label} />
+                        </ListItemButton>
+                      </NavLink>
+                    ))}
+                    <Divider sx={{ my: 1 }} />
+                  </Box>
+                ) : (
+                  <NavLink key={link.to} to={link.to} end={link.end} style={drawerLink}>
+                    <ListItemButton onClick={() => setDrawerOpen(false)}>
+                      <ListItemText primary={link.label} />
+                    </ListItemButton>
+                  </NavLink>
+                )
+              )}
+            </List>
+            <Box sx={{ px: 1, pt: 1.5 }}>
+              <ThemeToggle />
+            </Box>
+            <Box sx={{ p: 1, pt: 1.5 }}>
+              <Button
+                fullWidth
+                variant="contained"
+                href={hireMe.href}
+              >
+                <RocketLaunch sx={{ mr: 0.75, fontSize: 18 }} />
+                {hireMe.label}
+              </Button>
+            </Box>
+          </Box>
+        </Drawer>
+      </Toolbar>
+    </AppBar>
   )
 }

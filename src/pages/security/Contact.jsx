@@ -1,14 +1,23 @@
-import { securityContact } from '../../data/security'
+import { Box, Container, Grid, Typography, Paper, Stack, Link } from '@mui/material'
+import ArrowForward from '@mui/icons-material/ArrowForward'
+import { securityContact } from '../../data/security.json'
 import SecurityNav from '../../components/SecurityNav'
 import SectionHeading from '../../components/SectionHeading'
 import ContactForm from '../../components/ContactForm'
+
+const channels = [
+  { heading: 'Email', value: securityContact.email, href: `mailto:${securityContact.email}`, hint: securityContact.responseTime, external: false },
+  { heading: 'WhatsApp', value: securityContact.whatsapp, href: securityContact.whatsappUrl, hint: 'Chat directly on WhatsApp', external: true },
+  { heading: 'Calendly', value: 'Book a 15-min call', href: securityContact.calendlyUrl, hint: 'Free consultation, no commitment', external: true },
+  { heading: 'LinkedIn', value: 'linkedin.com/in/mdomorffaruk', href: securityContact.linkedinUrl, hint: 'See my professional background', external: true },
+]
 
 export default function Contact() {
   return (
     <>
       <SecurityNav />
-      <section className="py-5 bg-body-tertiary border-bottom">
-        <div className="container">
+      <Box component="section" className="bg-surface-2 border-y" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
           <SectionHeading
             as="h1"
             id="contact-heading"
@@ -16,89 +25,87 @@ export default function Contact() {
             title="Schedule a free consultation"
             subtitle="No commitment. No sales pitch. A short conversation about your systems and security concerns — and what a review would involve."
           />
-        </div>
-      </section>
+        </Container>
+      </Box>
 
-      <section className="py-5">
-        <div className="container">
-          <div className="row g-5">
-            <div className="col-lg-7">
-              <div className="card border-0 shadow-sm">
-                <div className="card-body p-4 p-lg-5">
-                  <ContactForm variant="security" />
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-5">
-              <div className="card border-0 shadow-sm mb-4">
-                <div className="card-body p-4">
-                  <h3 className="h6 fw-bold mb-3">What happens next</h3>
-                  <ol className="list-unstyled d-flex flex-column gap-3 mb-0">
-                    {securityContact.nextSteps.map((step) => (
-                      <li key={step.number} className="d-flex align-items-start gap-3">
-                        <span className="d-flex align-items-center justify-content-center bg-primary-subtle text-primary rounded-circle fw-bold flex-shrink-0" style={{ width: 28, height: 28 }}>
-                          {step.number}
-                        </span>
-                        <div>
-                          <div className="fw-semibold small">{step.title}</div>
-                          <div className="text-secondary small">{step.description}</div>
-                        </div>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              </div>
+      <Box component="section" sx={{ py: { xs: 6, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={4}>
+            <Grid size={{ xs: 12, lg: 7 }}>
+              <Paper sx={{ p: { xs: 3, md: 5 } }}>
+                <ContactForm variant="security" />
+              </Paper>
+            </Grid>
+            <Grid size={{ xs: 12, lg: 5 }}>
+              <Paper sx={{ p: 3, mb: 3 }}>
+                <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 2 }}>
+                  What happens next
+                </Typography>
+                <Stack spacing={2.5}>
+                  {securityContact.nextSteps.map((step) => (
+                    <Stack key={step.number} direction="row" spacing={2} sx={{ alignItems: 'flex-start' }}>
+                      <Box
+                        sx={{
+                          width: 28,
+                          height: 28,
+                          borderRadius: '50%',
+                          flexShrink: 0,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontWeight: 700,
+                          fontSize: '0.85rem',
+                          backgroundColor: 'primary.main',
+                          color: 'primary.contrastText',
+                        }}
+                      >
+                        {step.number}
+                      </Box>
+                      <Box>
+                        <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                          {step.title}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {step.description}
+                        </Typography>
+                      </Box>
+                    </Stack>
+                  ))}
+                </Stack>
+              </Paper>
 
-              <div className="d-flex flex-column gap-3">
-                <div className="card border-0 shadow-sm">
-                  <div className="card-body p-4">
-                    <h3 className="h6 fw-bold mb-1">Email</h3>
-                    <a className="text-primary text-decoration-none" href={`mailto:${securityContact.email}`}>
-                      {securityContact.email}
-                    </a>
-                    <p className="text-secondary small mt-1 mb-0">{securityContact.responseTime}</p>
-                  </div>
-                </div>
-                <div className="card border-0 shadow-sm">
-                  <div className="card-body p-4">
-                    <h3 className="h6 fw-bold mb-1">WhatsApp</h3>
-                    <a className="text-primary text-decoration-none" href={securityContact.whatsappUrl} target="_blank" rel="noopener noreferrer">
-                      {securityContact.whatsapp} <i className="bi bi-arrow-right ms-1" aria-hidden="true"></i>
-                    </a>
-                    <p className="text-secondary small mt-1 mb-0">Chat directly on WhatsApp</p>
-                  </div>
-                </div>
-                <div className="card border-0 shadow-sm">
-                  <div className="card-body p-4">
-                    <h3 className="h6 fw-bold mb-1">Calendly</h3>
-                    <a className="text-primary text-decoration-none" href={securityContact.calendlyUrl} target="_blank" rel="noopener noreferrer">
-                      Book a 15-min call <i className="bi bi-arrow-right ms-1" aria-hidden="true"></i>
-                    </a>
-                    <p className="text-secondary small mt-1 mb-0">Free consultation, no commitment</p>
-                  </div>
-                </div>
-                <div className="card border-0 shadow-sm">
-                  <div className="card-body p-4">
-                    <h3 className="h6 fw-bold mb-1">LinkedIn</h3>
-                    <a className="text-primary text-decoration-none" href={securityContact.linkedinUrl} target="_blank" rel="noopener noreferrer">
-                      linkedin.com/in/mdomorffaruk <i className="bi bi-arrow-right ms-1" aria-hidden="true"></i>
-                    </a>
-                    <p className="text-secondary small mt-1 mb-0">See my professional background</p>
-                  </div>
-                </div>
-                <div className="card border-0 shadow-sm">
-                  <div className="card-body p-4">
-                    <h3 className="h6 fw-bold mb-1">Confidential &amp; independent</h3>
-                    <p className="text-secondary small mb-0">
-                      All conversations are confidential and NDA-friendly. You&apos;ll work directly with me — no account managers, no hand-offs.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+              <Stack spacing={2}>
+                {channels.map((c) => (
+                  <Paper key={c.heading} className="card-hover" sx={{ p: 3 }}>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.5 }}>
+                      {c.heading}
+                    </Typography>
+                    <Link
+                      href={c.href}
+                      {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      sx={{ color: 'primary.main', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 0.5 }}
+                    >
+                      {c.value} <ArrowForward sx={{ fontSize: 16 }} />
+                    </Link>
+                    <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
+                      {c.hint}
+                    </Typography>
+                  </Paper>
+                ))}
+                <Paper sx={{ p: 3 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.5 }}>
+                    Confidential &amp; independent
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    All conversations are confidential and NDA-friendly. You&apos;ll work directly with me — no account managers, no
+                    hand-offs.
+                  </Typography>
+                </Paper>
+              </Stack>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
     </>
   )
 }
