@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { contact, hero, services, stats } from './data/home.json'
+import { contact, faqs, hero, processSteps, services, stats } from './data/home.json'
 import {
   about,
   apps,
@@ -289,65 +289,84 @@ function Header({ active, menuOpen, setMenuOpen }) {
 
 function Hero() {
   const [headline, subline] = hero.title.split('\n')
-  const heroStats = [stats[0], stats[1], stats[2], stats[5]]
+  const heroStats = [stats[0], stats[1], stats[2], stats[4]]
 
   return (
     <section className="border-b border-line" aria-label="Introduction">
       <div className="mx-auto max-w-6xl px-5 pt-20 pb-16 sm:px-8 sm:pt-28 sm:pb-24">
-        <Reveal>
-          <p className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-[0.2em] text-muted">
-            <span className="inline-flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-ok" aria-hidden="true" />
-              {hero.badge}
-            </span>
-            <span aria-hidden="true">·</span>
-            <span>Bogura, Bangladesh · UTC+6</span>
-          </p>
-          <p className="mt-6 font-mono text-xs uppercase tracking-[0.25em] text-accent">
-            Mohammad Omor Faruk · {about.role}
-          </p>
-        </Reveal>
+        <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:items-center">
+          <div>
+            <Reveal>
+              <p className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-[0.2em] text-muted">
+                <span className="inline-flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-ok" aria-hidden="true" />
+                  {hero.badge}
+                </span>
+                <span aria-hidden="true">·</span>
+                <span>Bogura, Bangladesh · UTC+6</span>
+              </p>
+              <p className="mt-6 font-mono text-xs uppercase tracking-[0.25em] text-accent">
+                Mohammad Omor Faruk · {about.role}
+              </p>
+            </Reveal>
 
-        <Reveal delay={60}>
-          <h1 className="mt-4 font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
-            {headline}
-            <span className="mt-2 block italic text-accent">{subline}</span>
-          </h1>
-        </Reveal>
+            <Reveal delay={60}>
+              <h1 className="mt-4 font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
+                {headline}
+                <span className="mt-2 block italic text-accent">{subline}</span>
+              </h1>
+            </Reveal>
 
-        <Reveal delay={120}>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted">{hero.subtitle}</p>
-        </Reveal>
+            <Reveal delay={120}>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted">{hero.subtitle}</p>
+            </Reveal>
 
-        <Reveal delay={180}>
-          <div className="mt-8 flex flex-wrap gap-2">
-            {services.map((s) => (
-              <Chip key={s.title}>{s.title}</Chip>
-            ))}
+            <Reveal delay={180}>
+              <div className="mt-8 flex flex-wrap gap-2">
+                {services.map((s) => (
+                  <Chip key={s.title}>{s.title}</Chip>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal delay={240}>
+              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+                <a href={hero.ctaPrimary.href} className={btnPrimary}>
+                  {hero.ctaPrimary.label}
+                </a>
+                <a href={hero.ctaSecondary.href} className={btnGhost}>
+                  {hero.ctaSecondary.label}
+                </a>
+                <div className="flex flex-wrap gap-x-5 gap-y-2">
+                  <a href={contact.github} target="_blank" rel="noreferrer" className={linkMono}>
+                    GitHub ↗
+                  </a>
+                  <a href={contact.linkedin} target="_blank" rel="noreferrer" className={linkMono}>
+                    LinkedIn ↗
+                  </a>
+                  <a href="/resume.pdf" className={linkMono}>
+                    Resume ↗
+                  </a>
+                </div>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
 
-        <Reveal delay={240}>
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <a href={hero.ctaPrimary.href} className={btnPrimary}>
-              {hero.ctaPrimary.label}
-            </a>
-            <a href={hero.ctaSecondary.href} className={btnGhost}>
-              {hero.ctaSecondary.label}
-            </a>
-            <div className="flex flex-wrap gap-x-5 gap-y-2">
-              <a href={contact.github} target="_blank" rel="noreferrer" className={linkMono}>
-                GitHub ↗
-              </a>
-              <a href={contact.linkedin} target="_blank" rel="noreferrer" className={linkMono}>
-                LinkedIn ↗
-              </a>
-              <a href="/resume.pdf" className={linkMono}>
-                Resume ↗
-              </a>
-            </div>
-          </div>
-        </Reveal>
+          <Reveal delay={120}>
+            <figure className="mx-auto w-64 max-w-full lg:w-72">
+              <div className="overflow-hidden rounded-xl border border-line bg-card p-2 shadow-sm">
+                <img
+                  src="/profile.gif"
+                  alt="Mohammad Omor Faruk - Software Engineer and Security Researcher"
+                  className="h-auto w-full rounded-lg border border-line"
+                />
+              </div>
+              <figcaption className="mt-3 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+                Software Engineer · Security Researcher
+              </figcaption>
+            </figure>
+          </Reveal>
+        </div>
 
         <Reveal delay={300}>
           <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-4">
@@ -571,23 +590,32 @@ function Projects() {
         )}
 
         {apps.length > 0 && (
-          <div className="mt-10 flex flex-wrap items-baseline gap-x-2 gap-y-2">
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
-              Play Store
-            </span>
-            {apps.map((a, i) => (
-              <span key={a.name} className="font-mono text-xs">
-                {i > 0 && <span className="text-muted"> · </span>}
+          <div className="mt-14">
+            <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
+              Android apps on Google Play
+            </h3>
+            <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+              {apps.map((a) => (
                 <a
+                  key={a.name}
                   href={a.playUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-muted transition-colors hover:text-accent"
+                  className="group rounded-lg border border-line bg-card p-4 text-center transition-colors hover:border-accent hover:bg-accent-soft/40"
                 >
-                  {a.name}
+                  <img
+                    src={`/${a.icon}`}
+                    alt={`${a.name} app icon`}
+                    loading="lazy"
+                    className="mx-auto h-14 w-14 rounded-xl border border-line object-cover"
+                  />
+                  <p className="mt-2 font-serif text-sm font-semibold transition-colors group-hover:text-accent">
+                    {a.name}
+                  </p>
+                  <p className="font-mono text-[11px] text-muted">Google Play ↗</p>
                 </a>
-              </span>
-            ))}
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -689,6 +717,55 @@ function Skills() {
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{cat.skills.join(' · ')}</p>
               </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function HowWork() {
+  return (
+    <section id="process" className="border-b border-line">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+        <SectionHead index="07" title="How I work" />
+        <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {processSteps.map((s, i) => (
+            <Reveal key={s.number} delay={Math.min(i * 60, 180)} className="h-full">
+              <div className="h-full bg-card p-6 sm:p-8">
+                <p className="font-serif text-3xl font-semibold text-accent">{s.number}</p>
+                <h3 className="mt-3 font-serif text-lg font-semibold">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{s.description}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Faq() {
+  return (
+    <section id="faq" className="border-b border-line">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+        <SectionHead index="08" title="Common questions" />
+        <div className="max-w-3xl border-t border-line">
+          {faqs.map((f) => (
+            <Reveal key={f.question}>
+              <details className="group border-b border-line">
+                <summary className="flex cursor-pointer items-center justify-between gap-4 py-5 font-serif text-lg font-semibold">
+                  {f.question}
+                  <span
+                    className="shrink-0 font-mono text-sm text-accent transition-transform group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="pb-5 text-sm leading-relaxed text-muted">{f.answer}</p>
+              </details>
             </Reveal>
           ))}
         </div>
@@ -814,6 +891,8 @@ export default function App() {
         <Projects />
         <Security />
         <Skills />
+        <HowWork />
+        <Faq />
         <Contact />
       </main>
       <Footer />

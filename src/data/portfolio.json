@@ -16,7 +16,7 @@
 
   "timeline": [
     {
-      "year": "2023 - Present",
+      "year": "2023 - Feb 2026",
       "title": "Cybersecurity Researcher",
       "organization": "ByteTech, Bangladesh",
       "type": "experience",
@@ -27,7 +27,7 @@
       "title": "Full-Stack Developer",
       "organization": "ByteTech, Bangladesh",
       "type": "experience",
-      "description": "Production web apps (React, Node.js, PHP, REST APIs)\nSoutheast Bank Alarm Management System - end to end\nElectronJS desktop tooling, monitoring dashboards"
+      "description": "Production web apps (React, Node.js, PHP, REST APIs)\nElectronJS desktop tooling, monitoring dashboards"
     },
     {
       "year": "2019 - 2020",
@@ -323,7 +323,7 @@
   "portfolioProjects": [
     {
       "title": "Southeast Bank Alarm Management",
-      "description": "24/7 real-time monitoring for banking security infrastructure. Kotlin Android client + PHP REST API backend. Reduced manual monitoring workload by 70%.",
+      "description": "Personal project, built end-to-end outside of office work. 24/7 real-time monitoring for banking security infrastructure. Kotlin Android client + PHP REST API backend. Reduced manual monitoring workload by 70%.",
       "tech": ["PHP", "Kotlin", "MySQL", "Banking", "REST API"],
       "links": { "demo": null, "github": null }
     },

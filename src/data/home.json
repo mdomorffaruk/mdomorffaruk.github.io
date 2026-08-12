@@ -38,9 +38,8 @@
   "stats": [
     { "value": 6, "suffix": "+", "label": "Years Experience" },
     { "value": 30, "suffix": "+", "label": "Bug Reports" },
-    { "value": 8, "suffix": "", "label": "Apps Shipped" },
+    { "value": 10, "suffix": "", "label": "Apps Shipped" },
     { "value": 1, "suffix": "", "label": "National Award" },
-    { "value": 450, "suffix": "+", "label": "Repos on GitHub" },
     { "value": 10, "suffix": "+", "label": "Countries Served" }
   ],
 
@@ -116,7 +115,7 @@
     {
       "title": "Southeast Bank Alarm Platform",
       "category": "Banking",
-      "description": "24/7 monitoring for banking security infrastructure. Kotlin Android client + PHP REST API.",
+      "description": "Personal project, built end-to-end. 24/7 monitoring for banking security infrastructure. Kotlin Android client + PHP REST API.",
       "tech": ["PHP", "Kotlin", "MySQL", "Banking", "REST API"],
       "links": { "demo": null, "github": null }
     },
