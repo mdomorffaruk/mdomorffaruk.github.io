@@ -1132,7 +1132,7 @@ function Testimonials() {
                 <p className="font-mono text-sm text-accent" aria-label="5 out of 5 stars">
                   ★★★★★
                 </p>
-                <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ink/85">
+                <blockquote className="mt-3 flex-1 text-xs leading-relaxed text-ink/80">
                   {t.text}
                 </blockquote>
                 <figcaption className="mt-4 flex items-center gap-2">
