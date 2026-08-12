@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { contact, faqs, hero, processSteps, services, stats } from './data/home.json'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { contact, faqs, hero, marqueeItems, processSteps, services, stats } from './data/home.json'
 import {
   about,
   apps,
@@ -11,12 +11,13 @@ import {
 } from './data/portfolio.json'
 
 const sections = [
-  { id: 'about', label: 'About', index: '01' },
-  { id: 'experience', label: 'Experience', index: '02' },
-  { id: 'projects', label: 'Work', index: '03' },
-  { id: 'security', label: 'Security', index: '04' },
-  { id: 'skills', label: 'Skills', index: '05' },
-  { id: 'contact', label: 'Contact', index: '06' },
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Work' },
+  { id: 'services', label: 'Services' },
+  { id: 'security', label: 'Security' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'contact', label: 'Contact' },
 ]
 
 const btn = 'inline-flex items-center justify-center gap-2 rounded-md px-5 py-2.5 font-mono text-sm font-medium transition-colors'
@@ -52,10 +53,11 @@ const featuredTitles = [
   'Smart Helmet',
 ]
 
-const featured = featuredTitles
-  .map((title) => portfolioProjects.find((p) => p.title === title))
-  .filter(Boolean)
-const otherProjects = portfolioProjects.filter((p) => !featuredTitles.includes(p.title))
+function getFeatured(list) {
+  return featuredTitles
+    .map((title) => list.find((p) => p.title === title))
+    .filter(Boolean)
+}
 const experience = timeline.filter((t) => t.type === 'experience')
 
 const securityTools = skillCategories
@@ -137,6 +139,85 @@ function useScrollSpy(ids) {
   }, [ids])
 
   return active
+}
+
+function ScrollProgress() {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    let raf = null
+    const update = () => {
+      const doc = document.documentElement
+      const total = doc.scrollHeight - doc.clientHeight
+      const pct = total > 0 ? (window.scrollY / total) * 100 : 0
+      if (ref.current) ref.current.style.transform = `scaleX(${pct / 100})`
+      raf = null
+    }
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(update)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
+    onScroll()
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      aria-hidden="true"
+      className="fixed inset-x-0 top-0 z-50 h-0.5 origin-left bg-accent"
+      style={{ transform: 'scaleX(0)' }}
+    />
+  )
+}
+
+function CountUp({ value, suffix = '', duration = 1100 }) {
+  const ref = useRef(null)
+  const [display, setDisplay] = useState(0)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return undefined
+    let raf = null
+    let start = null
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        io.disconnect()
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          setDisplay(value)
+          return
+        }
+        const step = (t) => {
+          if (start === null) start = t
+          const p = Math.min((t - start) / duration, 1)
+          const eased = 1 - Math.pow(1 - p, 3)
+          setDisplay(Math.round(value * eased))
+          if (p < 1) raf = requestAnimationFrame(step)
+        }
+        raf = requestAnimationFrame(step)
+      },
+      { threshold: 0.4 },
+    )
+    io.observe(el)
+    return () => {
+      io.disconnect()
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [value, duration])
+
+  return (
+    <span ref={ref}>
+      {display}
+      {suffix}
+    </span>
+  )
 }
 
 function ThemeToggle() {
@@ -233,7 +314,7 @@ function Header({ active, menuOpen, setMenuOpen }) {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <a href="#top" className="flex items-center" aria-label="Mohammad Omor Faruk">
           <img
-            src="/profile.gif"
+            src="/profile-static.png"
             alt=""
             className="h-8 w-8 rounded-full border border-line object-cover"
           />
@@ -243,7 +324,7 @@ function Header({ active, menuOpen, setMenuOpen }) {
             <a
               key={s.id}
               href={`#${s.id}`}
-              aria-current={active === s.id ? 'true' : undefined}
+              aria-current={active === s.id ? 'location' : undefined}
               className={`rounded-md px-3 py-2 font-mono text-xs uppercase tracking-wider transition-colors ${
                 active === s.id ? 'text-accent' : 'text-muted hover:text-ink'
               }`}
@@ -290,7 +371,6 @@ function Header({ active, menuOpen, setMenuOpen }) {
                 className="flex items-center justify-between border-b border-line py-3.5 font-serif text-lg"
               >
                 {s.label}
-                <span className="font-mono text-xs text-accent">{s.index}</span>
               </a>
             ))}
             <a href="#contact" onClick={() => setMenuOpen(false)} className={`${btnPrimary} mt-5`}>
@@ -372,7 +452,7 @@ function Hero() {
             <figure className="mx-auto w-72 max-w-full sm:w-80 lg:w-96">
               <div className="overflow-hidden rounded-full border border-line bg-card p-2 shadow-sm">
                 <img
-                  src="/profile.gif"
+                  src="/profile-static.png"
                   alt="Mohammad Omor Faruk - Software Engineer and Security Researcher"
                   className="aspect-square w-full rounded-full border border-line object-cover"
                 />
@@ -390,13 +470,30 @@ function Hero() {
               <div key={s.label} className="bg-paper px-5 py-5">
                 <dt className="font-mono text-[11px] uppercase tracking-wider text-muted">{s.label}</dt>
                 <dd className="mt-1 font-serif text-3xl font-semibold">
-                  {s.value}
-                  {s.suffix}
+                  <CountUp value={s.value} suffix={s.suffix} />
                 </dd>
               </div>
             ))}
           </dl>
         </Reveal>
+      </div>
+
+      <div className="border-t border-line">
+        <div className="mx-auto max-w-6xl px-5 py-6 sm:px-8">
+          <Marquee duration={45}>
+            {marqueeItems.map((m) => (
+              <span
+                key={m}
+                className="flex shrink-0 items-center gap-4 font-mono text-sm text-muted"
+              >
+                {m}
+                <span className="text-accent" aria-hidden="true">
+                  ·
+                </span>
+              </span>
+            ))}
+          </Marquee>
+        </div>
       </div>
     </section>
   )
@@ -470,6 +567,9 @@ function About() {
 }
 
 function Experience() {
+  const education = timeline.find((t) => t.type === 'education' && t.title.startsWith('B.Sc'))
+  const awards = timeline.filter((t) => t.type === 'award')
+
   return (
     <section id="experience" className="border-b border-line">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
@@ -478,39 +578,75 @@ function Experience() {
           title="Experience"
           intro="Three years of security research layered on top of six years building production systems."
         />
-        <ol className="relative space-y-12 border-l border-line pl-6 sm:pl-8">
-          {experience.map((item, i) => (
-            <Reveal key={`${item.title}-${item.year}`} delay={Math.min(i * 60, 180)}>
-              <li className="relative">
-                <span
-                  className="absolute top-1.5 -left-[1.81rem] h-2.5 w-2.5 rounded-full border-2 border-accent bg-paper sm:-left-[2.31rem]"
-                  aria-hidden="true"
-                />
-                <p className="font-mono text-xs font-medium uppercase tracking-wider text-accent">
-                  {item.year}
-                </p>
-                <h3 className="mt-1 font-serif text-xl font-semibold sm:text-2xl">{item.title}</h3>
-                <p className="mt-0.5 text-sm text-muted">{item.organization}</p>
-                <ul className="mt-4 space-y-2">
-                  {item.description.split('\n').map((d) => (
-                    <li key={d} className="flex gap-3 text-sm leading-relaxed text-ink/85">
-                      <span className="font-mono text-xs leading-6 text-accent" aria-hidden="true">
-                        ›
-                      </span>
-                      {d}
-                    </li>
+        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr]">
+          <ol className="space-y-6">
+            {experience.map((item, i) => (
+              <Reveal key={`${item.title}-${item.year}`} delay={Math.min(i * 60, 180)}>
+                <li className="glass group relative overflow-hidden rounded-xl border border-line p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg sm:p-8">
+                  <div className="absolute inset-x-0 top-0 h-0.5 bg-accent/60" aria-hidden="true" />
+                  <p className="font-mono text-xs font-medium uppercase tracking-wider text-accent">
+                    {item.year}
+                  </p>
+                  <h3 className="mt-2 font-serif text-xl font-semibold sm:text-2xl">{item.title}</h3>
+                  <p className="mt-0.5 text-sm text-muted">{item.organization}</p>
+                  <ul className="mt-4 space-y-2">
+                    {item.description.split('\n').map((d) => (
+                      <li key={d} className="flex gap-3 text-sm leading-relaxed text-ink/85">
+                        <span className="font-mono text-xs leading-6 text-accent" aria-hidden="true">
+                          ›
+                        </span>
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+
+          <aside className="space-y-8">
+            {education && (
+              <Reveal>
+                <div className="glass rounded-xl border border-line p-6">
+                  <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
+                    Education
+                  </h3>
+                  <p className="mt-4 font-mono text-xs text-muted">{education.year}</p>
+                  <p className="mt-1 font-serif text-lg font-semibold">{education.title}</p>
+                  <p className="mt-1 text-sm text-muted">{education.organization}</p>
+                </div>
+              </Reveal>
+            )}
+            {awards.length > 0 && (
+              <div>
+                <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-accent">Awards</h3>
+                <div className="mt-4 space-y-4">
+                  {awards.map((a, i) => (
+                    <Reveal key={a.title} delay={Math.min((i + 1) * 60, 180)}>
+                      <div className="glass rounded-xl border border-line p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50">
+                        <p className="font-mono text-xs text-accent">{a.year}</p>
+                        <p className="mt-1 font-serif text-base font-semibold">{a.title}</p>
+                        <p className="mt-1 text-sm text-muted">{a.organization}</p>
+                      </div>
+                    </Reveal>
                   ))}
-                </ul>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
+                </div>
+              </div>
+            )}
+          </aside>
+        </div>
       </div>
     </section>
   )
 }
 
 function Projects() {
+  const [category, setCategory] = useState('All')
+  const categories = ['All', ...new Set(portfolioProjects.map((p) => p.category).filter(Boolean))]
+  const shown = category === 'All' ? portfolioProjects : portfolioProjects.filter((p) => p.category === category)
+  const featured = getFeatured(shown)
+  const otherProjects = shown.filter((p) => !featuredTitles.includes(p.title))
+
   return (
     <section id="projects" className="border-b border-line">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
@@ -519,10 +655,27 @@ function Projects() {
           title="Work"
           intro="Production systems I've shipped and research tooling I've built: from banking infrastructure to vulnerability assessment platforms."
         />
+        <div className="mb-8 flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
+          {categories.map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => setCategory(c)}
+              aria-pressed={category === c}
+              className={`rounded-full border px-3.5 py-1.5 font-mono text-xs transition-colors ${
+                category === c
+                  ? 'border-accent bg-accent text-accent-ink'
+                  : 'border-line bg-card text-muted hover:border-accent hover:text-accent'
+              }`}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
         <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
           {featured.map((p, i) => (
             <Reveal key={p.title} className="h-full" delay={Math.min(i * 60, 180)}>
-              <article className="glass group flex h-full flex-col p-6 transition-colors hover:bg-accent-soft/40 sm:p-8">
+              <article className="glass group flex h-full flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:bg-accent-soft/40 hover:shadow-lg sm:p-8">
                 <div className="flex items-baseline justify-between gap-4">
                   <p className="font-mono text-xs text-accent">
                     {String(i + 1).padStart(2, '0')} / {String(featured.length).padStart(2, '0')}
@@ -685,12 +838,119 @@ function Projects() {
   )
 }
 
+function ServiceIcon({ name }) {
+  const paths = {
+    'bi-server': (
+      <>
+        <rect x="2" y="3" width="20" height="7" rx="1.5" />
+        <rect x="2" y="14" width="20" height="7" rx="1.5" />
+        <path d="M6.5 6.5h.01M6.5 17.5h.01M10 6.5h8M10 17.5h8" />
+      </>
+    ),
+    'bi-shield-check': (
+      <>
+        <path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3Z" />
+        <path d="m9 11.5 2 2 4-4" />
+      </>
+    ),
+    'bi-terminal': (
+      <>
+        <rect x="2" y="3" width="20" height="18" rx="2" />
+        <path d="m6.5 8.5 3 2.5-3 2.5" />
+        <path d="M12 15.5h5" />
+      </>
+    ),
+    'bi-wrench-adjustable': (
+      <>
+        <path d="M4 8h10" />
+        <path d="M18 8h2" />
+        <path d="M4 16h4" />
+        <path d="M12 16h8" />
+        <circle cx="16" cy="8" r="2" />
+        <circle cx="10" cy="16" r="2" />
+      </>
+    ),
+    'bi-phone': (
+      <>
+        <rect x="7" y="2" width="10" height="20" rx="2.5" />
+        <path d="M11 18h2" />
+      </>
+    ),
+    'bi-lightbulb': (
+      <>
+        <path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1.1 1.9h5c.1-.7.5-1.4 1.1-1.9A6 6 0 0 0 12 3Z" />
+        <path d="M9.5 18h5M10.5 21h3" />
+      </>
+    ),
+  }
+
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {paths[name] || paths['bi-terminal']}
+    </svg>
+  )
+}
+
+function Services() {
+  return (
+    <section id="services" className="border-b border-line">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+        <SectionHead
+          index="04"
+          title="Services"
+          intro="Fixed-price, outcome-focused engagements with clear deliverables and timelines — no hourly surprises."
+        />
+        <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((s, i) => (
+            <Reveal key={s.title} className="h-full" delay={Math.min(i * 60, 180)}>
+              <div className="glass group flex h-full flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:bg-accent-soft/40 hover:shadow-lg sm:p-7">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-line bg-paper text-accent">
+                    <ServiceIcon name={s.icon} />
+                  </span>
+                  <span className="rounded-full border border-line bg-paper px-2.5 py-1 font-mono text-[11px] text-muted">
+                    {s.timeline}
+                  </span>
+                </div>
+                <h3 className="mt-5 font-serif text-xl font-semibold transition-colors group-hover:text-accent">
+                  {s.title}
+                </h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{s.description}</p>
+                <ul className="mt-5 flex flex-wrap gap-1.5">
+                  {s.features.map((f) => (
+                    <li
+                      key={f}
+                      className="rounded border border-line bg-paper px-2 py-0.5 font-mono text-[11px] text-muted"
+                    >
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Security() {
   return (
     <section id="security" className="border-b border-line bg-accent-soft/40">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
         <SectionHead
-          index="04"
+          index="05"
           title="Security"
           intro="Offensive research and defensive engineering: bug bounty work, vulnerability tooling, and a background in adversarial research."
         />
@@ -740,7 +1000,7 @@ function Security() {
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
-                className="glass flex items-center justify-between rounded-lg border border-line px-5 py-3.5 font-mono text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+                className="glass flex items-center justify-between rounded-lg border border-line px-5 py-3.5 font-mono text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:text-accent"
               >
                 <span>{p.label}</span>
                 <span className="text-accent" aria-hidden="true">
@@ -748,6 +1008,37 @@ function Security() {
                 </span>
               </a>
             ))}
+          </div>
+          <div className="glass mt-4 rounded-lg border border-line p-6">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h4 className="font-serif text-lg font-semibold">TryHackMe</h4>
+                <p className="mt-1 font-mono text-xs uppercase tracking-wider text-muted">
+                  Top 8% · 51 rooms completed · 10 badges
+                </p>
+              </div>
+              <a
+                href={contact.tryhackme}
+                target="_blank"
+                rel="noreferrer"
+                className={`${btnGhost} px-4 py-2 text-xs`}
+              >
+                View profile ↗
+              </a>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {[
+                'Linux fundamentals',
+                'Security Engineering',
+                'OWASP Top 10',
+                'OWASP API Security',
+                'Web Hacking',
+                'Risk Management',
+                '7-day streak',
+              ].map((b) => (
+                <Chip key={b}>{b}</Chip>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -760,7 +1051,7 @@ function Skills() {
     <section id="skills" className="border-b border-line">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
         <SectionHead
-          index="05"
+          index="06"
           title="Skills"
           intro="The stack I work with day-to-day, organized by discipline."
         />
@@ -786,7 +1077,7 @@ function Testimonials() {
     <section id="testimonials" className="border-b border-line">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
         <SectionHead
-          index="06"
+          index="07"
           title="Client feedback"
           intro="Reviews from clients on Fiverr, where I've shipped web and Android work for buyers in 10+ countries."
         />
@@ -827,7 +1118,7 @@ function HowWork() {
   return (
     <section id="process" className="border-b border-line">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-        <SectionHead index="07" title="How I work" />
+        <SectionHead index="08" title="How I work" />
         <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((s, i) => (
             <Reveal key={s.number} delay={Math.min(i * 60, 180)} className="h-full">
@@ -848,7 +1139,7 @@ function Faq() {
   return (
     <section id="faq" className="border-b border-line">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-        <SectionHead index="08" title="Common questions" />
+        <SectionHead index="09" title="Common questions" />
         <div className="max-w-3xl border-t border-line">
           {faqs.map((f) => (
             <Reveal key={f.question}>
@@ -890,7 +1181,7 @@ function Contact() {
           <Reveal>
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
-                09 · Contact
+                10 · Contact
               </p>
               <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
                 Let's build something that holds up in production.
@@ -974,19 +1265,22 @@ function Footer() {
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const active = useScrollSpy(sections.map((s) => s.id))
+  const sectionIds = useMemo(() => sections.map((s) => s.id), [])
+  const active = useScrollSpy(sectionIds)
 
   return (
     <div id="top" className="min-h-screen bg-paper text-ink">
       <a className="skip-link" href="#main">
         Skip to content
       </a>
+      <ScrollProgress />
       <Header active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <main id="main">
         <Hero />
         <About />
         <Experience />
         <Projects />
+        <Services />
         <Security />
         <Skills />
         <Testimonials />

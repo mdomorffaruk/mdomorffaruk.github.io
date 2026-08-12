@@ -4,7 +4,7 @@
     "summary": "Software engineer with 6+ years in backend systems and 3+ years in cybersecurity research. I build production infrastructure and find what breaks. Based in Bogura, Bangladesh.",
     "philosophy": "\"I don't just write code. I stress-test it, break it, and rebuild it stronger.\"",
     "highlights": [
-      "B.Sc. CSE, TMSS Engineering College (affiliated with University of Rajshahi)",
+      "B.Sc. CSE, University of Rajshahi",
       "OSCP Coursework (PWK 3.2)",
       "Blue Team Junior Analyst (BJT)",
       "Google Foundations of Cybersecurity",
@@ -37,10 +37,10 @@
     },
     {
       "year": "2018-2022",
-      "title": "B.Sc. CSE",
-      "organization": "TMSS Engineering College (affiliated with University of Rajshahi)",
+      "title": "B.Sc. in Computer Science & Engineering",
+      "organization": "University of Rajshahi",
       "type": "education",
-      "description": "B.Sc. CSE, TMSS Engineering College (2018-2022), degree awarded by University of Rajshahi"
+      "description": "Bachelor's degree in Computer Science & Engineering from the University of Rajshahi."
     },
     {
       "year": null,
@@ -424,6 +424,7 @@
   "portfolioProjects": [
     {
       "title": "Southeast Bank Alarm Management",
+      "category": "Banking",
       "description": "Personal project, built end-to-end outside of office work. 24/7 real-time monitoring for banking security infrastructure. Kotlin Android client + PHP REST API backend. Reduced manual monitoring workload by 70%.",
       "tech": [
         "PHP",
@@ -439,6 +440,7 @@
     },
     {
       "title": "Concurrent Banking Transaction System",
+      "category": "Banking",
       "description": "MERN stack system handling concurrent banking transactions with race-condition-safe balance updates. Built end-to-end for Excel Technologies Ltd.",
       "tech": [
         "TypeScript",
@@ -454,6 +456,7 @@
     },
     {
       "title": "VulnXposer",
+      "category": "Security",
       "description": "Web-based vulnerability assessment platform integrating OWASP ZAP, DNS analysis, port scanning, and structured HTML/PDF reporting.",
       "tech": [
         "React",
@@ -468,6 +471,7 @@
     },
     {
       "title": "Smart Helmet",
+      "category": "IoT",
       "description": "AI-powered accident alert and rider safety system with GPS/GSM and OpenCV vehicle recognition. Digital Bangladesh Award 2022 by the Prime Minister.",
       "tech": [
         "Python",
@@ -484,6 +488,7 @@
     },
     {
       "title": "Recon Automation Toolkit",
+      "category": "Automation",
       "description": "Bash/Python automation for subdomain enumeration, archive URL collection, HTTP probing, and Nuclei-based vulnerability triage.",
       "tech": [
         "Bash",
@@ -498,6 +503,7 @@
     },
     {
       "title": "Research Notes & Workflows",
+      "category": "Security",
       "description": "Curated methodology for recon, API testing, and structured testing strategy for bug bounty hunting across major platforms.",
       "tech": [
         "Methodology",
@@ -510,6 +516,7 @@
     },
     {
       "title": "HackerOne Workflow Scripts",
+      "category": "Automation",
       "description": "Python automation for HackerOne bug bounty workflows, target scope management, and structured vulnerability reporting.",
       "tech": [
         "Python",
@@ -524,44 +531,9 @@
   ],
   "testimonials": [
     {
-      "name": "adajian",
-      "role": "United States",
-      "text": "Very good work!"
-    },
-    {
       "name": "user83603407",
       "role": "Egypt - Repeat Client",
       "text": "Really good communication and he also helped me understand more about website development and improve my website with really high skills and overall a really good seller and I would like to buy from again in the near future. Has to be one of the best."
-    },
-    {
-      "name": "user83603407",
-      "role": "Egypt - Repeat Client",
-      "text": "A very helpful person."
-    },
-    {
-      "name": "graphicbang",
-      "role": "LOC / United Kingdom",
-      "text": "Fast service, excellent communication"
-    },
-    {
-      "name": "umairasif90",
-      "role": "Pakistan",
-      "text": "He is a good seller and knows how to do work in a short time."
-    },
-    {
-      "name": "marcarold",
-      "role": "Haiti",
-      "text": "Very good experience"
-    },
-    {
-      "name": "hklein641",
-      "role": "Israel",
-      "text": "Very quick and professional!"
-    },
-    {
-      "name": "nkohli3",
-      "role": "United States",
-      "text": "Very quick!"
     },
     {
       "name": "sorryttv",
@@ -569,9 +541,9 @@
       "text": "Seller provided exactly what was discussed & more! Highly reliable as long as you communicate efficiently. Very helpful. Also helps with further developments if required! Genuine and super nice, could not have asked for a better person to work with. Excellent work."
     },
     {
-      "name": "harekrishna321",
-      "role": "India",
-      "text": "I had difficulty of Windows 10 mic recording volume low. It happened after a windows update. He suggested a fix and it worked. See how you succeeded by making an endeavour. One can succeed in life by making an endeavour. Success is in the endeavour"
+      "name": "barakambarawa",
+      "role": "LOC / United Kingdom",
+      "text": "Working with him was very easy. He is very knowledgeable, patient and delivers in excellent time. He understood my requirements and delivered the highest quality of work. I recommend 100%."
     },
     {
       "name": "daclover",
@@ -579,9 +551,14 @@
       "text": "Very happy with the result! Muhammad run extra mile, was helpful and react according the situation. Recommend! Will be working in future."
     },
     {
-      "name": "barakambarawa",
+      "name": "graphicbang",
       "role": "LOC / United Kingdom",
-      "text": "Working with him was very easy. He is very knowledgeable, patient and delivers in excellent time. He understood my requirements and delivered the highest quality of work. I recommend 100%."
+      "text": "Fast service, excellent communication"
+    },
+    {
+      "name": "harekrishna321",
+      "role": "India",
+      "text": "I had difficulty of Windows 10 mic recording volume low. It happened after a windows update. He suggested a fix and it worked. See how you succeeded by making an endeavour. One can succeed in life by making an endeavour. Success is in the endeavour"
     }
   ]
 }
