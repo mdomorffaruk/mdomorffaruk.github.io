@@ -218,6 +218,97 @@ function BackToTop() {
   )
 }
 
+function CursorFX() {
+  const dotRef = useRef(null)
+  const ringRef = useRef(null)
+  const sparkRef = useRef(null)
+  const rippleRef = useRef(null)
+  const pos = useRef({ x: 0, y: 0 })
+  const ringPos = useRef({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const fine = window.matchMedia('(pointer: fine)').matches
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!fine || reduce) return undefined
+
+    document.documentElement.classList.add('has-cursor-fx')
+
+    let raf = null
+    let lastSpark = 0
+
+    const spawnSpark = (x, y) => {
+      const now = performance.now()
+      if (now - lastSpark < 45) return
+      lastSpark = now
+      const layer = sparkRef.current
+      if (!layer) return
+      const spark = document.createElement('span')
+      spark.className = 'spark'
+      const angle = Math.random() * Math.PI * 2
+      const dist = 16 + Math.random() * 28
+      spark.style.setProperty('--tx', `${Math.cos(angle) * dist}px`)
+      spark.style.setProperty('--ty', `${Math.sin(angle) * dist}px`)
+      spark.style.left = `${x}px`
+      spark.style.top = `${y}px`
+      layer.appendChild(spark)
+      spark.addEventListener('animationend', () => spark.remove())
+    }
+
+    const onMove = (e) => {
+      pos.current = { x: e.clientX, y: e.clientY }
+      if (dotRef.current) dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+      spawnSpark(e.clientX, e.clientY)
+    }
+
+    const onDown = (e) => {
+      const layer = rippleRef.current
+      if (!layer) return
+      const r = document.createElement('span')
+      r.className = 'ripple'
+      r.style.left = `${e.clientX}px`
+      r.style.top = `${e.clientY}px`
+      layer.appendChild(r)
+      r.addEventListener('animationend', () => r.remove())
+    }
+
+    const onOver = (e) => {
+      const interactive = e.target.closest('a, button, summary, input, select, textarea, [role="button"]')
+      ringRef.current?.classList.toggle('cursor-ring--active', Boolean(interactive))
+    }
+
+    const loop = () => {
+      ringPos.current.x += (pos.current.x - ringPos.current.x) * 0.16
+      ringPos.current.y += (pos.current.y - ringPos.current.y) * 0.16
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${ringPos.current.x}px, ${ringPos.current.y}px)`
+      }
+      raf = requestAnimationFrame(loop)
+    }
+
+    window.addEventListener('mousemove', onMove, { passive: true })
+    window.addEventListener('mousedown', onDown, { passive: true })
+    window.addEventListener('mouseover', onOver, { passive: true })
+    raf = requestAnimationFrame(loop)
+
+    return () => {
+      document.documentElement.classList.remove('has-cursor-fx')
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mousedown', onDown)
+      window.removeEventListener('mouseover', onOver)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  return (
+    <>
+      <div ref={dotRef} aria-hidden="true" className="cursor-dot" />
+      <div ref={ringRef} aria-hidden="true" className="cursor-ring" />
+      <div ref={sparkRef} aria-hidden="true" className="cursor-spark-layer" />
+      <div ref={rippleRef} aria-hidden="true" className="cursor-ripple-layer" />
+    </>
+  )
+}
+
 function CountUp({ value, suffix = '', duration = 1100 }) {
   const ref = useRef(null)
   const [display, setDisplay] = useState(0)
@@ -1331,6 +1422,7 @@ export default function App() {
       </main>
       <Footer />
       <BackToTop />
+      <CursorFX />
     </div>
   )
 }
