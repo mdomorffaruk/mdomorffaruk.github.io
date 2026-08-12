@@ -271,8 +271,7 @@
       "tech": [],
       "icon": "apps/budget-tracker-icon.png",
       "preview": "apps/budget-tracker-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.budgettracker",
-      "github": "https://github.com/mdomorffaruk/budget-tracker"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.budgettracker"
     },
     {
       "name": "Habit Tracker",
@@ -281,8 +280,7 @@
       "tech": [],
       "icon": "apps/habit-tracker-icon.png",
       "preview": "apps/habit-tracker-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.habittracker",
-      "github": "https://github.com/mdomorffaruk/habit-tracker"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.habittracker"
     },
     {
       "name": "Ledger Book",
@@ -291,8 +289,7 @@
       "tech": [],
       "icon": "apps/ledger-book-icon.png",
       "preview": "apps/ledger-book-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.ledgerbook",
-      "github": "https://github.com/mdomorffaruk/ledger-book"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.ledgerbook"
     },
     {
       "name": "Freelancer CRM",
@@ -301,8 +298,7 @@
       "tech": [],
       "icon": "apps/freelancer-crm-icon.png",
       "preview": "apps/freelancer-crm-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.freelancercrm",
-      "github": "https://github.com/mdomorffaruk/freelancer-crm"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.freelancercrm"
     },
     {
       "name": "Renewal Tracker",
@@ -311,8 +307,7 @@
       "tech": [],
       "icon": "apps/renewal-tracker-icon.png",
       "preview": "apps/renewal-tracker-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.renewaltracker",
-      "github": "https://github.com/mdomorffaruk/renewal-tracker"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.renewaltracker"
     },
     {
       "name": "Study Planner",
@@ -321,8 +316,7 @@
       "tech": [],
       "icon": "apps/study-planner-icon.png",
       "preview": "apps/study-planner-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.studyplanner",
-      "github": "https://github.com/mdomorffaruk/study-planner"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.studyplanner"
     }
   ],
 
