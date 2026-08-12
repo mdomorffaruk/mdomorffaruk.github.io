@@ -4,7 +4,7 @@
     "summary": "Software engineer with 6+ years in backend systems and 3+ years in cybersecurity research. I build production infrastructure and find what breaks. Based in Bogura, Bangladesh.",
     "philosophy": "\"I don't just write code. I stress-test it, break it, and rebuild it stronger.\"",
     "highlights": [
-      "B.Sc. CSE, University of Rajshahi (2018-2022)",
+      "B.Sc. CSE, TMSS Engineering College (affiliated with University of Rajshahi)",
       "OSCP Coursework (PWK 3.2)",
       "Blue Team Junior Analyst (BJT)",
       "Google Foundations of Cybersecurity",
@@ -39,9 +39,9 @@
     {
       "year": "2018-2022",
       "title": "B.Sc. CSE",
-      "organization": "University of Rajshahi",
+      "organization": "TMSS Engineering College (affiliated with University of Rajshahi)",
       "type": "education",
-      "description": "B.Sc. CSE, University of Rajshahi (2018-2022)"
+      "description": "B.Sc. CSE, TMSS Engineering College (2018-2022), degree awarded by University of Rajshahi"
     },
     {
       "year": null,
