@@ -196,6 +196,22 @@ function Chip({ children }) {
   )
 }
 
+function Marquee({ children, reverse = false, duration = 40 }) {
+  return (
+    <div className="marquee">
+      <div
+        className={`marquee-track marquee-animate${reverse ? ' marquee-reverse' : ''}`}
+        style={{ '--marquee-duration': `${duration}s` }}
+      >
+        <div className="flex shrink-0 gap-4 pr-4">{children}</div>
+        <div className="flex shrink-0 gap-4 pr-4" aria-hidden="true">
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function SectionHead({ index, title, intro }) {
   return (
     <Reveal>
@@ -506,7 +522,7 @@ function Projects() {
         <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
           {featured.map((p, i) => (
             <Reveal key={p.title} className="h-full" delay={Math.min(i * 60, 180)}>
-              <article className="group flex h-full flex-col bg-card p-6 transition-colors hover:bg-accent-soft/40 sm:p-8">
+              <article className="glass group flex h-full flex-col p-6 transition-colors hover:bg-accent-soft/40 sm:p-8">
                 <div className="flex items-baseline justify-between gap-4">
                   <p className="font-mono text-xs text-accent">
                     {String(i + 1).padStart(2, '0')} / {String(featured.length).padStart(2, '0')}
@@ -603,41 +619,64 @@ function Projects() {
 
         {apps.length > 0 && (
           <div className="mt-14">
-            <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
-              Android apps on Google Play
-            </h3>
-            <div className="mt-5 flex snap-x gap-4 overflow-x-auto pb-4">
-              {apps.map((a) => (
-                <div key={a.name} className="group w-40 shrink-0 snap-start sm:w-44">
-                  <a
-                    href={a.playUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`${a.name} on Google Play`}
-                    className="block overflow-hidden rounded-xl border border-line bg-card"
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+              <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
+                Android apps
+              </h3>
+              <span className="font-mono text-xs text-muted">Published & in development</span>
+            </div>
+            <div className="mt-5">
+              <Marquee duration={45}>
+                {apps.map((a) => (
+                  <div
+                    key={a.name}
+                    className="glass group w-40 shrink-0 rounded-xl border border-line p-3"
                   >
-                    <img
-                      src={`/${a.preview}`}
-                      alt={`${a.name} screenshot`}
-                      loading="lazy"
-                      className="aspect-[2/5] w-full object-cover transition-transform duration-300 group-hover:-translate-y-1"
-                    />
-                  </a>
-                  <div className="mt-2.5 flex items-center gap-2">
-                    <img
-                      src={`/${a.icon}`}
-                      alt=""
-                      className="h-7 w-7 shrink-0 rounded-md border border-line object-cover"
-                    />
-                    <div className="min-w-0">
-                      <p className="truncate font-serif text-sm font-semibold transition-colors group-hover:text-accent">
-                        {a.name}
-                      </p>
-                      <p className="font-mono text-[11px] text-muted">Google Play ↗</p>
+                    {a.playUrl ? (
+                      <a
+                        href={a.playUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${a.name} on Google Play`}
+                        className="block overflow-hidden rounded-lg border border-line"
+                      >
+                        <img
+                          src={`/${a.preview}`}
+                          alt={`${a.name} screenshot`}
+                          loading="lazy"
+                          className="aspect-[2/5] w-full object-cover transition-transform duration-300 group-hover:-translate-y-1"
+                        />
+                      </a>
+                    ) : (
+                      <div className="block overflow-hidden rounded-lg border border-line">
+                        <img
+                          src={`/${a.preview}`}
+                          alt={`${a.name} screenshot`}
+                          loading="lazy"
+                          className="aspect-[2/5] w-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="mt-2.5 flex items-center gap-2">
+                      <img
+                        src={`/${a.icon}`}
+                        alt=""
+                        className="h-7 w-7 shrink-0 rounded-md border border-line object-cover"
+                      />
+                      <div className="min-w-0">
+                        <p className="truncate font-serif text-sm font-semibold transition-colors group-hover:text-accent">
+                          {a.name}
+                        </p>
+                        {a.published ? (
+                          <p className="font-mono text-[11px] text-muted">Google Play ↗</p>
+                        ) : (
+                          <p className="font-mono text-[11px] text-accent">In development</p>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </Marquee>
             </div>
           </div>
         )}
@@ -658,7 +697,7 @@ function Security() {
         <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
           {securityGroups.map((g, i) => (
             <Reveal key={g.title} className="h-full" delay={Math.min(i * 60, 180)}>
-              <div className="h-full bg-card p-6 sm:p-8">
+              <div className="glass h-full p-6 sm:p-8">
                 <h3 className="font-serif text-xl font-semibold">{g.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{g.text}</p>
                 <ul className="mt-4 grid gap-x-6 gap-y-1.5 sm:grid-cols-2">
@@ -685,26 +724,31 @@ function Security() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-2">
-          <span className="mr-1 font-mono text-xs uppercase tracking-[0.25em] text-accent">
-            Profiles
+        <div className="mt-12">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
+            Platform profiles
           </span>
-          {[
-            { label: 'HackerOne', href: contact.hackerone },
-            { label: 'Bugcrowd', href: contact.bugcrowd },
-            { label: 'Intigriti', href: contact.intigriti },
-            { label: 'TryHackMe', href: contact.tryhackme },
-          ].map((p) => (
-            <a
-              key={p.label}
-              href={p.href}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center rounded-full border border-line bg-card px-3 py-1 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-accent"
-            >
-              {p.label} ↗
-            </a>
-          ))}
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { label: 'HackerOne', href: contact.hackerone },
+              { label: 'Bugcrowd', href: contact.bugcrowd },
+              { label: 'Intigriti', href: contact.intigriti },
+              { label: 'TryHackMe', href: contact.tryhackme },
+            ].map((p) => (
+              <a
+                key={p.label}
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+                className="glass flex items-center justify-between rounded-lg border border-line px-5 py-3.5 font-mono text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+              >
+                <span>{p.label}</span>
+                <span className="text-accent" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -746,10 +790,13 @@ function Testimonials() {
           title="Client feedback"
           intro="Reviews from clients on Fiverr, where I've shipped web and Android work for buyers in 10+ countries."
         />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <Reveal key={`${t.name}-${i}`} delay={Math.min((i % 3) * 60, 120)}>
-              <figure className="flex h-full flex-col rounded-lg border border-line bg-card p-6">
+        <div className="mt-5">
+          <Marquee duration={60}>
+            {testimonials.map((t, i) => (
+              <figure
+                key={`${t.name}-${i}`}
+                className="glass flex h-full w-80 shrink-0 flex-col rounded-lg border border-line p-6"
+              >
                 <p className="font-mono text-sm text-accent" aria-label="5 out of 5 stars">
                   ★★★★★
                 </p>
@@ -763,8 +810,8 @@ function Testimonials() {
                   </span>
                 </figcaption>
               </figure>
-            </Reveal>
-          ))}
+            ))}
+          </Marquee>
         </div>
         <p className="mt-8">
           <a href={contact.fiverr} target="_blank" rel="noreferrer" className={linkMono}>
@@ -784,7 +831,7 @@ function HowWork() {
         <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((s, i) => (
             <Reveal key={s.number} delay={Math.min(i * 60, 180)} className="h-full">
-              <div className="h-full bg-card p-6 sm:p-8">
+              <div className="glass h-full p-6 sm:p-8">
                 <p className="font-serif text-3xl font-semibold text-accent">{s.number}</p>
                 <h3 className="mt-3 font-serif text-lg font-semibold">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{s.description}</p>

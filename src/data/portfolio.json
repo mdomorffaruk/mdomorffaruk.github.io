@@ -13,7 +13,6 @@
       "Robotech Olympiad 2023 - Embedded Systems"
     ]
   },
-
   "timeline": [
     {
       "year": "2023 - Feb 2026",
@@ -86,54 +85,148 @@
       "description": "Robotech Olympiad 2023 - Embedded Systems"
     }
   ],
-
   "skillCategories": [
     {
       "category": "Languages",
-      "skills": ["JavaScript", "PHP", "Python", "Kotlin", "C/C++", "Bash", "Java"]
+      "skills": [
+        "JavaScript",
+        "PHP",
+        "Python",
+        "Kotlin",
+        "C/C++",
+        "Bash",
+        "Java"
+      ]
     },
     {
       "category": "Backend",
-      "skills": ["Node.js", "Express", "Laravel", "Django", "REST APIs"]
+      "skills": [
+        "Node.js",
+        "Express",
+        "Laravel",
+        "Django",
+        "REST APIs"
+      ]
     },
     {
       "category": "Frontend",
-      "skills": ["React", "TypeScript", "HTML/CSS", "ElectronJS"]
+      "skills": [
+        "React",
+        "TypeScript",
+        "HTML/CSS",
+        "ElectronJS"
+      ]
     },
     {
       "category": "Databases",
-      "skills": ["MySQL", "PostgreSQL", "MongoDB", "SQLite"]
+      "skills": [
+        "MySQL",
+        "PostgreSQL",
+        "MongoDB",
+        "SQLite"
+      ]
     },
     {
       "category": "Web Security",
-      "skills": ["OWASP Top 10", "XSS", "SQLi", "SSRF", "IDOR", "RCE", "SSTI", "XXE", "CSRF", "Race Conditions", "Business Logic", "Prototype Pollution"]
+      "skills": [
+        "OWASP Top 10",
+        "XSS",
+        "SQLi",
+        "SSRF",
+        "IDOR",
+        "RCE",
+        "SSTI",
+        "XXE",
+        "CSRF",
+        "Race Conditions",
+        "Business Logic",
+        "Prototype Pollution"
+      ]
     },
     {
       "category": "API & Auth",
-      "skills": ["REST API Testing", "GraphQL", "JWT Attacks", "OAuth/OIDC", "MFA Bypass", "Auth Bypass", "Mass Assignment", "CORS Misconfig"]
+      "skills": [
+        "REST API Testing",
+        "GraphQL",
+        "JWT Attacks",
+        "OAuth/OIDC",
+        "MFA Bypass",
+        "Auth Bypass",
+        "Mass Assignment",
+        "CORS Misconfig"
+      ]
     },
     {
       "category": "Advanced Attacks",
-      "skills": ["HTTP Request Smuggling", "Host Header Injection", "Cache Poisoning", "WebSocket Hijack", "Subdomain Takeover", "Cloud Metadata SSRF", "File Upload Bypass", "Open Redirect"]
+      "skills": [
+        "HTTP Request Smuggling",
+        "Host Header Injection",
+        "Cache Poisoning",
+        "WebSocket Hijack",
+        "Subdomain Takeover",
+        "Cloud Metadata SSRF",
+        "File Upload Bypass",
+        "Open Redirect"
+      ]
     },
     {
       "category": "Infra & Cloud",
-      "skills": ["AWS Pentest", "S3 Misconfig", "Cloud Recon", "WAF Bypass", "DNS Enum", "Port Scanning", "Container Security", "Linux Priv Esc"]
+      "skills": [
+        "AWS Pentest",
+        "S3 Misconfig",
+        "Cloud Recon",
+        "WAF Bypass",
+        "DNS Enum",
+        "Port Scanning",
+        "Container Security",
+        "Linux Priv Esc"
+      ]
     },
     {
       "category": "Recon & Automation",
-      "skills": ["Subfinder", "Amass", "Chaos API", "Httpx", "Katana", "Gau", "Wayback", "Feroxbuster", "Nuclei", "FFuF", "Grep", "Custom Pipelines"]
+      "skills": [
+        "Subfinder",
+        "Amass",
+        "Chaos API",
+        "Httpx",
+        "Katana",
+        "Gau",
+        "Wayback",
+        "Feroxbuster",
+        "Nuclei",
+        "FFuF",
+        "Grep",
+        "Custom Pipelines"
+      ]
     },
     {
       "category": "Tools",
-      "skills": ["Burp Suite Pro", "Nmap", "Metasploit", "Ghidra", "Wireshark", "Python Scripting", "Bash", "Docker", "Playwright", "Git"]
+      "skills": [
+        "Burp Suite Pro",
+        "Nmap",
+        "Metasploit",
+        "Ghidra",
+        "Wireshark",
+        "Python Scripting",
+        "Bash",
+        "Docker",
+        "Playwright",
+        "Git"
+      ]
     },
     {
       "category": "Reverse & Malware",
-      "skills": ["Malware Analysis", "Reverse Engineering", "Buffer Overflow", "Exploit Dev", "Kernel Exploit", "PatchGuard", "DLL Injection"]
+      "skills": [
+        "Malware Analysis",
+        "Reverse Engineering",
+        "Buffer Overflow",
+        "Exploit Dev",
+        "Kernel Exploit",
+        "PatchGuard",
+        "DLL Injection"
+      ]
     }
   ],
-
   "certifications": [
     {
       "name": "Google Foundations of Cybersecurity",
@@ -226,7 +319,6 @@
       "credentialUrl": "https://tryhackme.com/p/mdomorffaruk"
     }
   ],
-
   "apps": [
     {
       "name": "Hifz Tracker",
@@ -235,7 +327,8 @@
       "tech": [],
       "icon": "apps/hifz-tracker-icon.png",
       "preview": "apps/hifz-tracker-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.hifztracker"
+      "playUrl": null,
+      "published": false
     },
     {
       "name": "Zakat Calculator",
@@ -244,7 +337,8 @@
       "tech": [],
       "icon": "apps/zakat-calculator-icon.png",
       "preview": "apps/zakat-calculator-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.zakatcalculator"
+      "playUrl": null,
+      "published": false
     },
     {
       "name": "Simple To-Do",
@@ -253,7 +347,8 @@
       "tech": [],
       "icon": "apps/todo-app-icon.png",
       "preview": "apps/todo-app-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.todoapp"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.todoapp",
+      "published": true
     },
     {
       "name": "Mosque Toolkit",
@@ -262,7 +357,8 @@
       "tech": [],
       "icon": "apps/mosque-toolkit-icon.png",
       "preview": "apps/mosque-toolkit-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.mosquetoolkit"
+      "playUrl": null,
+      "published": false
     },
     {
       "name": "Budget Tracker",
@@ -271,7 +367,8 @@
       "tech": [],
       "icon": "apps/budget-tracker-icon.png",
       "preview": "apps/budget-tracker-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.budgettracker"
+      "playUrl": null,
+      "published": false
     },
     {
       "name": "Habit Tracker",
@@ -280,7 +377,8 @@
       "tech": [],
       "icon": "apps/habit-tracker-icon.png",
       "preview": "apps/habit-tracker-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.habittracker"
+      "playUrl": null,
+      "published": false
     },
     {
       "name": "Ledger Book",
@@ -289,7 +387,8 @@
       "tech": [],
       "icon": "apps/ledger-book-icon.png",
       "preview": "apps/ledger-book-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.ledgerbook"
+      "playUrl": null,
+      "published": false
     },
     {
       "name": "Freelancer CRM",
@@ -298,7 +397,8 @@
       "tech": [],
       "icon": "apps/freelancer-crm-icon.png",
       "preview": "apps/freelancer-crm-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.freelancercrm"
+      "playUrl": null,
+      "published": false
     },
     {
       "name": "Renewal Tracker",
@@ -307,7 +407,8 @@
       "tech": [],
       "icon": "apps/renewal-tracker-icon.png",
       "preview": "apps/renewal-tracker-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.renewaltracker"
+      "playUrl": null,
+      "published": false
     },
     {
       "name": "Study Planner",
@@ -316,21 +417,36 @@
       "tech": [],
       "icon": "apps/study-planner-icon.png",
       "preview": "apps/study-planner-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.studyplanner"
+      "playUrl": null,
+      "published": false
     }
   ],
-
   "portfolioProjects": [
     {
       "title": "Southeast Bank Alarm Management",
       "description": "Personal project, built end-to-end outside of office work. 24/7 real-time monitoring for banking security infrastructure. Kotlin Android client + PHP REST API backend. Reduced manual monitoring workload by 70%.",
-      "tech": ["PHP", "Kotlin", "MySQL", "Banking", "REST API"],
-      "links": { "demo": null, "github": null }
+      "tech": [
+        "PHP",
+        "Kotlin",
+        "MySQL",
+        "Banking",
+        "REST API"
+      ],
+      "links": {
+        "demo": null,
+        "github": null
+      }
     },
     {
       "title": "Concurrent Banking Transaction System",
       "description": "MERN stack system handling concurrent banking transactions with race-condition-safe balance updates. Built end-to-end for Excel Technologies Ltd.",
-      "tech": ["TypeScript", "React", "Node.js", "MongoDB", "Banking"],
+      "tech": [
+        "TypeScript",
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Banking"
+      ],
       "links": {
         "demo": null,
         "github": "https://github.com/mdomorffaruk/MERN_Assignment-Concurrent_Banking_Transaction_System-Excel_Technologies_Ltd"
@@ -339,13 +455,27 @@
     {
       "title": "VulnXposer",
       "description": "Web-based vulnerability assessment platform integrating OWASP ZAP, DNS analysis, port scanning, and structured HTML/PDF reporting.",
-      "tech": ["React", "Node.js", "OWASP ZAP", "Nmap"],
-      "links": { "demo": null, "github": "https://github.com/mdomorffaruk/vulnxposer-web-vulnerability-scanner" }
+      "tech": [
+        "React",
+        "Node.js",
+        "OWASP ZAP",
+        "Nmap"
+      ],
+      "links": {
+        "demo": null,
+        "github": "https://github.com/mdomorffaruk/vulnxposer-web-vulnerability-scanner"
+      }
     },
     {
       "title": "Smart Helmet",
       "description": "AI-powered accident alert and rider safety system with GPS/GSM and OpenCV vehicle recognition. Digital Bangladesh Award 2022 by the Prime Minister.",
-      "tech": ["Python", "OpenCV", "IoT", "GPS/GSM", "AI"],
+      "tech": [
+        "Python",
+        "OpenCV",
+        "IoT",
+        "GPS/GSM",
+        "AI"
+      ],
       "links": {
         "demo": null,
         "github": null,
@@ -355,23 +485,43 @@
     {
       "title": "Recon Automation Toolkit",
       "description": "Bash/Python automation for subdomain enumeration, archive URL collection, HTTP probing, and Nuclei-based vulnerability triage.",
-      "tech": ["Bash", "Python", "Subfinder", "Nuclei"],
-      "links": { "demo": null, "github": "https://github.com/mdomorffaruk/recon-automation" }
+      "tech": [
+        "Bash",
+        "Python",
+        "Subfinder",
+        "Nuclei"
+      ],
+      "links": {
+        "demo": null,
+        "github": "https://github.com/mdomorffaruk/recon-automation"
+      }
     },
     {
       "title": "Research Notes & Workflows",
       "description": "Curated methodology for recon, API testing, and structured testing strategy for bug bounty hunting across major platforms.",
-      "tech": ["Methodology", "API Testing"],
-      "links": { "demo": null, "github": "https://github.com/mdomorffaruk/bug-bounty-methodology" }
+      "tech": [
+        "Methodology",
+        "API Testing"
+      ],
+      "links": {
+        "demo": null,
+        "github": "https://github.com/mdomorffaruk/bug-bounty-methodology"
+      }
     },
     {
       "title": "HackerOne Workflow Scripts",
       "description": "Python automation for HackerOne bug bounty workflows, target scope management, and structured vulnerability reporting.",
-      "tech": ["Python", "Automation", "Bug Bounty"],
-      "links": { "demo": null, "github": "https://github.com/mdomorffaruk/hackerone-automation" }
+      "tech": [
+        "Python",
+        "Automation",
+        "Bug Bounty"
+      ],
+      "links": {
+        "demo": null,
+        "github": "https://github.com/mdomorffaruk/hackerone-automation"
+      }
     }
   ],
-
   "testimonials": [
     {
       "name": "adajian",

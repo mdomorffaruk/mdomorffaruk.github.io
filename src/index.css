@@ -96,6 +96,43 @@ summary {
   top: 1rem;
 }
 
+.glass {
+  background: color-mix(in srgb, var(--card) 58%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee-animate {
+  animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-animate,
+.marquee:focus-within .marquee-animate {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(16px);
@@ -125,5 +162,13 @@ summary {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .marquee-animate {
+    animation: none;
+  }
+
+  .marquee-track {
+    overflow-x: auto;
   }
 }
