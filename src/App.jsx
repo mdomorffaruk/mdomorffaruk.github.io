@@ -222,14 +222,8 @@ function CursorFX() {
   const dotRef = useRef(null)
   const ringRef = useRef(null)
   const sparkRef = useRef(null)
-  const waveRef = useRef(null)
-  const stateRef = useRef(null)
   const pos = useRef({ x: 0, y: 0 })
-  const lastPos = useRef({ x: 0, y: 0 })
   const ringPos = useRef({ x: 0, y: 0 })
-  const scrollTimer = useRef(null)
-  const clickTimer = useRef(null)
-  const [state, setState] = useState('move')
 
   const FIRE_COLORS = ['#ff3b30', '#ff8c00', '#ffd23f', '#ff5e00']
 
@@ -241,41 +235,13 @@ function CursorFX() {
     document.documentElement.classList.add('has-cursor-fx')
 
     let raf = null
-    let lastWave = 0
-
-    const spawnWave = (x, y) => {
-      const now = performance.now()
-      if (now - lastWave < 70) return
-      lastWave = now
-      const layer = waveRef.current
-      if (!layer) return
-      const dx = Math.abs(x - lastPos.current.x)
-      const dir = dx > 2 ? Math.sign(x - lastPos.current.x) : Math.random() < 0.5 ? -1 : 1
-      const w = document.createElement('span')
-      w.className = 'wave'
-      w.style.setProperty('--tx', `${(26 + Math.random() * 30) * dir}px`)
-      w.style.setProperty('--ty', `${-8 + Math.random() * 16}px`)
-      w.style.left = `${x}px`
-      w.style.top = `${y}px`
-      layer.appendChild(w)
-      w.addEventListener('animationend', () => w.remove())
-      lastPos.current = { x, y }
-    }
 
     const onMove = (e) => {
       pos.current = { x: e.clientX, y: e.clientY }
       if (dotRef.current) dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
-      if (stateRef.current) {
-        stateRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
-      }
-      spawnWave(e.clientX, e.clientY)
     }
 
     const onDown = (e) => {
-      setState('click')
-      clearTimeout(clickTimer.current)
-      clickTimer.current = setTimeout(() => setState('move'), 380)
-
       const layer = sparkRef.current
       if (!layer) return
       const count = 10
@@ -292,12 +258,6 @@ function CursorFX() {
         layer.appendChild(s)
         s.addEventListener('animationend', () => s.remove())
       }
-    }
-
-    const onWheel = () => {
-      setState('scroll')
-      clearTimeout(scrollTimer.current)
-      scrollTimer.current = setTimeout(() => setState('move'), 650)
     }
 
     const onOver = (e) => {
@@ -317,7 +277,6 @@ function CursorFX() {
     window.addEventListener('mousemove', onMove, { passive: true })
     window.addEventListener('mousedown', onDown, { passive: true })
     window.addEventListener('mouseover', onOver, { passive: true })
-    window.addEventListener('wheel', onWheel, { passive: true })
     raf = requestAnimationFrame(loop)
 
     return () => {
@@ -325,9 +284,6 @@ function CursorFX() {
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('mousedown', onDown)
       window.removeEventListener('mouseover', onOver)
-      window.removeEventListener('wheel', onWheel)
-      clearTimeout(scrollTimer.current)
-      clearTimeout(clickTimer.current)
       if (raf) cancelAnimationFrame(raf)
     }
   }, [])
@@ -336,14 +292,50 @@ function CursorFX() {
     <>
       <div ref={dotRef} aria-hidden="true" className="cursor-dot" />
       <div ref={ringRef} aria-hidden="true" className="cursor-ring" />
-      <div ref={stateRef} aria-hidden="true" className={`cursor-state cursor-state--${state}`}>
-        <span className="cursor-state-emoji" aria-hidden="true">
-          {state === 'scroll' ? '🤚' : state === 'click' ? '👆' : '🚢'}
-        </span>
-      </div>
       <div ref={sparkRef} aria-hidden="true" className="cursor-spark-layer" />
-      <div ref={waveRef} aria-hidden="true" className="cursor-wave-layer" />
     </>
+  )
+}
+
+function PageWobble({ children }) {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const fine = window.matchMedia('(pointer: fine)').matches
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!fine || reduce) return undefined
+
+    let raf = null
+    let target = { x: 0, y: 0 }
+    let current = { x: 0, y: 0 }
+
+    const onMove = (e) => {
+      target.x = (e.clientX / window.innerWidth) * 2 - 1
+      target.y = (e.clientY / window.innerHeight) * 2 - 1
+    }
+
+    const loop = () => {
+      current.x += (target.x - current.x) * 0.08
+      current.y += (target.y - current.y) * 0.08
+      if (ref.current) {
+        ref.current.style.transform = `perspective(1200px) rotateX(${(current.y * 0.7).toFixed(3)}deg) rotateY(${(current.x * 0.9).toFixed(3)}deg)`
+      }
+      raf = requestAnimationFrame(loop)
+    }
+
+    window.addEventListener('mousemove', onMove, { passive: true })
+    raf = requestAnimationFrame(loop)
+
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  return (
+    <div ref={ref} className="will-change-transform">
+      {children}
+    </div>
   )
 }
 
@@ -1444,21 +1436,23 @@ export default function App() {
         Skip to content
       </a>
       <ScrollProgress />
-      <Header active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      <main id="main">
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Services />
-        <Security />
-        <Skills />
-        <Testimonials />
-        <HowWork />
-        <Faq />
-        <Contact />
-      </main>
-      <Footer />
+      <PageWobble>
+        <Header active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        <main id="main">
+          <Hero />
+          <About />
+          <Experience />
+          <Projects />
+          <Services />
+          <Security />
+          <Skills />
+          <Testimonials />
+          <HowWork />
+          <Faq />
+          <Contact />
+        </main>
+        <Footer />
+      </PageWobble>
       <BackToTop />
       <CursorFX />
     </div>
