@@ -838,7 +838,7 @@ function Projects() {
                           src={`/${a.preview}`}
                           alt={`${a.name} screenshot`}
                           loading="lazy"
-                          className="aspect-[2/5] w-full object-cover transition-transform duration-300 group-hover:-translate-y-1"
+                          className="aspect-[3/4] w-full object-cover object-top transition-transform duration-300 group-hover:-translate-y-1"
                         />
                       </a>
                     ) : (
@@ -847,7 +847,7 @@ function Projects() {
                           src={`/${a.preview}`}
                           alt={`${a.name} screenshot`}
                           loading="lazy"
-                          className="aspect-[2/5] w-full object-cover"
+                          className="aspect-[3/4] w-full object-cover object-top"
                         />
                       </div>
                     )}
