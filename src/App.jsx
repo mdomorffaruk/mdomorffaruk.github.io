@@ -177,6 +177,47 @@ function ScrollProgress() {
   )
 }
 
+function BackToTop() {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    let raf = null
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        raf = null
+        setVisible(window.scrollY > 480)
+      })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  const scrollTop = () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={scrollTop}
+      aria-label="Back to top"
+      className={`glass fixed right-5 bottom-5 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink transition-all duration-300 hover:border-accent hover:text-accent ${
+        visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
+      }`}
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 19V5m-7 7 7-7 7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </button>
+  )
+}
+
 function CountUp({ value, suffix = '', duration = 1100 }) {
   const ref = useRef(null)
   const [display, setDisplay] = useState(0)
@@ -1289,6 +1330,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   )
 }
