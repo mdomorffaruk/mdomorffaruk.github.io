@@ -7,7 +7,6 @@ import {
   portfolioProjects,
   skillCategories,
   timeline,
-  writeups,
 } from './data/portfolio.json'
 
 const sections = [
@@ -289,7 +288,7 @@ function Header({ active, menuOpen, setMenuOpen }) {
 
 function Hero() {
   const [headline, subline] = hero.title.split('\n')
-  const heroStats = [stats[0], stats[1], stats[2], stats[4]]
+  const heroStats = stats
 
   return (
     <section className="border-b border-line" aria-label="Introduction">
@@ -654,7 +653,7 @@ function Security() {
         <SectionHead
           index="04"
           title="Security"
-          intro="Offensive research and defensive engineering: bug bounty work, vulnerability tooling, and the writeups that came out of it."
+          intro="Offensive research and defensive engineering: bug bounty work, vulnerability tooling, and a background in adversarial research."
         />
         <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
           {securityGroups.map((g, i) => (
@@ -707,39 +706,6 @@ function Security() {
             </a>
           ))}
         </div>
-
-        <h3 className="mt-16 font-mono text-xs uppercase tracking-[0.25em] text-accent">
-          Research & writing
-        </h3>
-        <ul className="mt-4 border-t border-line">
-          {writeups.map((w) => (
-            <Reveal key={w.title}>
-              <li>
-                <a
-                  href={w.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex items-baseline justify-between gap-6 border-b border-line py-5 transition-colors"
-                >
-                  <div className="min-w-0">
-                    <p className="truncate font-serif text-lg font-semibold transition-colors group-hover:text-accent">
-                      {w.title}
-                    </p>
-                    <p className="mt-1 font-mono text-xs uppercase tracking-wider text-muted">
-                      {w.category} <span className="text-line">·</span> {w.readingTime}
-                    </p>
-                  </div>
-                  <span
-                    className="shrink-0 font-mono text-sm text-muted transition-all group-hover:translate-x-1 group-hover:text-accent"
-                    aria-hidden="true"
-                  >
-                    ↗
-                  </span>
-                </a>
-              </li>
-            </Reveal>
-          ))}
-        </ul>
       </div>
     </section>
   )

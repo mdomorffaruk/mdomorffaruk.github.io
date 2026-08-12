@@ -20,7 +20,7 @@
       "title": "Cybersecurity Researcher",
       "organization": "ByteTech, Bangladesh",
       "type": "experience",
-      "description": "Web app recon, attack-surface mapping, manual testing\nAutomation pipelines for asset discovery and vuln triage\nMalware analysis and reverse engineering\n30+ bug bounty reports across H1, Bugcrowd, Intigriti"
+      "description": "Web app recon, attack-surface mapping, manual testing\nAutomation pipelines for asset discovery and vuln triage\nMalware analysis and reverse engineering\nBug bounty research across HackerOne, Bugcrowd, Intigriti"
     },
     {
       "year": "2020 - 2023",
@@ -371,57 +371,6 @@
       "description": "Python automation for HackerOne bug bounty workflows, target scope management, and structured vulnerability reporting.",
       "tech": ["Python", "Automation", "Bug Bounty"],
       "links": { "demo": null, "github": "https://github.com/mdomorffaruk/hackerone-automation" }
-    }
-  ],
-
-  "writeups": [
-    {
-      "title": "Exploring Vulnerabilities in Modern Web Applications",
-      "date": null,
-      "category": "Web Security",
-      "excerpt": "Overview of common web weaknesses and practical security considerations for developers.",
-      "url": "https://medium.com/@mdomorffaruk/exploring-vulnerabilities-in-modern-web-applications-758ad6a4e7cd",
-      "readingTime": "8 min read"
-    },
-    {
-      "title": "Kernel Mode DLL Injection Techniques",
-      "date": null,
-      "category": "Reverse Engineering",
-      "excerpt": "Low-level injection concepts, OS internals, and kernel-space execution methods.",
-      "url": "https://medium.com/@mdomorffaruk/kernel-mode-dll-injection-techniques-6d92d7419863",
-      "readingTime": "12 min read"
-    },
-    {
-      "title": "Advanced Persistent Threats and Kernel-Level Exploits",
-      "date": null,
-      "category": "Exploit Development",
-      "excerpt": "Attacker tradecraft, APT methodology, and kernel exploitation techniques.",
-      "url": "https://medium.com/@mdomorffaruk/advanced-persistent-threats-apts-and-kernel-level-exploits-d71cfac7a1b3",
-      "readingTime": "15 min read"
-    },
-    {
-      "title": "Bypassing Windows Kernel PatchGuard",
-      "date": null,
-      "category": "Kernel Security",
-      "excerpt": "Deep dive into PatchGuard bypass for exploit development workflows.",
-      "url": "https://medium.com/@mdomorffaruk/bypassing-windows-kernel-patchguard-for-exploit-development-c7472b7af10c",
-      "readingTime": "10 min read"
-    },
-    {
-      "title": "Red Team Strategies and Methodologies",
-      "date": null,
-      "category": "Offensive Security",
-      "excerpt": "Offensive security approaches covering planning, execution, and reporting.",
-      "url": "https://medium.com/@mdomorffaruk/red-team-strategies-and-methodologies-outlined-effective-approaches-in-offensive-security-72166b456375",
-      "readingTime": "11 min read"
-    },
-    {
-      "title": "Advanced Malware Injection Techniques",
-      "date": null,
-      "category": "Malware Analysis",
-      "excerpt": "Analysis of sophisticated injection patterns and defensive countermeasures.",
-      "url": "https://medium.com/@mdomorffaruk/advanced-malware-injection-techniques-and-countermeasures-f22bf95585f2",
-      "readingTime": "14 min read"
     }
   ],
 

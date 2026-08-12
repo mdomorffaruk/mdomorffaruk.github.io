@@ -41,8 +41,7 @@
 
   "stats": [
     { "value": 6, "suffix": "+", "label": "Years Experience" },
-    { "value": 30, "suffix": "+", "label": "Bug Reports" },
-    { "value": 10, "suffix": "", "label": "Apps Shipped" },
+    { "value": 10, "suffix": "", "label": "Apps on Play Store" },
     { "value": 1, "suffix": "", "label": "National Award" },
     { "value": 10, "suffix": "+", "label": "Countries Served" }
   ],
