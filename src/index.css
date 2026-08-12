@@ -153,6 +153,7 @@ summary {
   background: color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
+.cursor-wobble-layer,
 .cursor-spark-layer {
   position: fixed;
   top: 0;
@@ -161,6 +162,38 @@ summary {
   height: 0;
   pointer-events: none;
   z-index: 9997;
+}
+
+.wobble {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  box-shadow: inset 0 0 14px color-mix(in srgb, var(--accent) 20%, transparent);
+  -webkit-backdrop-filter: blur(1.5px);
+  backdrop-filter: blur(1.5px);
+  pointer-events: none;
+  animation: wobble-spread 1.05s ease-out forwards;
+}
+
+@keyframes wobble-spread {
+  0% {
+    transform: scale(0.15);
+    opacity: 0.8;
+    border-width: 3px;
+  }
+  55% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(8);
+    opacity: 0;
+    border-width: 1px;
+  }
 }
 
 .spark {

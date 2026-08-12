@@ -222,6 +222,7 @@ function CursorFX() {
   const dotRef = useRef(null)
   const ringRef = useRef(null)
   const sparkRef = useRef(null)
+  const wobbleRef = useRef(null)
   const pos = useRef({ x: 0, y: 0 })
   const ringPos = useRef({ x: 0, y: 0 })
 
@@ -235,10 +236,26 @@ function CursorFX() {
     document.documentElement.classList.add('has-cursor-fx')
 
     let raf = null
+    let lastWobble = 0
+
+    const spawnWobble = (x, y) => {
+      const now = performance.now()
+      if (now - lastWobble < 90) return
+      lastWobble = now
+      const layer = wobbleRef.current
+      if (!layer) return
+      const w = document.createElement('span')
+      w.className = 'wobble'
+      w.style.left = `${x}px`
+      w.style.top = `${y}px`
+      layer.appendChild(w)
+      w.addEventListener('animationend', () => w.remove())
+    }
 
     const onMove = (e) => {
       pos.current = { x: e.clientX, y: e.clientY }
       if (dotRef.current) dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+      spawnWobble(e.clientX, e.clientY)
     }
 
     const onDown = (e) => {
@@ -292,50 +309,9 @@ function CursorFX() {
     <>
       <div ref={dotRef} aria-hidden="true" className="cursor-dot" />
       <div ref={ringRef} aria-hidden="true" className="cursor-ring" />
+      <div ref={wobbleRef} aria-hidden="true" className="cursor-wobble-layer" />
       <div ref={sparkRef} aria-hidden="true" className="cursor-spark-layer" />
     </>
-  )
-}
-
-function PageWobble({ children }) {
-  const ref = useRef(null)
-
-  useEffect(() => {
-    const fine = window.matchMedia('(pointer: fine)').matches
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (!fine || reduce) return undefined
-
-    let raf = null
-    let target = { x: 0, y: 0 }
-    let current = { x: 0, y: 0 }
-
-    const onMove = (e) => {
-      target.x = (e.clientX / window.innerWidth) * 2 - 1
-      target.y = (e.clientY / window.innerHeight) * 2 - 1
-    }
-
-    const loop = () => {
-      current.x += (target.x - current.x) * 0.08
-      current.y += (target.y - current.y) * 0.08
-      if (ref.current) {
-        ref.current.style.transform = `perspective(1200px) rotateX(${(current.y * 0.7).toFixed(3)}deg) rotateY(${(current.x * 0.9).toFixed(3)}deg)`
-      }
-      raf = requestAnimationFrame(loop)
-    }
-
-    window.addEventListener('mousemove', onMove, { passive: true })
-    raf = requestAnimationFrame(loop)
-
-    return () => {
-      window.removeEventListener('mousemove', onMove)
-      if (raf) cancelAnimationFrame(raf)
-    }
-  }, [])
-
-  return (
-    <div ref={ref} className="will-change-transform">
-      {children}
-    </div>
   )
 }
 
@@ -1436,23 +1412,21 @@ export default function App() {
         Skip to content
       </a>
       <ScrollProgress />
-      <PageWobble>
-        <Header active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-        <main id="main">
-          <Hero />
-          <About />
-          <Experience />
-          <Projects />
-          <Services />
-          <Security />
-          <Skills />
-          <Testimonials />
-          <HowWork />
-          <Faq />
-          <Contact />
-        </main>
-        <Footer />
-      </PageWobble>
+      <Header active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <main id="main">
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Services />
+        <Security />
+        <Skills />
+        <Testimonials />
+        <HowWork />
+        <Faq />
+        <Contact />
+      </main>
+      <Footer />
       <BackToTop />
       <CursorFX />
     </div>
