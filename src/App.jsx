@@ -593,48 +593,35 @@ function Projects() {
             <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
               Android apps on Google Play
             </h3>
-            <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            <div className="mt-5 flex snap-x gap-4 overflow-x-auto pb-4">
               {apps.map((a) => (
-                <div
-                  key={a.name}
-                  className="group rounded-lg border border-line bg-card p-4 text-center transition-colors hover:border-accent hover:bg-accent-soft/40"
-                >
+                <div key={a.name} className="group w-40 shrink-0 snap-start sm:w-44">
                   <a
                     href={a.playUrl}
                     target="_blank"
                     rel="noreferrer"
                     aria-label={`${a.name} on Google Play`}
-                    className="block"
+                    className="block overflow-hidden rounded-xl border border-line bg-card"
                   >
                     <img
-                      src={`/${a.icon}`}
-                      alt={`${a.name} app icon`}
+                      src={`/${a.preview}`}
+                      alt={`${a.name} screenshot`}
                       loading="lazy"
-                      className="mx-auto h-14 w-14 rounded-xl border border-line object-cover"
+                      className="aspect-[2/5] w-full object-cover transition-transform duration-300 group-hover:-translate-y-1"
                     />
-                    <p className="mt-2 font-serif text-sm font-semibold transition-colors group-hover:text-accent">
-                      {a.name}
-                    </p>
                   </a>
-                  <div className="mt-1 flex items-center justify-center gap-3 font-mono text-[11px]">
-                    <a
-                      href={a.playUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-muted transition-colors hover:text-accent"
-                    >
-                      Play ↗
-                    </a>
-                    {a.github && (
-                      <a
-                        href={a.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-muted transition-colors hover:text-accent"
-                      >
-                        GitHub ↗
-                      </a>
-                    )}
+                  <div className="mt-2.5 flex items-center gap-2">
+                    <img
+                      src={`/${a.icon}`}
+                      alt=""
+                      className="h-7 w-7 shrink-0 rounded-md border border-line object-cover"
+                    />
+                    <div className="min-w-0">
+                      <p className="truncate font-serif text-sm font-semibold transition-colors group-hover:text-accent">
+                        {a.name}
+                      </p>
+                      <p className="font-mono text-[11px] text-muted">Google Play ↗</p>
+                    </div>
                   </div>
                 </div>
               ))}
