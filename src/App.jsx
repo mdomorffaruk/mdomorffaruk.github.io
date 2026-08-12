@@ -223,9 +223,13 @@ function CursorFX() {
   const ringRef = useRef(null)
   const sparkRef = useRef(null)
   const waveRef = useRef(null)
+  const stateRef = useRef(null)
   const pos = useRef({ x: 0, y: 0 })
   const lastPos = useRef({ x: 0, y: 0 })
   const ringPos = useRef({ x: 0, y: 0 })
+  const scrollTimer = useRef(null)
+  const clickTimer = useRef(null)
+  const [state, setState] = useState('move')
 
   const FIRE_COLORS = ['#ff3b30', '#ff8c00', '#ffd23f', '#ff5e00']
 
@@ -261,10 +265,17 @@ function CursorFX() {
     const onMove = (e) => {
       pos.current = { x: e.clientX, y: e.clientY }
       if (dotRef.current) dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+      if (stateRef.current) {
+        stateRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+      }
       spawnWave(e.clientX, e.clientY)
     }
 
     const onDown = (e) => {
+      setState('click')
+      clearTimeout(clickTimer.current)
+      clickTimer.current = setTimeout(() => setState('move'), 380)
+
       const layer = sparkRef.current
       if (!layer) return
       const count = 10
@@ -281,6 +292,12 @@ function CursorFX() {
         layer.appendChild(s)
         s.addEventListener('animationend', () => s.remove())
       }
+    }
+
+    const onWheel = () => {
+      setState('scroll')
+      clearTimeout(scrollTimer.current)
+      scrollTimer.current = setTimeout(() => setState('move'), 650)
     }
 
     const onOver = (e) => {
@@ -300,6 +317,7 @@ function CursorFX() {
     window.addEventListener('mousemove', onMove, { passive: true })
     window.addEventListener('mousedown', onDown, { passive: true })
     window.addEventListener('mouseover', onOver, { passive: true })
+    window.addEventListener('wheel', onWheel, { passive: true })
     raf = requestAnimationFrame(loop)
 
     return () => {
@@ -307,6 +325,9 @@ function CursorFX() {
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('mousedown', onDown)
       window.removeEventListener('mouseover', onOver)
+      window.removeEventListener('wheel', onWheel)
+      clearTimeout(scrollTimer.current)
+      clearTimeout(clickTimer.current)
       if (raf) cancelAnimationFrame(raf)
     }
   }, [])
@@ -315,6 +336,11 @@ function CursorFX() {
     <>
       <div ref={dotRef} aria-hidden="true" className="cursor-dot" />
       <div ref={ringRef} aria-hidden="true" className="cursor-ring" />
+      <div ref={stateRef} aria-hidden="true" className={`cursor-state cursor-state--${state}`}>
+        <span className="cursor-state-emoji" aria-hidden="true">
+          {state === 'scroll' ? '🤚' : state === 'click' ? '👆' : '🚢'}
+        </span>
+      </div>
       <div ref={sparkRef} aria-hidden="true" className="cursor-spark-layer" />
       <div ref={waveRef} aria-hidden="true" className="cursor-wave-layer" />
     </>
