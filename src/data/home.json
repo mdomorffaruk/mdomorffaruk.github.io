@@ -4,7 +4,11 @@
     "linkedin": "https://linkedin.com/in/mdomorffaruk",
     "github": "https://github.com/mdomorffaruk",
     "fiverr": "https://fiverr.com/mdofrbn7",
-    "whatsapp": "https://wa.me/880175014994"
+    "whatsapp": "https://wa.me/880175014994",
+    "hackerone": "https://hackerone.com/mdomorffaruk",
+    "bugcrowd": "https://bugcrowd.com/mdomorffaruk",
+    "intigriti": "https://app.intigriti.com/researcher/profile/mdomorffaruk",
+    "tryhackme": "https://tryhackme.com/p/mdomorffaruk"
   },
 
   "marqueeItems": [
@@ -118,6 +122,16 @@
       "description": "Personal project, built end-to-end. 24/7 monitoring for banking security infrastructure. Kotlin Android client + PHP REST API.",
       "tech": ["PHP", "Kotlin", "MySQL", "Banking", "REST API"],
       "links": { "demo": null, "github": null }
+    },
+    {
+      "title": "Concurrent Banking Transaction System",
+      "category": "Banking",
+      "description": "MERN stack system handling concurrent banking transactions with race-condition-safe balance updates. Built end-to-end for Excel Technologies Ltd.",
+      "tech": ["TypeScript", "React", "Node.js", "MongoDB", "Banking"],
+      "links": {
+        "demo": null,
+        "github": "https://github.com/mdomorffaruk/MERN_Assignment-Concurrent_Banking_Transaction_System-Excel_Technologies_Ltd"
+      }
     },
     {
       "title": "VulnXposer Scanner",

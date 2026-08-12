@@ -353,7 +353,7 @@ function Hero() {
           </div>
 
           <Reveal delay={120}>
-            <figure className="mx-auto w-64 max-w-full lg:w-72">
+            <figure className="mx-auto w-72 max-w-full sm:w-80 lg:w-96">
               <div className="overflow-hidden rounded-xl border border-line bg-card p-2 shadow-sm">
                 <img
                   src="/profile.gif"
@@ -596,24 +596,48 @@ function Projects() {
             </h3>
             <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
               {apps.map((a) => (
-                <a
+                <div
                   key={a.name}
-                  href={a.playUrl}
-                  target="_blank"
-                  rel="noreferrer"
                   className="group rounded-lg border border-line bg-card p-4 text-center transition-colors hover:border-accent hover:bg-accent-soft/40"
                 >
-                  <img
-                    src={`/${a.icon}`}
-                    alt={`${a.name} app icon`}
-                    loading="lazy"
-                    className="mx-auto h-14 w-14 rounded-xl border border-line object-cover"
-                  />
-                  <p className="mt-2 font-serif text-sm font-semibold transition-colors group-hover:text-accent">
-                    {a.name}
-                  </p>
-                  <p className="font-mono text-[11px] text-muted">Google Play ↗</p>
-                </a>
+                  <a
+                    href={a.playUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${a.name} on Google Play`}
+                    className="block"
+                  >
+                    <img
+                      src={`/${a.icon}`}
+                      alt={`${a.name} app icon`}
+                      loading="lazy"
+                      className="mx-auto h-14 w-14 rounded-xl border border-line object-cover"
+                    />
+                    <p className="mt-2 font-serif text-sm font-semibold transition-colors group-hover:text-accent">
+                      {a.name}
+                    </p>
+                  </a>
+                  <div className="mt-1 flex items-center justify-center gap-3 font-mono text-[11px]">
+                    <a
+                      href={a.playUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-muted transition-colors hover:text-accent"
+                    >
+                      Play ↗
+                    </a>
+                    {a.github && (
+                      <a
+                        href={a.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-muted transition-colors hover:text-accent"
+                      >
+                        GitHub ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -659,6 +683,28 @@ function Security() {
           </span>
           {securityTools.map((t) => (
             <Chip key={t}>{t}</Chip>
+          ))}
+        </div>
+
+        <div className="mt-10 flex flex-wrap items-center gap-2">
+          <span className="mr-1 font-mono text-xs uppercase tracking-[0.25em] text-accent">
+            Profiles
+          </span>
+          {[
+            { label: 'HackerOne', href: contact.hackerone },
+            { label: 'Bugcrowd', href: contact.bugcrowd },
+            { label: 'Intigriti', href: contact.intigriti },
+            { label: 'TryHackMe', href: contact.tryhackme },
+          ].map((p) => (
+            <a
+              key={p.label}
+              href={p.href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center rounded-full border border-line bg-card px-3 py-1 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-accent"
+            >
+              {p.label} ↗
+            </a>
           ))}
         </div>
 

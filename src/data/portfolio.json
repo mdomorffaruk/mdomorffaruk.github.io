@@ -271,7 +271,8 @@
       "tech": [],
       "icon": "apps/budget-tracker-icon.png",
       "preview": "apps/budget-tracker-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.budgettracker"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.budgettracker",
+      "github": "https://github.com/mdomorffaruk/budget-tracker"
     },
     {
       "name": "Habit Tracker",
@@ -280,7 +281,8 @@
       "tech": [],
       "icon": "apps/habit-tracker-icon.png",
       "preview": "apps/habit-tracker-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.habittracker"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.habittracker",
+      "github": "https://github.com/mdomorffaruk/habit-tracker"
     },
     {
       "name": "Ledger Book",
@@ -289,7 +291,8 @@
       "tech": [],
       "icon": "apps/ledger-book-icon.png",
       "preview": "apps/ledger-book-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.ledgerbook"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.ledgerbook",
+      "github": "https://github.com/mdomorffaruk/ledger-book"
     },
     {
       "name": "Freelancer CRM",
@@ -298,7 +301,8 @@
       "tech": [],
       "icon": "apps/freelancer-crm-icon.png",
       "preview": "apps/freelancer-crm-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.freelancercrm"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.freelancercrm",
+      "github": "https://github.com/mdomorffaruk/freelancer-crm"
     },
     {
       "name": "Renewal Tracker",
@@ -307,7 +311,8 @@
       "tech": [],
       "icon": "apps/renewal-tracker-icon.png",
       "preview": "apps/renewal-tracker-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.renewaltracker"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.renewaltracker",
+      "github": "https://github.com/mdomorffaruk/renewal-tracker"
     },
     {
       "name": "Study Planner",
@@ -316,7 +321,8 @@
       "tech": [],
       "icon": "apps/study-planner-icon.png",
       "preview": "apps/study-planner-preview.png",
-      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.studyplanner"
+      "playUrl": "https://play.google.com/store/apps/details?id=com.mdomorffaruk.studyplanner",
+      "github": "https://github.com/mdomorffaruk/study-planner"
     }
   ],
 
@@ -326,6 +332,15 @@
       "description": "Personal project, built end-to-end outside of office work. 24/7 real-time monitoring for banking security infrastructure. Kotlin Android client + PHP REST API backend. Reduced manual monitoring workload by 70%.",
       "tech": ["PHP", "Kotlin", "MySQL", "Banking", "REST API"],
       "links": { "demo": null, "github": null }
+    },
+    {
+      "title": "Concurrent Banking Transaction System",
+      "description": "MERN stack system handling concurrent banking transactions with race-condition-safe balance updates. Built end-to-end for Excel Technologies Ltd.",
+      "tech": ["TypeScript", "React", "Node.js", "MongoDB", "Banking"],
+      "links": {
+        "demo": null,
+        "github": "https://github.com/mdomorffaruk/MERN_Assignment-Concurrent_Banking_Transaction_System-Excel_Technologies_Ltd"
+      }
     },
     {
       "title": "VulnXposer",
