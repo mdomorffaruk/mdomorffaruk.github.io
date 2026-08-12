@@ -314,7 +314,7 @@ function Header({ active, menuOpen, setMenuOpen }) {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <a href="#top" className="flex items-center" aria-label="Mohammad Omor Faruk">
           <img
-            src="/profile-static.png"
+            src="/profile.gif"
             alt=""
             className="h-8 w-8 rounded-full border border-line object-cover"
           />
@@ -452,7 +452,7 @@ function Hero() {
             <figure className="mx-auto w-72 max-w-full sm:w-80 lg:w-96">
               <div className="overflow-hidden rounded-full border border-line bg-card p-2 shadow-sm">
                 <img
-                  src="/profile-static.png"
+                  src="/profile.gif"
                   alt="Mohammad Omor Faruk - Software Engineer and Security Researcher"
                   className="aspect-square w-full rounded-full border border-line object-cover"
                 />
