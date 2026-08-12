@@ -222,9 +222,12 @@ function CursorFX() {
   const dotRef = useRef(null)
   const ringRef = useRef(null)
   const sparkRef = useRef(null)
-  const rippleRef = useRef(null)
+  const waveRef = useRef(null)
   const pos = useRef({ x: 0, y: 0 })
+  const lastPos = useRef({ x: 0, y: 0 })
   const ringPos = useRef({ x: 0, y: 0 })
+
+  const FIRE_COLORS = ['#ff3b30', '#ff8c00', '#ffd23f', '#ff5e00']
 
   useEffect(() => {
     const fine = window.matchMedia('(pointer: fine)').matches
@@ -234,41 +237,50 @@ function CursorFX() {
     document.documentElement.classList.add('has-cursor-fx')
 
     let raf = null
-    let lastSpark = 0
+    let lastWave = 0
 
-    const spawnSpark = (x, y) => {
+    const spawnWave = (x, y) => {
       const now = performance.now()
-      if (now - lastSpark < 45) return
-      lastSpark = now
-      const layer = sparkRef.current
+      if (now - lastWave < 70) return
+      lastWave = now
+      const layer = waveRef.current
       if (!layer) return
-      const spark = document.createElement('span')
-      spark.className = 'spark'
-      const angle = Math.random() * Math.PI * 2
-      const dist = 16 + Math.random() * 28
-      spark.style.setProperty('--tx', `${Math.cos(angle) * dist}px`)
-      spark.style.setProperty('--ty', `${Math.sin(angle) * dist}px`)
-      spark.style.left = `${x}px`
-      spark.style.top = `${y}px`
-      layer.appendChild(spark)
-      spark.addEventListener('animationend', () => spark.remove())
+      const dx = Math.abs(x - lastPos.current.x)
+      const dir = dx > 2 ? Math.sign(x - lastPos.current.x) : Math.random() < 0.5 ? -1 : 1
+      const w = document.createElement('span')
+      w.className = 'wave'
+      w.style.setProperty('--tx', `${(26 + Math.random() * 30) * dir}px`)
+      w.style.setProperty('--ty', `${-8 + Math.random() * 16}px`)
+      w.style.left = `${x}px`
+      w.style.top = `${y}px`
+      layer.appendChild(w)
+      w.addEventListener('animationend', () => w.remove())
+      lastPos.current = { x, y }
     }
 
     const onMove = (e) => {
       pos.current = { x: e.clientX, y: e.clientY }
       if (dotRef.current) dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
-      spawnSpark(e.clientX, e.clientY)
+      spawnWave(e.clientX, e.clientY)
     }
 
     const onDown = (e) => {
-      const layer = rippleRef.current
+      const layer = sparkRef.current
       if (!layer) return
-      const r = document.createElement('span')
-      r.className = 'ripple'
-      r.style.left = `${e.clientX}px`
-      r.style.top = `${e.clientY}px`
-      layer.appendChild(r)
-      r.addEventListener('animationend', () => r.remove())
+      const count = 10
+      for (let i = 0; i < count; i++) {
+        const s = document.createElement('span')
+        s.className = 'spark'
+        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.5
+        const dist = 30 + Math.random() * 55
+        s.style.setProperty('--tx', `${Math.cos(angle) * dist}px`)
+        s.style.setProperty('--ty', `${Math.sin(angle) * dist}px`)
+        s.style.setProperty('--sc', FIRE_COLORS[i % FIRE_COLORS.length])
+        s.style.left = `${e.clientX}px`
+        s.style.top = `${e.clientY}px`
+        layer.appendChild(s)
+        s.addEventListener('animationend', () => s.remove())
+      }
     }
 
     const onOver = (e) => {
@@ -304,7 +316,7 @@ function CursorFX() {
       <div ref={dotRef} aria-hidden="true" className="cursor-dot" />
       <div ref={ringRef} aria-hidden="true" className="cursor-ring" />
       <div ref={sparkRef} aria-hidden="true" className="cursor-spark-layer" />
-      <div ref={rippleRef} aria-hidden="true" className="cursor-ripple-layer" />
+      <div ref={waveRef} aria-hidden="true" className="cursor-wave-layer" />
     </>
   )
 }

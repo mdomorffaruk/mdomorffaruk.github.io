@@ -20,30 +20,30 @@
 }
 
 :root {
-  --paper: #f6f1e6;
-  --card: #fffdf6;
-  --ink: #201c15;
-  --muted: #6c6555;
-  --line: #e2d9c4;
-  --accent: #0f6b62;
-  --accent-strong: #0b544c;
-  --accent-ink: #f7f3ea;
-  --accent-soft: #e3efec;
-  --ok: #1d7a3e;
+  --paper: #fffdf9;
+  --card: #ffffff;
+  --ink: #241c18;
+  --muted: #7a6a5e;
+  --line: #f2dcd3;
+  --accent: #d6222b;
+  --accent-strong: #b01a22;
+  --accent-ink: #fff8f5;
+  --accent-soft: #fdebe7;
+  --ok: #d9a500;
   color-scheme: light;
 }
 
 .dark {
-  --paper: #14110c;
-  --card: #1c1811;
-  --ink: #ede7db;
-  --muted: #a49b88;
-  --line: #322b1f;
-  --accent: #53b4a6;
-  --accent-strong: #6cc4b8;
-  --accent-ink: #10201d;
-  --accent-soft: #223532;
-  --ok: #3ecf6e;
+  --paper: #0b0b0b;
+  --card: #161311;
+  --ink: #f7ecdd;
+  --muted: #a99a8b;
+  --line: #2e2220;
+  --accent: #e8352d;
+  --accent-strong: #ff5047;
+  --accent-ink: #fff8f5;
+  --accent-soft: #331210;
+  --ok: #ffcf3f;
   color-scheme: dark;
 }
 
@@ -154,7 +154,7 @@ summary {
 }
 
 .cursor-spark-layer,
-.cursor-ripple-layer {
+.cursor-wave-layer {
   position: fixed;
   top: 0;
   left: 0;
@@ -164,51 +164,56 @@ summary {
   z-index: 9997;
 }
 
+.wave {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 16px;
+  margin: -8px 0 0 -16px;
+  border-bottom: 2px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  animation: wave-flow 1.1s ease-out forwards;
+}
+
+@keyframes wave-flow {
+  0% {
+    transform: translate(0, 0) scaleX(0.25);
+    opacity: 0.75;
+  }
+  45% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scaleX(1.3);
+    opacity: 0;
+  }
+}
+
 .spark {
   position: fixed;
   top: 0;
   left: 0;
-  width: 5px;
-  height: 5px;
-  margin: -2.5px 0 0 -2.5px;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
   border-radius: 50%;
-  background: var(--accent);
-  animation: spark-fly 0.7s ease-out forwards;
+  background: var(--sc, var(--accent));
+  box-shadow: 0 0 6px 1px var(--sc, var(--accent));
+  pointer-events: none;
+  animation: spark-burst 0.65s ease-out forwards;
 }
 
-@keyframes spark-fly {
+@keyframes spark-burst {
   from {
     transform: translate(0, 0) scale(1);
-    opacity: 0.9;
+    opacity: 1;
   }
   to {
-    transform: translate(var(--tx), var(--ty)) scale(0);
+    transform: translate(var(--tx), var(--ty)) scale(0.15);
     opacity: 0;
-  }
-}
-
-.ripple {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  margin: -6px 0 0 -6px;
-  border-radius: 50%;
-  border: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
-  animation: ripple-water 0.8s ease-out forwards;
-}
-
-@keyframes ripple-water {
-  0% {
-    transform: scale(0.4);
-    opacity: 0.85;
-    border-width: 2px;
-  }
-  100% {
-    transform: scale(7);
-    opacity: 0;
-    border-width: 1px;
   }
 }
 
