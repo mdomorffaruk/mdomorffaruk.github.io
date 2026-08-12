@@ -346,7 +346,11 @@
       "title": "Smart Helmet",
       "description": "AI-powered accident alert and rider safety system with GPS/GSM and OpenCV vehicle recognition. Digital Bangladesh Award 2022 by the Prime Minister.",
       "tech": ["Python", "OpenCV", "IoT", "GPS/GSM", "AI"],
-      "links": { "demo": null, "github": null }
+      "links": {
+        "demo": null,
+        "github": null,
+        "cert": "https://drive.google.com/open?id=1-WATX2Gz6KMMVvW43t59FB7JW04ENEyH"
+      }
     },
     {
       "title": "Recon Automation Toolkit",

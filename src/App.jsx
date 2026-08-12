@@ -6,6 +6,7 @@ import {
   certifications,
   portfolioProjects,
   skillCategories,
+  testimonials,
   timeline,
 } from './data/portfolio.json'
 
@@ -353,11 +354,11 @@ function Hero() {
 
           <Reveal delay={120}>
             <figure className="mx-auto w-72 max-w-full sm:w-80 lg:w-96">
-              <div className="overflow-hidden rounded-xl border border-line bg-card p-2 shadow-sm">
+              <div className="overflow-hidden rounded-full border border-line bg-card p-2 shadow-sm">
                 <img
                   src="/profile.gif"
                   alt="Mohammad Omor Faruk - Software Engineer and Security Researcher"
-                  className="h-auto w-full rounded-lg border border-line"
+                  className="aspect-square w-full rounded-full border border-line object-cover"
                 />
               </div>
               <figcaption className="mt-3 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
@@ -538,16 +539,28 @@ function Projects() {
                   </div>
                 )}
                 <p className="mt-4 flex-1 text-sm leading-relaxed text-muted">{p.description}</p>
-                {p.links?.github && (
-                  <p className="mt-5 font-mono text-xs">
-                    <a
-                      href={p.links.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-medium text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
-                    >
-                      Source →
-                    </a>
+                {(p.links?.github || p.links?.cert) && (
+                  <p className="mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs">
+                    {p.links?.github && (
+                      <a
+                        href={p.links.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-medium text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
+                      >
+                        Source →
+                      </a>
+                    )}
+                    {p.links?.cert && (
+                      <a
+                        href={p.links.cert}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-medium text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
+                      >
+                        Certificate →
+                      </a>
+                    )}
                   </p>
                 )}
               </article>
@@ -724,6 +737,45 @@ function Skills() {
   )
 }
 
+function Testimonials() {
+  return (
+    <section id="testimonials" className="border-b border-line">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+        <SectionHead
+          index="06"
+          title="Client feedback"
+          intro="Reviews from clients on Fiverr, where I've shipped web and Android work for buyers in 10+ countries."
+        />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map((t, i) => (
+            <Reveal key={`${t.name}-${i}`} delay={Math.min((i % 3) * 60, 120)}>
+              <figure className="flex h-full flex-col rounded-lg border border-line bg-card p-6">
+                <p className="font-mono text-sm text-accent" aria-label="5 out of 5 stars">
+                  ★★★★★
+                </p>
+                <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ink/85">
+                  {t.text}
+                </blockquote>
+                <figcaption className="mt-4 flex items-center gap-2">
+                  <span className="h-2 w-2 shrink-0 rounded-full bg-ok" aria-hidden="true" />
+                  <span className="font-mono text-xs text-muted">
+                    Fiverr client · {t.role.replace(/^LOC \/ /, '')}
+                  </span>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+        <p className="mt-8">
+          <a href={contact.fiverr} target="_blank" rel="noreferrer" className={linkMono}>
+            View reviews on Fiverr ↗
+          </a>
+        </p>
+      </div>
+    </section>
+  )
+}
+
 function HowWork() {
   return (
     <section id="process" className="border-b border-line">
@@ -791,7 +843,7 @@ function Contact() {
           <Reveal>
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.25em] text-accent">
-                06 · Contact
+                09 · Contact
               </p>
               <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
                 Let's build something that holds up in production.
@@ -890,6 +942,7 @@ export default function App() {
         <Projects />
         <Security />
         <Skills />
+        <Testimonials />
         <HowWork />
         <Faq />
         <Contact />
