@@ -297,146 +297,6 @@ function CursorFX() {
   )
 }
 
-function WaterFX({ children }) {
-  const wrapRef = useRef(null)
-  const mapRef = useRef(null)
-  const wakeImgRef = useRef(null)
-  const lastX = useRef(0)
-  const lastY = useRef(0)
-  const vel = useRef({ x: 0, y: 0 })
-  const pos = useRef({ x: 0, y: 0 })
-  const offsetY = useRef(0)
-
-  useEffect(() => {
-    const fine = window.matchMedia('(pointer: fine)').matches
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (!fine || reduce) return undefined
-
-    let raf = null
-    let current = 0
-    let target = 0
-    let lastUri = ''
-    lastX.current = window.innerWidth / 2
-    lastY.current = window.innerHeight / 2
-
-    const wakeURI = (dx, dy) => {
-      let bx = 0
-      let by = -1
-      const m = Math.hypot(dx, dy)
-      if (m > 2) {
-        bx = -dx / m
-        by = -dy / m
-      }
-      const px = by
-      const py = -bx
-      const crests = [
-        { op: 0.85, len: 150, spread: 100 },
-        { op: 0.5, len: 185, spread: 128 },
-        { op: 0.28, len: 215, spread: 152 },
-      ]
-      let d = ''
-      for (const c of crests) {
-        const x1 = 180 + bx * c.len + px * c.spread
-        const y1 = 90 + by * c.len + py * c.spread
-        const x2 = 180 + bx * c.len - px * c.spread
-        const y2 = 90 + by * c.len - py * c.spread
-        d += `<path d="M180 90L${x1.toFixed(1)} ${y1.toFixed(1)}" stroke="#fff" stroke-width="30" stroke-linecap="round" opacity="${c.op}"/>`
-        d += `<path d="M180 90L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="#fff" stroke-width="30" stroke-linecap="round" opacity="${c.op}"/>`
-      }
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360"><g fill="none">${d}</g></svg>`
-      return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
-    }
-
-    const onMove = (e) => {
-      const dx = e.clientX - lastX.current
-      const dy = e.clientY - lastY.current
-      lastX.current = e.clientX
-      lastY.current = e.clientY
-      vel.current.x = vel.current.x * 0.55 + dx * 0.45
-      vel.current.y = vel.current.y * 0.55 + dy * 0.45
-      pos.current = { x: e.clientX, y: e.clientY }
-      if (Math.hypot(vel.current.x, vel.current.y) > 4) {
-        target = 40
-        const uri = wakeURI(vel.current.x, vel.current.y)
-        if (uri !== lastUri) {
-          lastUri = uri
-          wakeImgRef.current?.setAttribute('href', uri)
-        }
-      }
-    }
-
-    const updateOffset = () => {
-      offsetY.current = wrapRef.current ? wrapRef.current.getBoundingClientRect().top : 0
-    }
-
-    const loop = () => {
-      target *= 0.94
-      current += (target - current) * 0.1
-      if (current < 0.05) current = 0
-      mapRef.current?.setAttribute('scale', current.toFixed(2))
-      wakeImgRef.current?.setAttribute('x', (pos.current.x - 180).toFixed(1))
-      wakeImgRef.current?.setAttribute('y', (pos.current.y - 90 - offsetY.current).toFixed(1))
-      wrapRef.current?.style.setProperty('filter', current > 0.05 ? 'url(#water-wobble)' : 'none')
-      raf = requestAnimationFrame(loop)
-    }
-
-    updateOffset()
-    window.addEventListener('mousemove', onMove, { passive: true })
-    window.addEventListener('scroll', updateOffset, { passive: true })
-    window.addEventListener('resize', updateOffset, { passive: true })
-    raf = requestAnimationFrame(loop)
-
-    return () => {
-      window.removeEventListener('mousemove', onMove)
-      window.removeEventListener('scroll', updateOffset)
-      window.removeEventListener('resize', updateOffset)
-      if (raf) cancelAnimationFrame(raf)
-    }
-  }, [])
-
-  return (
-    <>
-      <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
-        <filter id="water-wobble">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.025 0.055"
-            numOctaves="2"
-            seed="7"
-            result="noise"
-          />
-          <feColorMatrix
-            in="noise"
-            type="matrix"
-            values="1 0 0 0 -0.5 0 1 0 0 -0.5 0 0 1 0 -0.5 0 0 0 1 0"
-            result="noiseC"
-          />
-          <feImage ref={wakeImgRef} href="" x="0" y="0" width="360" height="360" result="wake" />
-          <feComposite
-            operator="arithmetic"
-            k1="0.9"
-            k2="0"
-            k3="0.5"
-            k4="0"
-            in="noiseC"
-            in2="wake"
-            result="disp"
-          />
-          <feDisplacementMap
-            ref={mapRef}
-            in="SourceGraphic"
-            in2="disp"
-            scale="0"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
-      </svg>
-      <div ref={wrapRef}>{children}</div>
-    </>
-  )
-}
-
 function CountUp({ value, suffix = '', duration = 1100 }) {
   const ref = useRef(null)
   const [display, setDisplay] = useState(0)
@@ -1536,19 +1396,17 @@ export default function App() {
       <ScrollProgress />
       <Header active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <main id="main">
-        <WaterFX>
-          <Hero />
-          <About />
-          <Experience />
-          <Projects />
-          <Services />
-          <Security />
-          <Skills />
-          <Testimonials />
-          <HowWork />
-          <Faq />
-          <Contact />
-        </WaterFX>
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Services />
+        <Security />
+        <Skills />
+        <Testimonials />
+        <HowWork />
+        <Faq />
+        <Contact />
       </main>
       <Footer />
       <BackToTop />
