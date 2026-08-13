@@ -235,28 +235,54 @@ function CursorFX() {
     document.documentElement.classList.add('has-cursor-fx')
 
     let raf = null
+    const lastMove = { x: 0, y: 0 }
+
+    const spawnMoveSpark = (x, y) => {
+      const layer = sparkRef.current
+      if (!layer) return
+      if (Math.hypot(x - lastMove.x, y - lastMove.y) < 16) return
+      lastMove.x = x
+      lastMove.y = y
+      const s = document.createElement('span')
+      s.className = 'spark spark--move'
+      const angle = Math.random() * Math.PI * 2
+      const dist = 8 + Math.random() * 14
+      s.style.setProperty('--tx', `${Math.cos(angle) * dist}px`)
+      s.style.setProperty('--ty', `${Math.sin(angle) * dist}px`)
+      s.style.setProperty('--sc', FIRE_COLORS[Math.floor(Math.random() * FIRE_COLORS.length)])
+      s.style.left = `${x}px`
+      s.style.top = `${y}px`
+      layer.appendChild(s)
+      s.addEventListener('animationend', () => s.remove())
+    }
 
     const onMove = (e) => {
       pos.current = { x: e.clientX, y: e.clientY }
       if (dotRef.current) dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+      spawnMoveSpark(e.clientX, e.clientY)
     }
 
     const onDown = (e) => {
       const layer = sparkRef.current
       if (!layer) return
-      const count = 10
-      for (let i = 0; i < count; i++) {
-        const s = document.createElement('span')
-        s.className = 'spark'
-        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.5
-        const dist = 30 + Math.random() * 55
-        s.style.setProperty('--tx', `${Math.cos(angle) * dist}px`)
-        s.style.setProperty('--ty', `${Math.sin(angle) * dist}px`)
-        s.style.setProperty('--sc', FIRE_COLORS[i % FIRE_COLORS.length])
-        s.style.left = `${e.clientX}px`
-        s.style.top = `${e.clientY}px`
-        layer.appendChild(s)
-        s.addEventListener('animationend', () => s.remove())
+      const waves = [
+        { size: 56, color: FIRE_COLORS[0], scale: 14, dur: '0.7s' },
+        { size: 30, color: FIRE_COLORS[2], scale: 10, dur: '0.6s', delay: '0.06s' }
+      ]
+      for (const w of waves) {
+        const el = document.createElement('span')
+        el.className = 'cursor-wave'
+        el.style.setProperty('--sc', w.color)
+        el.style.setProperty('--ws', w.scale)
+        el.style.width = `${w.size}px`
+        el.style.height = `${w.size}px`
+        el.style.margin = `${-w.size / 2}px 0 0 ${-w.size / 2}px`
+        el.style.left = `${e.clientX}px`
+        el.style.top = `${e.clientY}px`
+        if (w.delay) el.style.animationDelay = w.delay
+        if (w.dur) el.style.animationDuration = w.dur
+        layer.appendChild(el)
+        el.addEventListener('animationend', () => el.remove())
       }
     }
 
