@@ -240,13 +240,13 @@ function CursorFX() {
     const spawnMoveSpark = (x, y) => {
       const layer = sparkRef.current
       if (!layer) return
-      if (Math.hypot(x - lastMove.x, y - lastMove.y) < 16) return
+      if (Math.hypot(x - lastMove.x, y - lastMove.y) < 12) return
       lastMove.x = x
       lastMove.y = y
       const s = document.createElement('span')
       s.className = 'spark spark--move'
       const angle = Math.random() * Math.PI * 2
-      const dist = 8 + Math.random() * 14
+      const dist = 14 + Math.random() * 20
       s.style.setProperty('--tx', `${Math.cos(angle) * dist}px`)
       s.style.setProperty('--ty', `${Math.sin(angle) * dist}px`)
       s.style.setProperty('--sc', FIRE_COLORS[Math.floor(Math.random() * FIRE_COLORS.length)])
@@ -266,8 +266,8 @@ function CursorFX() {
       const layer = sparkRef.current
       if (!layer) return
       const waves = [
-        { size: 56, color: FIRE_COLORS[0], scale: 14, dur: '0.7s' },
-        { size: 30, color: FIRE_COLORS[2], scale: 10, dur: '0.6s', delay: '0.06s' }
+        { size: 14, color: FIRE_COLORS[0], scale: 3.5, dur: '0.5s' },
+        { size: 8, color: FIRE_COLORS[2], scale: 2.2, dur: '0.35s', delay: '0.05s' }
       ]
       for (const w of waves) {
         const el = document.createElement('span')
