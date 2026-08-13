@@ -266,8 +266,8 @@ function CursorFX() {
       const layer = sparkRef.current
       if (!layer) return
       const waves = [
-        { size: 14, color: FIRE_COLORS[0], scale: 3.5, dur: '0.5s' },
-        { size: 8, color: FIRE_COLORS[2], scale: 2.2, dur: '0.35s', delay: '0.05s' }
+        { size: 14, color: FIRE_COLORS[0], scale: 6, dur: '1s' },
+        { size: 8, color: FIRE_COLORS[2], scale: 4, dur: '0.8s', delay: '0.08s' }
       ]
       for (const w of waves) {
         const el = document.createElement('span')
