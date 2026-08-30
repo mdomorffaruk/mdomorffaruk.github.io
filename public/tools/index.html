@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tools - Developer &amp; Security Tooling by Mohammad Omor Faruk</title>
+    <meta name="description" content="Practical developer tools, security tools, and WordPress tools from Mohammad Omor Faruk. Simple products that solve real problems without bloat, tracking, or subscriptions." />
+    <meta name="author" content="Mohammad Omor Faruk" />
+    <link rel="canonical" href="https://mdomorffaruk.github.io/tools/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tools - Developer &amp; Security Tooling" />
+    <meta property="og:description" content="Practical developer, security, and WordPress tools. Simple products that solve real problems without bloat or tracking." />
+    <meta property="og:url" content="https://mdomorffaruk.github.io/tools/" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --paper: #fffdf9;
+        --card: #faf6ee;
+        --ink: #241c18;
+        --muted: #6b615a;
+        --line: #e7ded2;
+        --accent: #d6222b;
+        --accent-strong: #b01a22;
+        --accent-ink: #fff8f5;
+        --accent-soft: #fdebe7;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --paper: #0b0b0b;
+          --card: #14110f;
+          --ink: #f7ecdd;
+          --muted: #a99d90;
+          --line: #2a251f;
+          --accent: #e8352d;
+          --accent-strong: #ff5047;
+          --accent-ink: #fff8f5;
+          --accent-soft: #331210;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: 'Inter', system-ui, sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { color: var(--accent-strong); }
+      .serif { font-family: 'Fraunces', serif; }
+      .mono { font-family: 'JetBrains Mono', monospace; }
+
+      .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+      header.site {
+        position: sticky; top: 0; z-index: 40;
+        border-bottom: 1px solid var(--line);
+        background: color-mix(in srgb, var(--paper) 88%, transparent);
+        backdrop-filter: blur(8px);
+      }
+      .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 1rem; }
+      .nav .brand { display: flex; align-items: center; gap: .6rem; font-weight: 700; color: var(--ink); }
+      .nav .brand .dot { width: 12px; height: 12px; border-radius: 3px; background: var(--accent); flex: none; }
+      .nav ul { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; font-size: .9rem; flex-wrap: wrap; }
+      .nav a.navlink { color: var(--ink); }
+      .nav a.navlink:hover { color: var(--accent); }
+      .nav a.navlink.active { color: var(--accent); }
+
+      section { padding: 4rem 0; }
+      .eyebrow {
+        display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: .8rem;
+        letter-spacing: .04em; color: var(--accent); text-transform: uppercase;
+        border: 1px solid var(--line); padding: .35rem .8rem; border-radius: 999px;
+        background: color-mix(in srgb, var(--accent) 6%, var(--paper));
+      }
+      h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; margin: 1.25rem 0 .75rem; }
+      h2 { font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.15; margin: 2.5rem 0 1.25rem; }
+      .lead { font-size: 1.1rem; color: var(--muted); max-width: 46rem; }
+
+      .grid { display: grid; gap: 1.25rem; }
+      .g3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+      .card {
+        background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1.5rem;
+        display: flex; flex-direction: column;
+      }
+      .card .icon { font-size: 1.5rem; margin-bottom: .5rem; }
+      .card h3 { font-family: 'Fraunces', serif; margin: 0 0 .5rem; font-size: 1.25rem; }
+      .card .problem { margin: 0 0 1rem; color: var(--muted); font-size: .95rem; }
+      .card .features { list-style: none; margin: 0 0 1.5rem; padding: 0; font-size: .9rem; }
+      .card .features li { padding: .3rem 0; color: var(--muted); border-bottom: 1px dashed var(--line); }
+      .card .features li::before { content: ""; }
+      .card .meta { margin-bottom: 1rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+      .badge {
+        font-family: 'JetBrains Mono', monospace; font-size: .7rem; letter-spacing: .05em;
+        text-transform: uppercase; padding: .25rem .6rem; border-radius: 999px;
+        border: 1px solid var(--line); color: var(--muted);
+      }
+      .badge.free { color: #2e8b57; border-color: rgba(46,139,87,.4); }
+      .badge.pro { color: var(--accent); border-color: var(--accent); }
+      .card .cta { margin-top: auto; }
+
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+        padding: .6rem 1.1rem; border-radius: 999px; font-weight: 600; font-size: .9rem;
+        border: 1px solid transparent; cursor: pointer;
+      }
+      .btn.primary { background: var(--accent); color: var(--accent-ink); }
+      .btn.primary:hover { background: var(--accent-strong); color: var(--accent-ink); }
+      .btn.ghost { border-color: var(--line); color: var(--ink); background: transparent; }
+      .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+      .empty { color: var(--muted); border: 1px dashed var(--line); border-radius: 16px; padding: 2rem; text-align: center; }
+      footer { border-top: 1px solid var(--line); padding: 2.5rem 0; color: var(--muted); font-size: .9rem; }
+      .muted { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap nav">
+        <a class="brand" href="/"><span class="dot"></span>Mohammad Omor Faruk</a>
+        <nav>
+          <ul>
+            <li><a class="navlink" href="/">Home</a></li>
+            <li><a class="navlink active" href="/tools/">Tools</a></li>
+            <li><a class="navlink" href="/simpletube-feed/">Products</a></li>
+            <li><a class="navlink" href="/#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section style="padding:4.5rem 0 2rem">
+      <div class="wrap">
+        <span class="eyebrow">Tools &amp; Products</span>
+        <h1 class="serif">Small tools. Real problems. No bloat.</h1>
+        <p class="lead">Developer, security, and WordPress tooling I build and maintain. Every product here exists because the existing options were heavy, expensive, subscription-locked, or over-engineered.</p>
+      </div>
+    </section>
+
+    <section style="padding-top:1rem">
+      <div class="wrap">
+        <h2 class="serif">WordPress Tools</h2>
+        <div class="grid g3" id="wp-tools">
+          <article class="card">
+            <div class="icon">&#128250;</div>
+            <h3>SimpleTube Feed</h3>
+            <p class="problem">Displaying a YouTube feed on WordPress shouldn&rsquo;t require a heavy plugin, an expensive subscription, or a fragile scraper.</p>
+            <div class="meta">
+              <span class="badge free">Free Lite</span>
+              <span class="badge pro">Pro $7 one-time</span>
+            </div>
+            <ul class="features">
+              <li>Official public RSS &mdash; no API key needed</li>
+              <li>Responsive grid &amp; list (carousel/featured in Pro)</li>
+              <li>Shortcode + Gutenberg block</li>
+              <li>Smart caching, no tracking, no ads</li>
+              <li>Multiple feeds, playlists &amp; Shorts in Pro</li>
+            </ul>
+            <a class="btn primary cta" href="/simpletube-feed/">View product &rarr;</a>
+          </article>
+        </div>
+
+        <h2 class="serif">Developer Tools</h2>
+        <p class="muted" style="margin-bottom:1.25rem">In progress &mdash; new tools land here as they&rsquo;re built.</p>
+        <div class="grid g3" id="dev-tools">
+          <div class="empty">Developer tools coming soon.</div>
+        </div>
+
+        <h2 class="serif">Security Tools</h2>
+        <p class="muted" style="margin-bottom:1.25rem">In progress &mdash; new tools land here as they&rsquo;re built.</p>
+        <div class="grid g3" id="sec-tools">
+          <div class="empty">Security tools coming soon.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <p class="mono" style="margin:0">Built by <a href="/">Mohammad Omor Faruk</a> &mdash; full-stack &amp; security. Tools and products are GPL-2.0 or clearly licensed. No tracking, no ads.</p>
+      </div>
+    </footer>
+  </body>
+</html>

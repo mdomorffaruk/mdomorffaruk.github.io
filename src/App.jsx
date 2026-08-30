@@ -478,6 +478,18 @@ function Header({ active, menuOpen, setMenuOpen }) {
               {s.label}
             </a>
           ))}
+          <a
+            href="/tools/"
+            className="ml-2 rounded-md border border-line px-3 py-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-accent hover:text-accent"
+          >
+            Tools
+          </a>
+          <a
+            href="/simpletube-feed/"
+            className="ml-2 rounded-md border border-line px-3 py-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-accent hover:text-accent"
+          >
+            Products
+          </a>
         </nav>
         <div className="flex items-center gap-3">
           <ThemeToggle />
@@ -519,6 +531,20 @@ function Header({ active, menuOpen, setMenuOpen }) {
                 {s.label}
               </a>
             ))}
+            <a
+              href="/tools/"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center justify-between border-b border-line py-3.5 font-serif text-lg"
+            >
+              Tools
+            </a>
+            <a
+              href="/simpletube-feed/"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center justify-between border-b border-line py-3.5 font-serif text-lg"
+            >
+              Products
+            </a>
             <a href="#contact" onClick={() => setMenuOpen(false)} className={`${btnPrimary} mt-5`}>
               Hire me
             </a>
@@ -1391,6 +1417,8 @@ function Footer() {
               {s.label}
             </a>
           ))}
+          <a href="/tools/" className="font-mono text-xs text-muted transition-colors hover:text-accent">Tools</a>
+          <a href="/simpletube-feed/" className="font-mono text-xs text-muted transition-colors hover:text-accent">Products</a>
         </nav>
         <div className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs">
           <a href={contact.github} target="_blank" rel="noreferrer" className="text-muted transition-colors hover:text-accent">

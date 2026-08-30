@@ -1,0 +1,47 @@
+name: Release SimpleTube Feed Lite
+
+# Builds the site, then creates a GitHub Release for the FREE Lite plugin ZIP
+# whenever a version tag is pushed (e.g. `git tag v1.0.0`).
+#
+# The PAID Pro ZIP is intentionally never attached to a release and is never
+# published. Pro is delivered privately (payment provider / email).
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: release
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build site
+        run: |
+          npm ci
+          npm run build
+
+      - name: Verify PRO ZIP is NOT published
+        run: |
+          if ls dist/simpletube-feed/downloads/simpletube-feed-pro-*.zip 2>/dev/null; then
+            echo "ERROR: Pro ZIP must never be published publicly."
+            exit 1
+          fi
+
+      - name: Create GitHub Release for Lite
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/simpletube-feed/downloads/simpletube-feed-lite-*.zip
+          generate_release_notes: true

@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SimpleTube Feed - YouTube feed plugin for WordPress</title>
+    <meta name="description" content="SimpleTube Feed is a fast, secure, no-analytics WordPress plugin that displays your YouTube channel, playlist, or Shorts feeds in clean grid, list, carousel and featured layouts. Free Lite and inexpensive Pro." />
+    <meta name="author" content="Mohammad Omor Faruk" />
+    <link rel="canonical" href="https://mdomorffaruk.github.io/simpletube-feed/" />
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="SimpleTube Feed - YouTube feed plugin for WordPress" />
+    <meta property="og:description" content="Fast, secure, no-analytics YouTube feeds for WordPress. Grid, list, carousel and featured layouts. Free Lite, cheap Pro." />
+    <meta property="og:url" content="https://mdomorffaruk.github.io/simpletube-feed/" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <script src="/simpletube-feed/config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --paper: #fffdf9;
+        --card: #faf6ee;
+        --ink: #241c18;
+        --muted: #6b615a;
+        --line: #e7ded2;
+        --accent: #d6222b;
+        --accent-strong: #b01a22;
+        --accent-ink: #fff8f5;
+        --accent-soft: #fdebe7;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --paper: #0b0b0b;
+          --card: #14110f;
+          --ink: #f7ecdd;
+          --muted: #a99d90;
+          --line: #2a251f;
+          --accent: #e8352d;
+          --accent-strong: #ff5047;
+          --accent-ink: #fff8f5;
+          --accent-soft: #331210;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: 'Inter', system-ui, sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { color: var(--accent-strong); }
+      .serif { font-family: 'Fraunces', serif; }
+      .mono { font-family: 'JetBrains Mono', monospace; }
+
+      .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+      header.site {
+        position: sticky; top: 0; z-index: 40;
+        border-bottom: 1px solid var(--line);
+        background: color-mix(in srgb, var(--paper) 88%, transparent);
+        backdrop-filter: blur(8px);
+      }
+      .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+      .nav .brand { display: flex; align-items: center; gap: .6rem; font-weight: 700; color: var(--ink); }
+      .nav .brand .dot { width: 12px; height: 12px; border-radius: 3px; background: var(--accent); flex: none; }
+      .nav ul { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; font-size: .9rem; }
+      .nav a.navlink { color: var(--ink); }
+      .nav a.navlink:hover { color: var(--accent); }
+
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+        padding: .7rem 1.25rem; border-radius: 999px; font-weight: 600; font-size: .95rem;
+        border: 1px solid transparent; cursor: pointer;
+      }
+      .btn.primary { background: var(--accent); color: var(--accent-ink); }
+      .btn.primary:hover { background: var(--accent-strong); color: var(--accent-ink); }
+      .btn.ghost { border-color: var(--line); color: var(--ink); background: transparent; }
+      .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+      section { padding: 4rem 0; }
+      .hero { padding: 5rem 0 3.5rem; }
+      .eyebrow {
+        display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: .8rem;
+        letter-spacing: .04em; color: var(--accent); text-transform: uppercase;
+        border: 1px solid var(--line); padding: .35rem .8rem; border-radius: 999px;
+        background: color-mix(in srgb, var(--accent) 6%, var(--paper));
+      }
+      h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); line-height: 1.05; margin: 1.25rem 0 .75rem; }
+      h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1.15; margin: 0 0 1rem; }
+      .lead { font-size: 1.15rem; color: var(--muted); max-width: 46rem; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.75rem; }
+      .hero-note { margin-top: .9rem; font-size: .85rem; color: var(--muted); }
+
+      .grid { display: grid; gap: 1.25rem; }
+      .g2 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+      .g3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .card {
+        background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1.5rem;
+      }
+      .card h3 { font-family: 'Fraunces', serif; margin: 0 0 .5rem; font-size: 1.2rem; }
+      .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+      .card .icon { font-size: 1.5rem; margin-bottom: .5rem; }
+
+      .compare { width: 100%; border-collapse: collapse; font-size: .95rem; }
+      .compare th, .compare td { text-align: left; padding: .8rem 1rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+      .compare th { font-family: 'JetBrains Mono', monospace; font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+      .compare td.yes { color: var(--accent); font-weight: 600; }
+      .compare .free { color: #2e8b57; }
+
+      .pricing { display: grid; gap: 1.25rem; }
+      .price-card { position: relative; }
+      .price-card.highlight { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+      .price-card .tag {
+        position: absolute; top: -12px; left: 1.25rem; background: var(--accent); color: var(--accent-ink);
+        font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .05em;
+        padding: .25rem .7rem; border-radius: 999px;
+      }
+      .price-amount { font-family: 'Fraunces', serif; font-size: 2.4rem; margin: .5rem 0 .25rem; }
+      .price-sub { color: var(--muted); font-size: .85rem; }
+      .price-features { list-style: none; margin: 1.25rem 0; padding: 0; }
+      .price-features li { padding: .35rem 0; color: var(--muted); font-size: .92rem; border-bottom: 1px dashed var(--line); }
+      .price-features li::before { content: "\2713"; color: var(--accent); font-weight: 700; margin-right: .6rem; }
+
+      code.inline {
+        background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+        padding: .1rem .4rem; font-family: 'JetBrains Mono', monospace; font-size: .85em;
+      }
+      pre.code {
+        background: #17130f; color: #f2e8dc; border-radius: 12px; padding: 1.25rem; overflow-x: auto;
+        font-family: 'JetBrains Mono', monospace; font-size: .88rem; line-height: 1.6;
+      }
+      pre.code .c { color: #7a6f62; }
+      .faq details { border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: .75rem; background: var(--card); }
+      .faq summary { font-weight: 600; cursor: pointer; }
+      .faq p { color: var(--muted); margin: .75rem 0 0; }
+
+      footer { border-top: 1px solid var(--line); padding: 2.5rem 0; color: var(--muted); font-size: .9rem; }
+      .muted { color: var(--muted); }
+      .center { text-align: center; }
+      .mt-0 { margin-top: 0; }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap nav">
+        <a class="brand" href="#top"><span class="dot"></span>SimpleTube Feed</a>
+        <nav>
+          <ul>
+            <li><a class="navlink" href="#features">Features</a></li>
+            <li><a class="navlink" href="#compare">Lite&nbsp;vs&nbsp;Pro</a></li>
+            <li><a class="navlink" href="#pricing">Pricing</a></li>
+            <li><a class="navlink" href="#install">Install</a></li>
+            <li><a class="navlink" href="#faq">FAQ</a></li>
+            <li><a class="navlink" href="/simpletube-feed/docs/">Docs</a></li>
+            <li><a class="navlink" href="/">&#8592; Site</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero" id="top">
+      <div class="wrap">
+        <span class="eyebrow">WordPress Plugin &middot; v1.0.0</span>
+        <h1 class="serif">Put your YouTube feed on WordPress.<br />Fast, secure, and no tracking.</h1>
+        <p class="lead">SimpleTube Feed fetches your YouTube channel, playlist, or Shorts from the official feed &mdash; caches it, and renders clean cards in grid, list, carousel, or featured layouts. No analytics, no external calls to our servers, no bloat. Free Lite, and a one-time low-price Pro.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#checkout" data-pro>Get Pro for $7</a>
+          <a class="btn ghost" href="#pricing">Download free Lite</a>
+          <a class="btn ghost" href="/simpletube-feed/docs/">View Docs</a>
+        </div>
+        <p class="hero-note mono">PHP 7.4+ &middot; WordPress 5.8+ &middot; light &lt; 40&nbsp;KB &middot; no data leaves your server</p>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <h2 class="serif">Everything you need</h2>
+        <div class="grid g3">
+          <div class="card"><div class="icon">&#128250;</div><h3>Channel, playlist &amp; Shorts</h3><p>One or many feeds. Playlists and channels work over public RSS; Shorts use the optional YouTube Data API.</p></div>
+          <div class="card"><div class="icon">&#128452;</div><h3>Four layouts</h3><p>Grid, list, carousel, and featured. Each feed gets its own layout, limit, and custom CSS.</p></div>
+          <div class="card"><div class="icon">&#9889;</div><h3>Fast &amp; cached</h3><p>Transient caching means no slow YouTube round-trips on every page load. Your site stays fast.</p></div>
+          <div class="card"><div class="icon">&#128272;</div><h3>Hardened &amp; private</h3><p>Escaped output, sanitized input, capability &amp; nonce checks, and XXE-hardened parsing. No tracking, ever.</p></div>
+          <div class="card"><div class="icon">&#128221;</div><h3>Shortcode &amp; block</h3><p>Drop in a Gutenberg block or <code class="inline">[simpletube_feed channel="..."]</code>. Works anywhere.</p></div>
+          <div class="card"><div class="icon">&#9989;</div><h3>GPL-2.0 licensed</h3><p>Free and open source at its core. Own your content; pay only for the convenience features.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="compare">
+      <div class="wrap">
+        <h2 class="serif">Lite vs Pro</h2>
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Lite <span class="free">(free)</span></th>
+              <th>Pro <span class="free">($7 one-time)</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Channel feeds (public RSS)</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+            <tr><td>Multiple saved feeds</td><td>&mdash;</td><td class="yes">&#10003;</td></tr>
+            <tr><td>Playlist feeds</td><td>&mdash;</td><td class="yes">&#10003;</td></tr>
+            <tr><td>Shorts feeds (YouTube Data API)</td><td>&mdash;</td><td class="yes">&#10003;</td></tr>
+            <tr><td>Grid &amp; list layouts</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+            <tr><td>Carousel &amp; featured layouts</td><td>&mdash;</td><td class="yes">&#10003;</td></tr>
+            <tr><td>Per-card metadata controls</td><td>&mdash;</td><td class="yes">&#10003;</td></tr>
+            <tr><td>Custom CSS per feed</td><td>&mdash;</td><td class="yes">&#10003;</td></tr>
+            <tr><td>Import / export config</td><td>&mdash;</td><td class="yes">&#10003;</td></tr>
+            <tr><td>Gutenberg block</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="wrap">
+        <h2 class="serif">Pricing</h2>
+        <div class="pricing grid g2">
+          <div class="card price-card">
+            <h3 class="serif" style="margin-top:0">Lite</h3>
+            <div class="price-amount">Free</div>
+            <p class="price-sub">GPL-2.0 &middot; self-hosted &middot; no license key</p>
+            <ul class="price-features">
+              <li>1 channel feed, grid or list</li>
+              <li>Public RSS &mdash; no API key</li>
+              <li>Shortcode + Gutenberg block</li>
+              <li>Settings page + cache control</li>
+              <li>Free updates, forever</li>
+            </ul>
+            <a class="btn ghost" href="downloads/simpletube-feed-lite-1.0.0.zip" download>Download ZIP &darr;</a>
+          </div>
+
+          <div class="card price-card highlight">
+            <span class="tag">Best value</span>
+            <h3 class="serif" style="margin-top:0">Pro</h3>
+            <div class="price-amount">$7</div>
+            <p class="price-sub">One-time &middot; bundles Lite &middot; includes future updates</p>
+            <ul class="price-features">
+              <li>Everything in Lite</li>
+              <li>Unlimited saved feeds</li>
+              <li>Playlist + Shorts feeds</li>
+              <li>Carousel &amp; featured layouts</li>
+              <li>Metadata controls, custom CSS, import/export</li>
+            </ul>
+            <a class="btn primary" href="#checkout" id="buy-pro" data-pro>Get Pro &mdash; $7</a>
+          </div>
+        </div>
+        <p class="muted" style="max-width:52rem">The Pro ZIP includes both <code class="inline">simpletube-feed</code> and <code class="inline">simpletube-feed-pro</code> so it installs and works in one go. Free Lite is a genuinely useful plugin on its own &mdash; no upsell wall.</p>
+      </div>
+    </section>
+
+    <section id="checkout">
+      <div class="wrap center">
+        <h2 class="serif">Checkout</h2>
+        <p class="lead" style="margin:0 auto">I&rsquo;m verifying a payment provider (Payhip / Gumroad) that supports accounts in Bangladesh. Until it&rsquo;s live, order by email and I&rsquo;ll send your Pro ZIP and license key directly.</p>
+        <p class="hero-note mono">Until then, contact me to order or for a license&nbsp;key.</p>
+        <div class="hero-actions" style="justify-content:center">
+          <a class="btn primary" id="checkout-btn" href="mailto:mdomorffaruk@gmail.com?subject=SimpleTube%20Feed%20Pro%20order">Contact me to order</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="install">
+      <div class="wrap">
+        <h2 class="serif">Quick start</h2>
+        <p class="lead" style="margin-top:0">Install the plugin, add a channel ID or saved feed, and drop the block or shortcode into a post.</p>
+
+        <h3 class="serif">1. Install</h3>
+        <pre class="code"><span class="c"># Upload this folder to wp-content/plugins, then activate.</span>
+wp-content/plugins/simpletube-feed/</pre>
+
+        <h3 class="serif">2. Get your channel ID</h3>
+        <p class="muted">Your channel ID is a 24-character string like <code class="inline">UCX_your_channel_ID</code> (find it under &ldquo;About&rdquo; on your YouTube channel, or in the channel URL).</p>
+
+        <h3 class="serif">3. Add the shortcode</h3>
+        <pre class="code"><span class="c"># Lite &mdash; one channel feed</span>
+[simpletube_feed channel="UCX_your_channel_ID" limit="6"]
+
+<span class="c"># Pro &mdash; a saved feed (defined in Settings &rarr; SimpleTube Feed Pro)</span>
+[simpletube_feed_pro feed="my-videos"]</pre>
+
+        <p class="muted">Or use the <strong>SimpleTube Feed</strong> block in the Gutenberg editor &mdash; no code needed.</p>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="wrap">
+        <h2 class="serif">FAQ</h2>
+        <details open>
+          <summary>Is Pro a subscription?</summary>
+          <p>No. It&rsquo;s a one-time $7 purchase that bundles the Lite plugin too. That price includes future updates for this version track.</p>
+        </details>
+        <details>
+          <summary>Does Lite gather analytics or send data anywhere?</summary>
+          <p>No. Neither plugin adds analytics, cookies, or calls to any SimpleTube server. They fetch YouTube&rsquo;s own public RSS (and only call the YouTube Data API if you supply your own key) directly from your server.</p>
+        </details>
+        <details>
+          <summary>Do I need a YouTube Data API key?</summary>
+          <p>Not for the basics. Channel and playlist feeds use YouTube&rsquo;s public RSS with no key. A key is only required for API-powered features in Pro, such as Shorts feeds.</p>
+        </details>
+        <details>
+          <summary>Will it slow my site down?</summary>
+          <p>No. Feeds are cached with WordPress transients, so the heavy YouTube network call happens once per cache window, not on every page view.</p>
+        </details>
+        <details>
+          <summary>Can I style the output to match my theme?</summary>
+          <p>Yes. In Pro, each feed can carry its own custom CSS, and all markup uses clear, classed hooks that are easy to target.</p>
+        </details>
+        <details>
+          <summary>How do I get a Pro license key?</summary>
+          <p>Once checkout is live you&rsquo;ll receive your files and key by email. In the meantime, <a href="mailto:mdomorffaruk@gmail.com?subject=SimpleTube%20Feed%20Pro">email me</a> and I&rsquo;ll take care of you directly.</p>
+        </details>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <p class="mono" style="margin:0">SimpleTube Feed &mdash; a product by <a href="/">Mohammad Omor Faruk</a>. GPL-2.0 &middot; Built by a security engineer, hardened like it matters.</p>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        var CHECKOUT_URL = (window.SIMPLETUBE_CONFIG && window.SIMPLETUBE_CONFIG.checkoutUrl) || "";
+        var FALLBACK = "mailto:mdomorffaruk@gmail.com?subject=SimpleTube%20Feed%20Pro%20order";
+        function wire(selector, href) {
+          var el = document.querySelectorAll(selector);
+          for (var i = 0; i < el.length; i++) {
+            el[i].addEventListener("click", function (e) {
+              if (CHECKOUT_URL && CHECKOUT_URL.indexOf("http") === 0) {
+                e.preventDefault();
+                window.open(CHECKOUT_URL, "_blank", "noopener");
+              }
+              return true;
+            });
+          }
+        }
+        function replaceLink(anchor) {
+          if (CHECKOUT_URL && CHECKOUT_URL.indexOf("http") === 0) {
+            anchor.href = CHECKOUT_URL;
+            anchor.target = "_blank";
+            anchor.rel = "noopener";
+          }
+        }
+        // Any element tagged data-pro becomes the checkout link.
+        var pro = document.querySelectorAll("[data-pro]");
+        for (var i = 0; i < pro.length; i++) replaceLink(pro[i]);
+        var co = document.getElementById("checkout-btn");
+        if (co) replaceLink(co);
+      })();
+    </script>
+  </body>
+</html>
