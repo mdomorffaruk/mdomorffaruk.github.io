@@ -5,7 +5,7 @@ export const HOME = '/'
 function parseHash() {
   const hash = window.location.hash || ''
   if (hash.startsWith('#/')) {
-    return { route: hash.slice(2).replace(/\/+$/, '') || '/', section: '' }
+    return { route: '/' + hash.slice(2).replace(/\/+$/, ''), section: '' }
   }
   // Section anchor on the home page, e.g. #about
   return { route: '/', section: hash.replace(/^#/, '') }
