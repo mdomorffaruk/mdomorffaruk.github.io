@@ -1,4 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useHashRoute } from './router'
+import { SiteHeader, SiteFooter } from './components/Site'
+import Tools from './pages/Tools'
+import SimpleTube from './pages/SimpleTube'
+import SimpleTubeDocs from './pages/SimpleTubeDocs'
 import { contact, faqs, hero, marqueeItems, processSteps, services, stats } from './data/home.json'
 import {
   about,
@@ -366,55 +371,6 @@ function CountUp({ value, suffix = '', duration = 1100 }) {
   )
 }
 
-function ThemeToggle() {
-  const [dark, setDark] = useState(
-    () => typeof document !== 'undefined' && document.documentElement.classList.contains('dark'),
-  )
-
-  const toggle = () => {
-    setDark((prev) => {
-      const next = !prev
-      document.documentElement.classList.toggle('dark', next)
-      try {
-        localStorage.setItem('site-theme', next ? 'dark' : 'light')
-      } catch (err) {
-        /* ignore storage errors */
-      }
-      return next
-    })
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={toggle}
-      aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-line text-ink transition-colors hover:border-accent hover:text-accent"
-    >
-      {dark ? (
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
-          <path
-            d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-        </svg>
-      ) : (
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M20.4 14.4A8.5 8.5 0 0 1 9.6 3.6a8.5 8.5 0 1 0 10.8 10.8Z"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-          />
-        </svg>
-      )}
-    </button>
-  )
-}
-
 function Chip({ children }) {
   return (
     <span className="inline-flex items-center rounded-full border border-line bg-card px-3 py-1 font-mono text-xs text-muted">
@@ -451,107 +407,6 @@ function SectionHead({ index, title, intro }) {
         {intro && <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">{intro}</p>}
       </div>
     </Reveal>
-  )
-}
-
-function Header({ active, menuOpen, setMenuOpen }) {
-  return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a href="#top" className="flex items-center" aria-label="Mohammad Omor Faruk">
-          <img
-            src="/profile.gif"
-            alt=""
-            className="h-8 w-8 rounded-full border border-line object-cover"
-          />
-        </a>
-        <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
-          {sections.map((s) => (
-            <a
-              key={s.id}
-              href={`#${s.id}`}
-              aria-current={active === s.id ? 'location' : undefined}
-              className={`rounded-md px-3 py-2 font-mono text-xs uppercase tracking-wider transition-colors ${
-                active === s.id ? 'text-accent' : 'text-muted hover:text-ink'
-              }`}
-            >
-              {s.label}
-            </a>
-          ))}
-          <a
-            href="/tools/"
-            className="ml-2 rounded-md border border-line px-3 py-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-accent hover:text-accent"
-          >
-            Tools
-          </a>
-          <a
-            href="/simpletube-feed/"
-            className="ml-2 rounded-md border border-line px-3 py-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-accent hover:text-accent"
-          >
-            Products
-          </a>
-        </nav>
-        <div className="flex items-center gap-3">
-          <ThemeToggle />
-          <a href="#contact" className={`${btnPrimary} hidden px-4 py-2 text-xs md:inline-flex`}>
-            Hire me
-          </a>
-          <button
-            type="button"
-            onClick={() => setMenuOpen((open) => !open)}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            aria-label="Toggle navigation menu"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-line text-ink transition-colors hover:border-accent hover:text-accent md:hidden"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              {menuOpen ? (
-                <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              ) : (
-                <path d="M2 4.5h12M2 8h12M2 11.5h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-      {menuOpen && (
-        <nav
-          id="mobile-menu"
-          className="border-t border-line bg-paper md:hidden"
-          aria-label="Mobile navigation"
-        >
-          <div className="mx-auto flex max-w-6xl flex-col px-5 py-4 sm:px-8">
-            {sections.map((s) => (
-              <a
-                key={s.id}
-                href={`#${s.id}`}
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-between border-b border-line py-3.5 font-serif text-lg"
-              >
-                {s.label}
-              </a>
-            ))}
-            <a
-              href="/tools/"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center justify-between border-b border-line py-3.5 font-serif text-lg"
-            >
-              Tools
-            </a>
-            <a
-              href="/simpletube-feed/"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center justify-between border-b border-line py-3.5 font-serif text-lg"
-            >
-              Products
-            </a>
-            <a href="#contact" onClick={() => setMenuOpen(false)} className={`${btnPrimary} mt-5`}>
-              Hire me
-            </a>
-          </div>
-        </nav>
-      )}
-    </header>
   )
 }
 
@@ -1080,7 +935,7 @@ function Services() {
         <SectionHead
           index="04"
           title="Services"
-          intro="Fixed-price, outcome-focused engagements with clear deliverables and timelines — no hourly surprises."
+          intro="Fixed-price, outcome-focused engagements with clear deliverables and timelines. No hourly surprises."
         />
         <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => (
@@ -1399,48 +1254,25 @@ function Contact() {
   )
 }
 
-function Footer() {
-  return (
-    <footer className="border-t border-line">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p className="font-serif text-lg font-semibold">Mohammad Omor Faruk</p>
-          <p className="mt-1 font-mono text-xs text-muted">{about.role}</p>
-        </div>
-        <nav className="flex flex-wrap gap-x-5 gap-y-2" aria-label="Footer">
-          {sections.map((s) => (
-            <a
-              key={s.id}
-              href={`#${s.id}`}
-              className="font-mono text-xs text-muted transition-colors hover:text-accent"
-            >
-              {s.label}
-            </a>
-          ))}
-          <a href="/tools/" className="font-mono text-xs text-muted transition-colors hover:text-accent">Tools</a>
-          <a href="/simpletube-feed/" className="font-mono text-xs text-muted transition-colors hover:text-accent">Products</a>
-        </nav>
-        <div className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs">
-          <a href={contact.github} target="_blank" rel="noreferrer" className="text-muted transition-colors hover:text-accent">
-            GitHub
-          </a>
-          <a href={contact.linkedin} target="_blank" rel="noreferrer" className="text-muted transition-colors hover:text-accent">
-            LinkedIn
-          </a>
-          <a href="/resume.pdf" className="text-muted transition-colors hover:text-accent">
-            Resume
-          </a>
-        </div>
-        <p className="font-mono text-xs text-muted">© {new Date().getFullYear()} Mohammad Omor Faruk</p>
-      </div>
-    </footer>
-  )
-}
-
 export default function App() {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const { route, section } = useHashRoute()
   const sectionIds = useMemo(() => sections.map((s) => s.id), [])
   const active = useScrollSpy(sectionIds)
+
+  // Scroll to top whenever landing on a non-home page.
+  useEffect(() => {
+    if (route !== '/' && section === '') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [route, section])
+
+  const isHome = route === '/'
+
+  let page = null
+  if (route === '/tools') page = <Tools />
+  else if (route === '/simpletube-feed') page = <SimpleTube />
+  else if (route === '/simpletube-feed/docs') page = <SimpleTubeDocs />
+  else if (route !== '/') page = null
 
   return (
     <div id="top" className="min-h-screen bg-paper text-ink">
@@ -1448,21 +1280,27 @@ export default function App() {
         Skip to content
       </a>
       <ScrollProgress />
-      <Header active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <SiteHeader route={route} activeSection={isHome ? active : ''} />
       <main id="main">
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Services />
-        <Security />
-        <Skills />
-        <Testimonials />
-        <HowWork />
-        <Faq />
-        <Contact />
+        {isHome ? (
+          <>
+            <Hero />
+            <About />
+            <Experience />
+            <Projects />
+            <Services />
+            <Security />
+            <Skills />
+            <Testimonials />
+            <HowWork />
+            <Faq />
+            <Contact />
+          </>
+        ) : (
+          page
+        )}
       </main>
-      <Footer />
+      <SiteFooter />
       <BackToTop />
       <CursorFX />
     </div>
