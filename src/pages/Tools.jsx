@@ -62,7 +62,7 @@ export default function Tools() {
                       <ul className={`mt-4 space-y-1.5 text-muted ${single ? 'grid gap-x-6 text-sm sm:grid-cols-2' : 'text-sm'}`}>
                         {t.features.map((f) => (
                           <li key={f} className="flex gap-2">
-                            <span className="text-accent">&check;</span>
+                            <span className="text-accent">✓</span>
                             <span>{f}</span>
                           </li>
                         ))}
